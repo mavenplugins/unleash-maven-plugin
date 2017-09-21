@@ -4,6 +4,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+import org.apache.commons.lang3.StringUtils;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -36,14 +37,19 @@ public class ScmPomVersionsMergeClientTest {
     ByteArrayOutputStream os = new ByteArrayOutputStream();
     try {
       mergeClient.merge(local, remote, base, os);
-      String result = os.toString();
-      Assert.assertEquals(new String(ByteStreams.toByteArray(expected)), result);
+      String resultStr = normalizeEOL(os.toString());
+      String expectedStr = normalizeEOL(new String(ByteStreams.toByteArray(expected)));
+      Assert.assertEquals(expectedStr, resultStr);
     } finally {
       Closeables.closeQuietly(local);
       Closeables.closeQuietly(remote);
       Closeables.closeQuietly(base);
       Closeables.close(os, true);
     }
+  }
+
+  private static String normalizeEOL(String in) {
+    return StringUtils.replace(in, "\r\n", "\n");
   }
 
   private static InputStream getTestResource(int testNumber, TestResource resource) {
