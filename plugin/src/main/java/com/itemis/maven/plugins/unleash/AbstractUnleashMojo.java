@@ -42,6 +42,7 @@ import com.itemis.maven.aether.ArtifactCoordinates;
 import com.itemis.maven.plugins.cdi.AbstractCDIMojo;
 import com.itemis.maven.plugins.cdi.annotations.MojoInject;
 import com.itemis.maven.plugins.cdi.annotations.MojoProduces;
+import com.itemis.maven.plugins.unleash.util.ReleaseUtil;
 import com.itemis.maven.plugins.unleash.util.Repository;
 import com.itemis.maven.plugins.unleash.util.VersionUpgradeStrategy;
 
@@ -237,7 +238,8 @@ public class AbstractUnleashMojo extends AbstractCDIMojo {
     if (this.scmMessagePrefix != null && !this.scmMessagePrefix.endsWith(" ")) {
       this.scmMessagePrefix = this.scmMessagePrefix + " ";
     }
-    return Strings.nullToEmpty(this.scmMessagePrefix);
+    // @mhoffrog: return with probable pom property values replaced
+    return ReleaseUtil.getTagName(Strings.nullToEmpty(this.scmMessagePrefix), this.project, getExpressionEvaluator());
   }
 
   @MojoProduces
