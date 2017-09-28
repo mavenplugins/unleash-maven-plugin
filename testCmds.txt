@@ -1,0 +1,17 @@
+Commandline parameters for testing:
+-----------------------------------
+mvn unleash:perform -Dworkflow=<workflow_file> 
+
+  -Dunleash.releaseArgs=release.arg1=value1,release.arg2=value2
+  -Dunleash.tagNamePattern="PRODUCT@{project.version}"
+  -Dunleash.scmMessagePrefix="[unleash PRODUCT@{project.version}]"
+  -DenableLogTimestamps=true
+  -Dmvn[deploy-snapshot]=clean deploy
+  -Dunleash.releaseVersion=2.10.1
+  -Dunleash.developmentVersion=2.10.2-SNAPSHOT
+  -Dunleash.allowLocalReleaseArtifacts=true
+  -Dunleash.commitBeforeTagging=true
+  -Dunleash.scmUsernameEnvVar=<UNLEASH_SCM_USERNAME>
+  -Dunleash.scmPasswordEnvVar=<UNLEASH_SCM_PASSWORD>
+
+mvnDebug unleash:perform -Dworkflow=testWorkflow.txt -Dunleash.scmMessagePrefix=[unleash PRODUCT@{project.version}]
