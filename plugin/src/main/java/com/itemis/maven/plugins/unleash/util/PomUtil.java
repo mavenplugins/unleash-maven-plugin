@@ -21,7 +21,7 @@ import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
-import com.google.common.base.Joiner;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.maven.model.Dependency;
 import org.apache.maven.model.Model;
 import org.apache.maven.model.Parent;
@@ -32,6 +32,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.Text;
 
+import com.google.common.base.Joiner;
 import com.google.common.base.Objects;
 import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
@@ -142,7 +143,7 @@ public final class PomUtil {
    * Serializes the passed document which should contain POM content to the project file of the passed Maven project.
    *
    * @param document the document to be serialized.
-   * @param project the project from which the serialization target will be retrieved.
+   * @param project  the project from which the serialization target will be retrieved.
    */
   public static final void writePOM(Document document, MavenProject project) {
     File pom = project.getFile();
@@ -161,7 +162,7 @@ public final class PomUtil {
    * Serializes the passed document which should contain POM content to the passed output stream.
    *
    * @param document the document to be serialized.
-   * @param out the output stream where the document shall be written to.
+   * @param out      the output stream where the document shall be written to.
    * @param closeOut whether to close the output stream afterwards or not.
    */
   public static final void writePOM(Document document, OutputStream out, boolean closeOut) {
@@ -189,8 +190,8 @@ public final class PomUtil {
    * Changes the project version of the POM as well as directly in the XML document preserving the whole document
    * formatting.
    *
-   * @param model the POM where to adapt the project version.
-   * @param document the POM as an XML document in which the project version shall be adapted.
+   * @param model      the POM where to adapt the project version.
+   * @param document   the POM as an XML document in which the project version shall be adapted.
    * @param newVersion the new project version to set.
    */
   public static void setProjectVersion(Model model, Document document, String newVersion) {
@@ -217,8 +218,8 @@ public final class PomUtil {
    * Changes the project's parent version of the POM as well as directly in the XML document preserving the whole
    * document formatting.
    *
-   * @param model the POM where to adapt the project's parent version.
-   * @param document the POM as an XML document in which the project's parent version shall be adapted.
+   * @param model            the POM where to adapt the project's parent version.
+   * @param document         the POM as an XML document in which the project's parent version shall be adapted.
    * @param newParentVersion the new version to set for the project parent.
    */
   public static void setParentVersion(Model model, Document document, String newParentVersion) {
@@ -248,11 +249,11 @@ public final class PomUtil {
    * Changes the reactor dependency version of the POM as well as directly in the XML document preserving the whole
    * document formatting.
    *
-   * @param dependency the reactor dependency where to adapt the project version.
-   * @param document the POM as an XML document in which the project version shall be adapted.
+   * @param dependency       the reactor dependency where to adapt the project version.
+   * @param document         the POM as an XML document in which the project version shall be adapted.
    * @param dependenciesPath the XPath to the {@code dependencies} starting from {@code /project/}.
-   *          e.g. {@code /profiles/profile[id[text()='release']]/dependencyManagement}.
-   * @param newVersion the new dependency version to set.
+   *                           e.g. {@code /profiles/profile[id[text()='release']]/dependencyManagement}.
+   * @param newVersion       the new dependency version to set.
    */
   public static void setDependencyVersion(Dependency dependency, Document document, String dependenciesPath,
       String newVersion) {
@@ -301,7 +302,7 @@ public final class PomUtil {
   /**
    * Queries for the project build node and creates one on demand.
    *
-   * @param document the document from which to get the node or where to create the node at.
+   * @param document       the document from which to get the node or where to create the node at.
    * @param createOnDemand {@code true} if the build node shall be created when not present.
    * @return the build node of the document or {@code null} if the node doesn't exist and {@code createOnDemand} was set
    *         to {@code false}.
@@ -331,7 +332,7 @@ public final class PomUtil {
   /**
    * Queries for the project build plugins node and creates one on demand. Creation is cascaded backwards.
    *
-   * @param document the document from which to get the node or where to create the node at.
+   * @param document       the document from which to get the node or where to create the node at.
    * @param createOnDemand {@code true} if the plugins node and parents shall be created when not present.
    * @return the plugins node of the document or {@code null} if the node doesn't exist and {@code createOnDemand} was
    *         set to {@code false}.
@@ -363,8 +364,8 @@ public final class PomUtil {
   /**
    * Queries the document for a specific plugin node which is identified by its groupId and artifactId.
    *
-   * @param document the document from which the plugin shall be retrieved if one is configured.
-   * @param groupId the groupId of the searched plugin.
+   * @param document   the document from which the plugin shall be retrieved if one is configured.
+   * @param groupId    the groupId of the searched plugin.
    * @param artifactId the artifactId of the searched plugin.
    * @return the queried plugin node or {@code null} if none is configured.
    */
@@ -406,10 +407,10 @@ public final class PomUtil {
    * Creates a plugin node in the given POM document or returns an already existing plugin node with the passed
    * coordinates.
    *
-   * @param document the document where to create the plugin at.
-   * @param groupId the groupId of the plugin to be created.
+   * @param document   the document where to create the plugin at.
+   * @param groupId    the groupId of the plugin to be created.
    * @param artifactId the artifactId of the plugin to be created.
-   * @param version the version of the plugin to be created.
+   * @param version    the version of the plugin to be created.
    * @return the node representing this plugin.
    */
   public static Node createPlugin(Document document, String groupId, String artifactId, String version) {
@@ -449,9 +450,9 @@ public final class PomUtil {
    * Creates a new execution element under the given plugin node.
    *
    * @param plugin the plugin under which the new execution shall be created.
-   * @param id the execution id.
-   * @param phase the phase in which the execution shall run.
-   * @param goals the goals to be executed.
+   * @param id     the execution id.
+   * @param phase  the phase in which the execution shall run.
+   * @param goals  the goals to be executed.
    * @return the freshly created execution element.
    */
   public static Node createPluginExecution(Node plugin, String id, Optional<String> phase, String... goals) {
@@ -501,7 +502,7 @@ public final class PomUtil {
   /**
    * Queries the document for an existing SCM node and creates one on demand if requested.
    *
-   * @param document the document to query.
+   * @param document       the document to query.
    * @param createOnDemand if {@code true} the node will be created on demand.
    * @return the SCM node of the document or {@code null} if the node doesn't exist and {@code createOnDemand} was set
    *         to {@code false}.
@@ -524,11 +525,11 @@ public final class PomUtil {
   /**
    * Sets the text content of the given node to the specified value preserving all whitespace.
    *
-   * @param parentNode the parent node of the node where to set the text content.
-   * @param nodeName the name of the node to set the text content at.
-   * @param content the text content to set.
+   * @param parentNode     the parent node of the node where to set the text content.
+   * @param nodeName       the name of the node to set the text content at.
+   * @param content        the text content to set.
    * @param createOnDemand if {@code true} the node with name {@code nodeName} will be created as a child of
-   *          {@code parentNode} if it does not exist.
+   *                         {@code parentNode} if it does not exist.
    */
   public static void setNodeTextContent(Node parentNode, String nodeName, String content, boolean createOnDemand) {
     Node node = null;
@@ -562,7 +563,7 @@ public final class PomUtil {
    * Deletes the specified node from the given parent.
    *
    * @param parentNode the parent of the node to delete.
-   * @param nodeName the name of the node to delete.
+   * @param nodeName   the name of the node to delete.
    */
   public static void deleteNode(Node parentNode, String nodeName) {
     Node nodeToDelete = null;
@@ -584,7 +585,7 @@ public final class PomUtil {
    * Queries a node for a child with a specific name.
    *
    * @param parentNode the parent to query for the node.
-   * @param nodeName the name of the searched node.
+   * @param nodeName   the name of the searched node.
    * @return {@code true} if the parent contains a node with the specified name.
    */
   public static boolean hasChildNode(Node parentNode, String nodeName) {
@@ -602,8 +603,8 @@ public final class PomUtil {
    * Get the text content of a specified child node (the first one) if it is present.
    *
    * @param parentNode the parent to query for the node.
-   * @param nodeName the name of the child node from which the text content is requested.
-   * @return the text content of the searched node.
+   * @param nodeName   the name of the child node from which the text content is requested.
+   * @return the text content of the searched node or null as content, if node is empty.
    */
   public static Optional<String> getChildNodeTextContent(Node parentNode, String nodeName) {
     String value = null;
@@ -612,7 +613,7 @@ public final class PomUtil {
     for (int i = 0; i < children.getLength(); i++) {
       Node n = children.item(i);
       if (Objects.equal(nodeName, n.getNodeName())) {
-        value = n.getTextContent();
+        value = StringUtils.trimToNull(n.getTextContent());
         break;
       }
     }
