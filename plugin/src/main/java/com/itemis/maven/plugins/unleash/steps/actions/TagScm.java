@@ -96,8 +96,9 @@ public class TagScm implements CDIMojoProcessingStep {
       message.insert(0, this.scmMessagePrefix);
     }
 
-    this.log.debug("\tCreating SCM tag with name '" + scmTagName + "'." + (this.commitBeforeTagging
-        ? " User requested pre-tag committing." : " Tag will be created from local working copy."));
+    this.log.debug("\tCreating SCM tag with name '" + scmTagName + "'."
+        + (this.commitBeforeTagging ? " User requested pre-tag committing."
+            : " Tag will be created from local working copy."));
 
     Builder requestBuilder = TagRequest.builder().message(message.toString()).tagName(scmTagName).push();
     if (this.commitBeforeTagging) {
@@ -134,17 +135,17 @@ public class TagScm implements CDIMojoProcessingStep {
           Node scmNode = PomUtil.getOrCreateScmNode(document, false);
 
           if (scmNode != null) {
-            if (scm.getConnection() != null) {
+            if (StringUtils.trimToNull(scm.getConnection()) != null) {
               PomUtil.setNodeTextContent(scmNode, PomUtil.NODE_NAME_SCM_CONNECTION,
                   this.scmProvider.calculateTagConnectionString(scm.getConnection(), scmTagName), false);
             }
 
-            if (scm.getDeveloperConnection() != null) {
+            if (StringUtils.trimToNull(scm.getDeveloperConnection()) != null) {
               PomUtil.setNodeTextContent(scmNode, PomUtil.NODE_NAME_SCM_DEV_CONNECTION,
                   this.scmProvider.calculateTagConnectionString(scm.getDeveloperConnection(), scmTagName), false);
             }
 
-            if (scm.getUrl() != null) {
+            if (StringUtils.trimToNull(scm.getUrl()) != null) {
               PomUtil.setNodeTextContent(scmNode, PomUtil.NODE_NAME_SCM_URL,
                   this.scmProvider.calculateTagConnectionString(scm.getUrl(), scmTagName), false);
             }
