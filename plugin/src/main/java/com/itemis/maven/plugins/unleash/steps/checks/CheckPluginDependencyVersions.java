@@ -34,6 +34,7 @@ import com.itemis.maven.plugins.unleash.util.PomPropertyResolver;
 import com.itemis.maven.plugins.unleash.util.ReleaseUtil;
 import com.itemis.maven.plugins.unleash.util.functions.DependencyToCoordinates;
 import com.itemis.maven.plugins.unleash.util.functions.PluginToCoordinates;
+import com.itemis.maven.plugins.unleash.util.functions.ProjectToCoordinates;
 import com.itemis.maven.plugins.unleash.util.functions.ProjectToString;
 import com.itemis.maven.plugins.unleash.util.predicates.IsSnapshotDependency;
 
@@ -76,6 +77,7 @@ public class CheckPluginDependencyVersions implements CDIMojoProcessingStep {
       snapshots.putAll(getSnapshotsFromAllProfiles(project, propertyResolver));
 
       removePluginForIntegrationTests(snapshots);
+      removeMultiModuleDependencies(snapshots);
 
       snapshotsByProjectAndPlugin.put(project, snapshots);
       if (!snapshots.isEmpty()) {
@@ -221,4 +223,20 @@ public class CheckPluginDependencyVersions implements CDIMojoProcessingStep {
       }
     }
   }
+
+  // Removes this reactor project artifacts from the list of violating dependencies.
+  private void removeMultiModuleDependencies(Multimap<ArtifactCoordinates, ArtifactCoordinates> snapshots) {
+    Collection<ArtifactCoordinates> projectCoordinates = Collections2.transform(this.reactorProjects,
+        ProjectToCoordinates.INSTANCE);
+    for (Iterator<Entry<ArtifactCoordinates, ArtifactCoordinates>> i = snapshots.entries().iterator(); i.hasNext();) {
+      Entry<ArtifactCoordinates, ArtifactCoordinates> entry = i.next();
+      for (ArtifactCoordinates projectCoordinate : projectCoordinates) {
+        if (projectCoordinate.equalsGAV(entry.getValue())) {
+          i.remove();
+          break;
+        }
+      }
+    }
+  }
+
 }
