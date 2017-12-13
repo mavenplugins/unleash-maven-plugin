@@ -36,6 +36,7 @@ import com.itemis.maven.plugins.unleash.util.PomPropertyResolver;
 import com.itemis.maven.plugins.unleash.util.ReleaseUtil;
 import com.itemis.maven.plugins.unleash.util.functions.DependencyToCoordinates;
 import com.itemis.maven.plugins.unleash.util.functions.PluginToCoordinates;
+import com.itemis.maven.plugins.unleash.util.functions.ProjectToCoordinates;
 import com.itemis.maven.plugins.unleash.util.functions.ProjectToString;
 import com.itemis.maven.plugins.unleash.util.predicates.IsSnapshotDependency;
 
@@ -67,7 +68,7 @@ public class CheckPluginDependencyVersions implements CDIMojoProcessingStep {
 
   @Override
   public void execute(ExecutionContext context) throws MojoExecutionException, MojoFailureException {
-    this.log.info("Checking that none of the reactor project's plugins contain SNAPSHOT dependencies.");
+    this.log.info("Checking that none of the reactor project's plugins contains SNAPSHOT dependencies.");
 
     Map<MavenProject, PomPropertyResolver> propertyResolvers = Maps
         .newHashMapWithExpectedSize(this.reactorProjects.size());
@@ -86,6 +87,7 @@ public class CheckPluginDependencyVersions implements CDIMojoProcessingStep {
       snapshots.putAll(getSnapshots(project, propertyResolver));
       snapshots.putAll(getSnapshotsFromAllProfiles(project, propertyResolver));
 
+      removeReactorProjectsOwnSnapshotDependencies(snapshots);
       removePluginForIntegrationTests(snapshots);
 
       snapshotsByProjectAndPlugin.put(project, snapshots);
@@ -232,4 +234,23 @@ public class CheckPluginDependencyVersions implements CDIMojoProcessingStep {
       }
     }
   }
+
+  // Removes this reactor projects snapshot artifacts from the list of violating dependencies.
+  private void removeReactorProjectsOwnSnapshotDependencies(
+      Multimap<ArtifactCoordinates, ArtifactCoordinates> snapshots) {
+    Collection<ArtifactCoordinates> projectCoordinates = Collections2.transform(this.reactorProjects,
+        ProjectToCoordinates.INSTANCE);
+    for (Iterator<Entry<ArtifactCoordinates, ArtifactCoordinates>> i = snapshots.entries().iterator(); i.hasNext();) {
+      Entry<ArtifactCoordinates, ArtifactCoordinates> entry = i.next();
+      for (ArtifactCoordinates projectCoordinate : projectCoordinates) {
+        if (projectCoordinate.equalsGAV(entry.getValue())) {
+          this.log.info("\tThis reactor project's plugin dependency SNAPSHOT artifact is scheduled for release: "
+              + entry.getValue());
+          i.remove();
+          break;
+        }
+      }
+    }
+  }
+
 }

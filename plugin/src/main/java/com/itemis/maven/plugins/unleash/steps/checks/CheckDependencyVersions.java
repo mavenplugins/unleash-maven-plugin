@@ -62,7 +62,7 @@ public class CheckDependencyVersions implements CDIMojoProcessingStep {
 
   @Override
   public void execute(ExecutionContext context) throws MojoExecutionException, MojoFailureException {
-    this.log.info("Checking that none of the reactor projects contain SNAPSHOT dependencies.");
+    this.log.info("Checking that none of the reactor projects contains SNAPSHOT dependencies.");
 
     Map<MavenProject, PomPropertyResolver> propertyResolvers = Maps
         .newHashMapWithExpectedSize(this.reactorProjects.size());
