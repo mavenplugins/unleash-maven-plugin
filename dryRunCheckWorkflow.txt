@@ -1,0 +1,31 @@
+###################################################################
+#
+# unleash DryRun workflow adapted for testing purpose
+#
+# Based on the original default perform workflow.
+# Modified as commented below.
+#
+storeScmRevision
+checkProjectVersions
+checkParentVersions
+checkDependencies
+checkPlugins
+checkPluginDependencies
+prepareVersions
+checkAether
+#
+# Skip further default workflow steps since of dry run
+#
+#setReleaseVersions
+#addSpyPlugin
+#buildReleaseArtifacts
+#removeSpyPlugin
+#checkForScmChanges
+#tagScm
+#detectReleaseArtifacts
+#setDevVersion
+#serializeMetadata
+#installArtifacts
+#deployArtifacts
+#
+###################################################################

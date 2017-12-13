@@ -37,6 +37,7 @@ import com.itemis.maven.plugins.cdi.logging.Logger;
 import com.itemis.maven.plugins.unleash.util.PomPropertyResolver;
 import com.itemis.maven.plugins.unleash.util.ReleaseUtil;
 import com.itemis.maven.plugins.unleash.util.functions.PluginToCoordinates;
+import com.itemis.maven.plugins.unleash.util.functions.ProjectToCoordinates;
 import com.itemis.maven.plugins.unleash.util.functions.ProjectToString;
 import com.itemis.maven.plugins.unleash.util.predicates.IsSnapshotPlugin;
 
@@ -83,6 +84,7 @@ public class CheckPluginVersions implements CDIMojoProcessingStep {
       snapshotsByProject.putAll(project, getSnapshotsFromAllProfiles(project, propertyResolver));
 
       removePluginForIntegrationTests(snapshotsByProject);
+      removeReactorProjectsOwnSnapshotPlugins(snapshotsByProject);
     }
 
     failIfSnapshotsAreReferenced(snapshotsByProject, propertyResolvers);
@@ -188,4 +190,21 @@ public class CheckPluginVersions implements CDIMojoProcessingStep {
       }
     }
   }
+
+  // Removes this reactor projects snapshot plugins from the list of violating plugins.
+  private void removeReactorProjectsOwnSnapshotPlugins(Multimap<MavenProject, ArtifactCoordinates> snapshotsByProject) {
+    Collection<ArtifactCoordinates> projectCoordinates = Collections2.transform(this.reactorProjects,
+        ProjectToCoordinates.INSTANCE);
+    for (Iterator<Entry<MavenProject, ArtifactCoordinates>> i = snapshotsByProject.entries().iterator(); i.hasNext();) {
+      Entry<MavenProject, ArtifactCoordinates> entry = i.next();
+      for (ArtifactCoordinates projectCoordinate : projectCoordinates) {
+        if (projectCoordinate.equalsGAV(entry.getValue())) {
+          this.log.info("\tThis reactor project's SNAPSHOT plugin is scheduled for release: " + entry.getValue());
+          i.remove();
+          break;
+        }
+      }
+    }
+  }
+
 }
