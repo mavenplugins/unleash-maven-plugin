@@ -235,7 +235,10 @@ public class AbstractUnleashMojo extends AbstractCDIMojo {
   @MojoProduces
   @Named("scmMessagePrefix")
   private String getScmMessagePrefix() {
-    if (this.scmMessagePrefix != null && !this.scmMessagePrefix.endsWith(" ")) {
+    // @shaertel: expand newlines configured in message prefix
+    this.scmMessagePrefix = this.scmMessagePrefix.replaceAll("\\\\n", System.lineSeparator());
+    // @shaertel: accept any white space char as separator
+    if (!this.scmMessagePrefix.matches(".*\\s+$")) {
       this.scmMessagePrefix = this.scmMessagePrefix + " ";
     }
     // @mhoffrog: return with probable pom property values replaced
