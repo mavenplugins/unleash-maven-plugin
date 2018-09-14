@@ -35,6 +35,7 @@ public class TagRequest {
   private boolean push;
   private String tagName;
   private boolean commitBeforeTagging;
+  private String scmMessagePrefix; // @shaertel
   private String preTagCommitMessage;
   private MergeStrategy mergeStrategy = MergeStrategy.DO_NOT_MERGE;
   private MergeClient mergeClient;
@@ -72,6 +73,10 @@ public class TagRequest {
     return this.commitBeforeTagging;
   }
 
+  public Optional<String> getScmMessagePrefix() {
+    return Optional.fromNullable(this.scmMessagePrefix);
+  }
+
   public Optional<String> getPreTagCommitMessage() {
     return Optional.fromNullable(this.preTagCommitMessage);
   }
@@ -103,7 +108,7 @@ public class TagRequest {
 
     /**
      * @param remoteRepositoryUrl the remote URL to tag from. If this url is omitted, tagging happens from the
-     *          local working directory.
+     *                              local working directory.
      * @return the builder itself.
      */
     public Builder from(String remoteRepositoryUrl) {
@@ -159,8 +164,17 @@ public class TagRequest {
     }
 
     /**
+     * @param scmMessagePrefix
+     * @return the builder itself.
+     */
+    public Builder scmMessagePrefix(String message) {
+      this.request.scmMessagePrefix = message;
+      return this;
+    }
+
+    /**
      * @param message the repository log message for the pre-tag commit (mandatory if pre-tag committing is
-     *          requested).
+     *                  requested).
      * @return the builder itself.
      */
     public Builder preTagCommitMessage(String message) {
@@ -233,7 +247,7 @@ public class TagRequest {
 
     /**
      * @param mergeClient the merge client to be used in case of merge conflicts and merge strategy
-     *          {@link MergeStrategy#FULL_MERGE}.
+     *                      {@link MergeStrategy#FULL_MERGE}.
      * @return the builder itself.
      */
     public Builder mergeClient(MergeClient mergeClient) {
