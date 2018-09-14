@@ -101,7 +101,8 @@ public class TagScm implements CDIMojoProcessingStep {
         + (this.commitBeforeTagging ? " User requested pre-tag committing."
             : " Tag will be created from local working copy."));
 
-    Builder requestBuilder = TagRequest.builder().message(message.toString()).tagName(scmTagName).push();
+    Builder requestBuilder = TagRequest.builder().message(message.toString()).scmMessagePrefix(this.scmMessagePrefix)
+        .tagName(scmTagName).push();
     if (this.commitBeforeTagging) {
       String remoteRevision = this.scmProvider.getLatestRemoteRevision();
       this.metadata.setScmRevisionBeforeTag(remoteRevision);
