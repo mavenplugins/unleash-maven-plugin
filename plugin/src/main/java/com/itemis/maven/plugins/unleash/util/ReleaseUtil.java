@@ -25,9 +25,9 @@ public final class ReleaseUtil {
    * Calculates the release version depending on several strategies such as prompting the user or applying a default
    * version.
    *
-   * @param version the initial version from which the release version shall be derived.
+   * @param version               the initial version from which the release version shall be derived.
    * @param defaultReleaseVersion the default release version that should be taken into account.
-   * @param prompter a {@link Prompter} for prompting the user for a release version.
+   * @param prompter              a {@link Prompter} for prompting the user for a release version.
    * @return the release version derived after applying several calculation strategies.
    */
   public static String getReleaseVersion(String version, Optional<String> defaultReleaseVersion,
@@ -53,10 +53,10 @@ public final class ReleaseUtil {
    * default
    * version.
    *
-   * @param version the initial version from which the development version shall be derived.
+   * @param version                   the initial version from which the development version shall be derived.
    * @param defaultDevelopmentVersion the default development version that should be taken into account.
-   * @param prompter a {@link Prompter} for prompting the user for a version.
-   * @param upgradeStrategy the strategy which determines the version segment to increase.
+   * @param prompter                  a {@link Prompter} for prompting the user for a version.
+   * @param upgradeStrategy           the strategy which determines the version segment to increase.
    * @return the development version derived after applying several calculation strategies.
    */
   public static String getNextDevelopmentVersion(String version, Optional<String> defaultDevelopmentVersion,
@@ -82,10 +82,10 @@ public final class ReleaseUtil {
    * resolved by <a href=
    * "https://maven.apache.org/ref/3.3.9/maven-core/apidocs/org/apache/maven/plugin/PluginParameterExpressionEvaluator.html">PluginParameterExpressionEvaluator</a>.
    *
-   * @param pattern the pattern for the tag name which may contain variables listed above.
-   * @param project the Maven project to be used for version calculation during parameter resolution.
+   * @param pattern   the pattern for the tag name which may contain variables listed above.
+   * @param project   the Maven project to be used for version calculation during parameter resolution.
    * @param evaluator the Maven plugin parameter expression evaluator used to evaluate expressions containing parameter
-   *          references.
+   *                    references.
    * @return the name of the tag derived from the pattern.
    */
   public static String getTagName(String pattern, MavenProject project, PluginParameterExpressionEvaluator evaluator) {

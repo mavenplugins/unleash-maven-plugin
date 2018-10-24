@@ -1,4 +1,6 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
@@ -9,30 +11,24 @@
 
   <artifactId>unleash-utils</artifactId>
   <name>Unleash Utilities</name>
-  <description>Common utility classes provided and used by the plugin. These utilities can f.i. be used by external tools, such as CI server integration plugins.</description>
-
-  <properties>
-    <version.guava>23.0</version.guava>
-    <version.junit>4.12</version.junit>
-    <version.junit-dataprovider>1.10.3</version.junit-dataprovider>
-  </properties>
+  <description>
+    Common utility classes provided and used by the plugin. These utilities can f.i. be used by external
+    tools, such as CI server integration plugins.
+  </description>
 
   <dependencies>
     <dependency>
       <groupId>com.google.guava</groupId>
       <artifactId>guava</artifactId>
-      <version>${version.guava}</version>
     </dependency>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>${version.junit}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>com.tngtech.java</groupId>
       <artifactId>junit-dataprovider</artifactId>
-      <version>${version.junit-dataprovider}</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
