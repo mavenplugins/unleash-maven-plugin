@@ -1,0 +1,34 @@
+name: Maven build and deploy
+
+on:
+  workflow_dispatch:
+    inputs:
+      dryrun_release_deployment:
+        required: true
+        default: false
+        type: boolean
+        description: "Dry run release version: If true, this will deploy to staging with the release version appropriate to current snapshot but not release to Maven Central."
+  push:
+    branches:    
+      #- '*'         # matches any branch that doesn't contain a '/'
+      #- '*/*'       # matches any branch containing a single '/'
+      #- '!master'   # excludes master
+      - '**'         # matches any branch
+      - '!**/*release_notes' # excludes gh_release_notes branch - supposed to update release notes relevant changes only
+    paths-ignore:
+      - 'README.md'
+      - 'CHANGELOG.md'
+      - 'LICENSE'
+
+jobs:
+  job1_Call_Build_and_Deploy:
+    name: Build ${{ github.repository }}
+    uses: mavenplugins/reusable-gh-actions/.github/workflows/__maven_clean_deploy.yml@master
+    with:
+      runner: ubuntu-latest
+      # Allow to deploy release version to test staging validation on OSSRH
+      # Note: A release version will NOT be relased to Maven Central by this workflow!
+      # Releasing to Maven Central will be performed via Unleash workflow only
+      deploy_snapshots_only: false
+      dryrun_release_deployment: ${{ inputs.dryrun_release_deployment }}
+    secrets: inherit

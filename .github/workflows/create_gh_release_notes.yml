@@ -1,0 +1,32 @@
+# ---------------------------------------------------------------------
+# This is a workflow to call the GitHub release notes creation workflow
+# ---------------------------------------------------------------------
+name: Create GitHub Release Notes
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      # Perform auto trigger for release notes tags only!
+      - 'v[0-9]+_release_notes'
+      - 'v[0-9]+.[0-9]+_release_notes'
+      - 'v[0-9]+.[0-9]+.[0-9]+_release_notes'
+      - 'v[0-9]+.[0-9]+.[0-9]+.[0-9]+_release_notes'
+
+  #push:
+  #  branches:
+  #    - master
+  #schedule:
+  #    - cron: 0 8 * * 5
+
+jobs:
+  job1_Call_Create_GitHub_Release_Notes:
+    name: Create GitHub Release Notes
+    # Release creation requires write permission to contents
+    permissions:
+      contents: write
+    uses: mavenplugins/reusable-gh-actions/.github/workflows/__create_gh_release_notes.yml@master
+    with:
+      runner: ubuntu-latest
+      postfix_to_strip_from_ref: '_release_notes'
+    secrets: inherit

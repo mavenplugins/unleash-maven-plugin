@@ -1,0 +1,51 @@
+name: Maven unleash
+
+on:
+  workflow_dispatch:
+    inputs:
+      releaseVersion:
+        required: false
+        type: string
+        description: "Release Version or empty - automatically determined then"
+        default: ''
+      nextSnapshotVersion:
+        required: false
+        type: string
+        description: "Next Snapshot Version or empty - auto-incremented then"
+        default: ''
+      releaseToMavenCentral:
+        required: false
+        type: boolean
+        description: "Release to Maven Central - DryRun otherwise"
+        default: false
+        
+#  push:
+#    tags:
+#      - '*'
+
+jobs:
+  # Deploy next snapshot
+  job1_Call_Unleash:
+    name: Unleash ${{ github.repository }}
+    # Elevate permission on repo content to write to allow git pushing
+    permissions:
+      contents: write
+    uses: mavenplugins/reusable-gh-actions/.github/workflows/__maven_unleash.yml@master
+    with:
+      runner: ubuntu-latest
+      releaseVersion: ${{ inputs.releaseVersion }}
+      nextSnapshotVersion: ${{ inputs.nextSnapshotVersion }}
+      releaseToMavenCentral: ${{ inputs.releaseToMavenCentral }}
+
+    secrets: inherit
+
+  # Deploy next snapshot, if job1 did succeed
+  job2_Call_Build_and_Deploy:
+    name: Build next snapshot
+    needs: job1_Call_Unleash
+    uses: mavenplugins/reusable-gh-actions/.github/workflows/__maven_clean_deploy.yml@master
+    with:
+      runner: ubuntu-latest
+      deploy_snapshots_only: true
+
+    secrets: inherit
