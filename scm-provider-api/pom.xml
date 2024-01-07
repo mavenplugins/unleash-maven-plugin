@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>com.itemis.maven.plugins</groupId>
+    <groupId>io.github.mavenplugins</groupId>
     <artifactId>unleash-parent</artifactId>
     <version>2.10.1-SNAPSHOT</version>
   </parent>

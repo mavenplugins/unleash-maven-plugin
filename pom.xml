@@ -2,19 +2,19 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>com.itemis</groupId>
+    <groupId>io.github.mavenplugins</groupId>
     <artifactId>org-parent</artifactId>
-    <version>3</version>
+    <version>1</version>
   </parent>
 
-  <groupId>com.itemis.maven.plugins</groupId>
+  <groupId>io.github.mavenplugins</groupId>
   <artifactId>unleash-parent</artifactId>
   <version>2.10.1-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>Unleash Parent</name>
   <description>An alternative release plugin for maven projects that tries to reduce the risk of failure during the release process as well as the number of builds and scm operations. This plugin shall provide a faster, more stable but also more customizable release process.</description>
-  <url>https://github.com/shillner/unleash-maven-plugin</url>
+  <url>https://github.com/mavenplugins/unleash-maven-plugin</url>
   <inceptionYear>2016</inceptionYear>
 
   <developers>
@@ -25,17 +25,26 @@
       <organizationUrl>https://itemis.com/</organizationUrl>
       <timezone>1</timezone>
     </developer>
+    <developer>
+      <id>mavenplugins</id>
+      <!-- Let Maven Central Search show 'Public Project' as known contributors tag -->
+      <name>Public Project</name>
+      <url>https://github.com/mavenplugins/unleash-maven-plugin/graphs/contributors</url>
+      <organization>mavenplugins</organization>
+      <organizationUrl>https://github.com/mavenplugins/</organizationUrl>
+      <timezone>1</timezone>
+    </developer>
   </developers>
 
   <scm>
-    <connection>scm:git:https://github.com/shillner/unleash-maven-plugin.git</connection>
-    <url>https://github.com/shillner/unleash-maven-plugin</url>
+    <connection>scm:git:https://github.com/mavenplugins/unleash-maven-plugin.git</connection>
+    <url>https://github.com/mavenplugins/unleash-maven-plugin</url>
     <tag>HEAD</tag>
   </scm>
 
   <issueManagement>
     <system>GitHub</system>
-    <url>https://github.com/shillner/unleash-maven-plugin/issues</url>
+    <url>https://github.com/mavenplugins/unleash-maven-plugin/issues</url>
   </issueManagement>
 
   <modules>
@@ -46,6 +55,7 @@
 
   <properties>
     <version.java>1.8</version.java>
+    <javadoc.doclint>none</javadoc.doclint>
   </properties>
 
   <build>
@@ -63,25 +73,4 @@
     </pluginManagement>
   </build>
 
-  <profiles>
-    <profile>
-      <id>disable-java8-doclint</id>
-      <activation>
-        <jdk>[1.8,)</jdk>
-      </activation>
-      <build>
-        <pluginManagement>
-          <plugins>
-            <plugin>
-              <groupId>org.apache.maven.plugins</groupId>
-              <artifactId>maven-javadoc-plugin</artifactId>
-              <configuration>
-                <additionalparam>-Xdoclint:none</additionalparam>
-              </configuration>
-            </plugin>
-          </plugins>
-        </pluginManagement>
-      </build>
-    </profile>
-  </profiles>
 </project>

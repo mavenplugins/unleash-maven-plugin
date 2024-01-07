@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>com.itemis.maven.plugins</groupId>
+    <groupId>io.github.mavenplugins</groupId>
     <artifactId>unleash-parent</artifactId>
     <version>2.10.1-SNAPSHOT</version>
   </parent>
@@ -19,7 +19,7 @@
 
   <properties>
     <version.aether>1.0.2.v20150114</version.aether>
-    <version.artifact-spy-plugin>1.0.6</version.artifact-spy-plugin>
+    <version.artifact-spy-plugin>1.0.7</version.artifact-spy-plugin>
     <version.cdi-api>1.2</version.cdi-api>
     <version.cdi-plugin-utils>3.4.0</version.cdi-plugin-utils>
     <version.commons-lang3>3.4</version.commons-lang3>
@@ -74,7 +74,7 @@
     </dependency>
     <dependency>
       <!-- just to be sure that the spy plugin is available in the aether -->
-      <groupId>com.itemis.maven.plugins</groupId>
+      <groupId>io.github.mavenplugins</groupId>
       <artifactId>artifact-spy-plugin</artifactId>
       <version>${version.artifact-spy-plugin}</version>
       <type>maven-plugin</type>
@@ -86,7 +86,7 @@
       <version>${version.cdi-api}</version>
     </dependency>
     <dependency>
-      <groupId>com.itemis.maven.plugins</groupId>
+      <groupId>io.github.mavenplugins</groupId>
       <artifactId>cdi-plugin-utils</artifactId>
       <version>${version.cdi-plugin-utils}</version>
     </dependency>
@@ -160,12 +160,12 @@
       <type>maven-plugin</type>
     </dependency>
     <dependency>
-      <groupId>com.itemis.maven.plugins</groupId>
+      <groupId>io.github.mavenplugins</groupId>
       <artifactId>unleash-scm-provider-api</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>com.itemis.maven.plugins</groupId>
+      <groupId>io.github.mavenplugins</groupId>
       <artifactId>unleash-utils</artifactId>
       <version>${project.version}</version>
     </dependency>
