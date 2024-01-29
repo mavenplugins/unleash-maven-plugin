@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<setup:CompoundTask
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:setup="http://www.eclipse.org/oomph/setup/1.0"
+    xmlns:setup.p2="http://www.eclipse.org/oomph/setup/p2/1.0"
+    name="M2E P2">
+  <setupTask
+      xsi:type="setup:VariableTask"
+      name="m2e.versionRange"
+      value="0.0.0">
+    <description>No M2E version limitation by default</description>
+  </setupTask>
+  <setupTask
+      xsi:type="setup:VariableTask"
+      filter="(scope.product.version.name=2018-09)"
+      name="m2e.versionRange"
+      value="[0.0.0,1.10.0)">
+    <description>M2E version as of https://projects.eclipse.org/projects/technology.m2e/governance</description>
+  </setupTask>
+  <setupTask
+      xsi:type="setup:VariableTask"
+      filter="(scope.product.version.name=2018-12)"
+      name="m2e.versionRange"
+      value="[0.0.0,1.11.0)">
+    <description>M2E version as of https://projects.eclipse.org/projects/technology.m2e/governance</description>
+  </setupTask>
+  <setupTask
+      xsi:type="setup:VariableTask"
+      filter="(scope.product.version.name=2019-03)"
+      name="m2e.versionRange"
+      value="[0.0.0,1.12.0)">
+    <description>M2E version as of https://projects.eclipse.org/projects/technology.m2e/governance</description>
+  </setupTask>
+  <setupTask
+      xsi:type="setup:VariableTask"
+      filter="(scope.product.version.name=2019-06)"
+      name="m2e.versionRange"
+      value="[0.0.0,1.13.0)">
+    <description>M2E version as of https://projects.eclipse.org/projects/technology.m2e/governance</description>
+  </setupTask>
+  <setupTask
+      xsi:type="setup:VariableTask"
+      filter="(scope.product.version.name=2019-09)"
+      name="m2e.versionRange"
+      value="[0.0.0,1.14.0)">
+    <description>M2E version as of https://projects.eclipse.org/projects/technology.m2e/governance</description>
+  </setupTask>
+  <setupTask
+      xsi:type="setup:VariableTask"
+      filter="(scope.product.version.name=2019-12)"
+      name="m2e.versionRange"
+      value="[0.0.0,1.15.0)">
+    <description>M2E version as of https://projects.eclipse.org/projects/technology.m2e/governance</description>
+  </setupTask>
+  <setupTask
+      xsi:type="setup:VariableTask"
+      filter="(scope.product.version.name=2020-03)"
+      name="m2e.versionRange"
+      value="[0.0.0,1.16.0)">
+    <description>M2E version as of https://projects.eclipse.org/projects/technology.m2e/governance</description>
+  </setupTask>
+  <setupTask
+      xsi:type="setup:VariableTask"
+      filter="(scope.product.version.name=2020-06)"
+      name="m2e.versionRange"
+      value="[0.0.0,1.16.2)">
+    <description>M2E version as of https://projects.eclipse.org/projects/technology.m2e/governance</description>
+  </setupTask>
+  <setupTask
+      xsi:type="setup:VariableTask"
+      filter="(|(scope.product.version.name=2022-06)(scope.product.version.name=2022-03)(scope.product.version.name=2021-12)(scope.product.version.name=2021-09)(scope.product.version.name=2021-06)(scope.product.version.name=2021-03)(scope.product.version.name=2020-12)(scope.product.version.name=2020-09))"
+      name="m2e.versionRange"
+      value="[0.0.0,1.19.0)">
+    <description>
+       Limit M2E version to 1.18.x for Eclipse versions requiring Java11 as a minimum
+      to work around a POM editor issue - effective for any Eclipse platform since 2020-09.
+    </description>
+  </setupTask>
+  <setupTask
+      xsi:type="setup.p2:P2Task"
+      filter="(|(scope.product.version.name=neon)(scope.product.version.name=oxygen)(scope.product.version.name=photon))"
+      label="M2E (Neon)"
+      licenseConfirmationDisabled="true">
+    <requirement
+        name="org.eclipse.m2e.feature.feature.group"
+        versionRange="[1.6.0,1.7.0)"/>
+    <requirement
+        name="org.eclipse.m2e.logback.feature.feature.group"/>
+    <requirement
+        name="org.sonatype.m2e.mavenarchiver.feature.feature.group"/>
+    <requirement
+        name="org.sonatype.m2e.buildhelper.feature.feature.group"/>
+    <repository
+        url="https://archive.eclipse.org/technology/m2e/releases/1.6/"/>
+    <description>M2Eclipse is shipped with Eclipse but we have to ensure that m2e 1.6 is used as a minimum (this is not the case for the Neon installs being out)</description>
+  </setupTask>
+  <setupTask
+      xsi:type="setup.p2:P2Task"
+      filter="(|(scope.product.version.name=2022-06)(scope.product.version.name=2022-03)(scope.product.version.name=2021-12)(scope.product.version.name=2021-09)(scope.product.version.name=2021-06)(scope.product.version.name=2021-03)(scope.product.version.name=2020-12)(scope.product.version.name=2020-09)(scope.product.version.name=2020-06)(scope.product.version.name=2020-03)(scope.product.version.name=2019-12)(scope.product.version.name=2019-09)(scope.product.version.name=2019-06)(scope.product.version.name=2019-03)(scope.product.version.name=2018-12)(scope.product.version.name=2018-09))"
+      label="M2E (2018-09 to 2022-06)"
+      licenseConfirmationDisabled="true">
+    <requirement
+        name="org.eclipse.m2e.feature.feature.group"
+        description="Version limited to enforce legacy POM editor being installed">
+      <annotation
+          source="http://www.eclipse.org/oomph/setup/FeatureSubstitution">
+        <detail
+            key="versionRange">
+          <value>${m2e.versionRange}</value>
+        </detail>
+      </annotation>
+    </requirement>
+    <requirement
+        name="org.eclipse.m2e.logback.feature.feature.group">
+      <annotation
+          source="http://www.eclipse.org/oomph/setup/FeatureSubstitution">
+        <detail
+            key="versionRange">
+          <value>${m2e.versionRange}</value>
+        </detail>
+      </annotation>
+    </requirement>
+    <requirement
+        name="org.eclipse.m2e.sse.ui.feature.feature.group"
+        description="The legacy POM editor">
+      <annotation
+          source="http://www.eclipse.org/oomph/setup/FeatureSubstitution">
+        <detail
+            key="versionRange">
+          <value>${m2e.versionRange}</value>
+        </detail>
+      </annotation>
+    </requirement>
+    <repository
+        url="https://archive.eclipse.org/technology/m2e/releases/1.18.2/"/>
+    <description>We explicitly add the specific M2E 1.18.2 repo to let these Eclipse products find this version</description>
+  </setupTask>
+  <description>
+
+    M2E has a POM editor issue introduced with M2E release 1.19.0.
+    Root cause is that from M2E version 1.19.0 on, the LemMinX POM editor did become the default POM editor.
+    See: https://github.com/eclipse-m2e/m2e-core/issues/458
+    To get this worked around for us, we enforce M2E being limited to version 1.18.2 unless this issue becomes fixed.
+
+  </description>
+</setup:CompoundTask>

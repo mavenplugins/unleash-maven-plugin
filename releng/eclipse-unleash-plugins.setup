@@ -13,23 +13,29 @@
     xmlns:setup.p2="http://www.eclipse.org/oomph/setup/p2/1.0"
     xmlns:setup.workingsets="http://www.eclipse.org/oomph/setup/workingsets/1.0"
     xsi:schemaLocation="http://www.eclipse.org/oomph/setup/git/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Git.ecore http://www.eclipse.org/oomph/setup/jdt/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/JDT.ecore http://www.eclipse.org/oomph/setup/launching/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Launching.ecore http://www.eclipse.org/oomph/setup/maven/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Maven.ecore http://www.eclipse.org/oomph/setup/mylyn/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Mylyn.ecore http://www.eclipse.org/oomph/predicates/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Predicates.ecore http://www.eclipse.org/oomph/setup/workingsets/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/SetupWorkingSets.ecore"
-    name="shillner.dev.ump"
+    name="mvnplugins.dev.ump"
     label="Unleash Maven Plugin">
   <setupTask
       xsi:type="setup:CompoundTask"
-      id="shillner.dev.ump.ini"
+      id="mvnplugins.dev.ump.ini"
       name="INI">
     <setupTask
         xsi:type="setup:EclipseIniTask"
-        id="shillner.dev.ump.ini.xms"
+        option="-eclipse.keyring"
+        value="${installation.location/eclipse/configuration/org.eclipse.equinox.security/secure_storage}">
+      <description>Use a local secure_storage for each installation to avoid conflict issues on multiple project installations of the same user</description>
+    </setupTask>
+    <setupTask
+        xsi:type="setup:EclipseIniTask"
+        id="mvnplugins.dev.ump.ini.xms"
         option="-Xms"
-        value="256m"
+        value="512m"
         vm="true">
       <description>Sets the minimum heap space for the IDE.</description>
     </setupTask>
     <setupTask
         xsi:type="setup:EclipseIniTask"
-        id="shillner.dev.ump.ini.xmx"
+        id="mvnplugins.dev.ump.ini.xmx"
         option="-Xmx"
         value="1024m"
         vm="true">
@@ -37,42 +43,238 @@
     </setupTask>
     <setupTask
         xsi:type="setup:EclipseIniTask"
-        id="shillner.dev.ump.ini.redirect-setup"
+        id="mvnplugins.dev.ump.ini.redirect-setup"
         option="-Doomph.redirection.ump"
-        value="=https://raw.githubusercontent.com/shillner/unleash-maven-plugin/master/releng/eclipse.setup->${shillner.dev.ump.git.clone.location|uri}/releng/eclipse.setup"
+        value="=https://raw.githubusercontent.com/mavenplugins/unleash-maven-plugin/master/releng/eclipse.setup->${mvnplugins.dev.ump.git.clone.location|uri}/releng/eclipse.setup"
         vm="true">
       <description>Specifies a redirection for the setup file. This enables us to use the github URI to include the setup file in the eclipse installer but when locally editing the setup (opened through Navigate-Setup...) the changes are made in our local copy of the setup for committing them.</description>
     </setupTask>
     <setupTask
         xsi:type="setup:ResourceCreationTask"
-        id="shillner.dev.ump.ini.pe"
+        id="mvnplugins.dev.ump.ini.pe"
         excludedTriggers="STARTUP MANUAL"
-        content="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;section name=&quot;Workbench&quot;>&#xD;&#xA;&#x9;&lt;section name=&quot;org.eclipse.jdt.internal.ui.packageview.PackageExplorerPart&quot;>&#xD;&#xA;&#x9;&#x9;&lt;item value=&quot;true&quot; key=&quot;group_libraries&quot;/>&#xD;&#xA;&#x9;&#x9;&lt;item value=&quot;false&quot; key=&quot;linkWithEditor&quot;/>&#xD;&#xA;&#x9;&#x9;&lt;item value=&quot;2&quot; key=&quot;layout&quot;/>&#xD;&#xA;&#x9;&#x9;&lt;item value=&quot;2&quot; key=&quot;rootMode&quot;/>&#xD;&#xA;&#x9;&#x9;&lt;item value=&quot;&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot;?&amp;gt;&amp;#x0D;&amp;#x0A;&amp;lt;packageExplorer configured=&amp;quot;true&amp;quot; group_libraries=&amp;quot;1&amp;quot; layout=&amp;quot;2&amp;quot; linkWithEditor=&amp;quot;0&amp;quot; rootMode=&amp;quot;2&amp;quot; sortWorkingSets=&amp;quot;false&amp;quot; workingSetName=&amp;quot;&amp;quot;&amp;gt;&amp;#x0D;&amp;#x0A;&amp;lt;localWorkingSetManager&amp;gt;&amp;#x0D;&amp;#x0A;&amp;lt;workingSet editPageId=&amp;quot;org.eclipse.jdt.internal.ui.OthersWorkingSet&amp;quot; factoryID=&amp;quot;org.eclipse.ui.internal.WorkingSetFactory&amp;quot; id=&amp;quot;1382792884467_1&amp;quot; label=&amp;quot;Other Projects&amp;quot; name=&amp;quot;Other Projects&amp;quot;/&amp;gt;&amp;#x0D;&amp;#x0A;&amp;lt;/localWorkingSetManager&amp;gt;&amp;#x0D;&amp;#x0A;&amp;lt;activeWorkingSet workingSetName=&amp;quot;Other Projects&amp;quot;/&amp;gt;&amp;#x0D;&amp;#x0A;&amp;lt;allWorkingSets workingSetName=&amp;quot;Other Projects&amp;quot;/&amp;gt;&amp;#x0D;&amp;#x0A;&amp;lt;/packageExplorer&amp;gt;&quot; key=&quot;memento&quot;/>&#xD;&#xA;&#x9;&lt;/section>&#xD;&#xA;&lt;/section>&#xD;&#xA;"
         targetURL="${workspace.location|uri}/.metadata/.plugins/org.eclipse.jdt.ui/dialog_settings.xml"
         encoding="UTF-8">
       <description>Initialize JDT's package explorer to show working sets as its root objects</description>
+      <content>
+        &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>
+        &lt;section name=&quot;Workbench&quot;>
+        	&lt;section name=&quot;org.eclipse.jdt.internal.ui.packageview.PackageExplorerPart&quot;>
+        		&lt;item value=&quot;true&quot; key=&quot;group_libraries&quot;/>
+        		&lt;item value=&quot;true&quot; key=&quot;linkWithEditor&quot;/>
+        		&lt;item value=&quot;2&quot; key=&quot;layout&quot;/>
+        		&lt;item value=&quot;2&quot; key=&quot;rootMode&quot;/>
+        		&lt;item value=&quot;&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot;?&amp;gt;&amp;#x0D;&amp;#x0A;&amp;lt;packageExplorer configured=&amp;quot;true&amp;quot; group_libraries=&amp;quot;1&amp;quot; layout=&amp;quot;2&amp;quot; linkWithEditor=&amp;quot;0&amp;quot; rootMode=&amp;quot;2&amp;quot; sortWorkingSets=&amp;quot;false&amp;quot; workingSetName=&amp;quot;&amp;quot;&amp;gt;&amp;#x0D;&amp;#x0A;&amp;lt;localWorkingSetManager&amp;gt;&amp;#x0D;&amp;#x0A;&amp;lt;workingSet editPageId=&amp;quot;org.eclipse.jdt.internal.ui.OthersWorkingSet&amp;quot; factoryID=&amp;quot;org.eclipse.ui.internal.WorkingSetFactory&amp;quot; id=&amp;quot;1382792884467_1&amp;quot; label=&amp;quot;Other Projects&amp;quot; name=&amp;quot;Other Projects&amp;quot;/&amp;gt;&amp;#x0D;&amp;#x0A;&amp;lt;/localWorkingSetManager&amp;gt;&amp;#x0D;&amp;#x0A;&amp;lt;activeWorkingSet workingSetName=&amp;quot;Other Projects&amp;quot;/&amp;gt;&amp;#x0D;&amp;#x0A;&amp;lt;allWorkingSets workingSetName=&amp;quot;Other Projects&amp;quot;/&amp;gt;&amp;#x0D;&amp;#x0A;&amp;lt;/packageExplorer&amp;gt;&quot; key=&quot;memento&quot;/>
+        	&lt;/section>
+        &lt;/section>
+
+      </content>
+    </setupTask>
+    <setupTask
+        xsi:type="setup:ResourceCreationTask"
+        id="mvnplugins.dev.ump.ini.launch.history"
+        excludedTriggers="STARTUP MANUAL"
+        targetURL="${workspace.location|uri}/.metadata/.plugins/org.eclipse.debug.ui/launchConfigurationHistory.xml"
+        encoding="UTF-8">
+      <description>Initialize JDT's launch configuration history</description>
+      <content>
+        &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?>
+        &lt;launchHistory>
+            &lt;launchGroup id=&quot;org.eclipse.debug.ui.launchGroup.debug&quot;>
+                &lt;mruHistory>
+                    &lt;launch memento=&quot;&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot; standalone=&amp;quot;no&amp;quot;?&amp;gt;&amp;#13;&amp;#10;&amp;lt;launchConfiguration local=&amp;quot;false&amp;quot; path=&amp;quot;/unleash-parent/releng/launch/build_maven-plugin [clean install].launch&amp;quot;/&amp;gt;&amp;#13;&amp;#10;&quot;/>
+                    &lt;launch memento=&quot;&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot; standalone=&amp;quot;no&amp;quot;?&amp;gt;&amp;#13;&amp;#10;&amp;lt;launchConfiguration local=&amp;quot;false&amp;quot; path=&amp;quot;/unleash/launch/build_jenkins-plugin [clean install].launch&amp;quot;/&amp;gt;&amp;#13;&amp;#10;&quot;/>
+                    &lt;launch memento=&quot;&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot; standalone=&amp;quot;no&amp;quot;?&amp;gt;&amp;#13;&amp;#10;&amp;lt;launchConfiguration local=&amp;quot;false&amp;quot; path=&amp;quot;/cdi-plugin-hooks/launch/build_cdi-hooks [clean install].launch&amp;quot;/&amp;gt;&amp;#13;&amp;#10;&quot;/>
+                    &lt;launch memento=&quot;&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot; standalone=&amp;quot;no&amp;quot;?&amp;gt;&amp;#13;&amp;#10;&amp;lt;launchConfiguration local=&amp;quot;false&amp;quot; path=&amp;quot;/cdi-plugin-utils/launch/build_cdi-utils [clean install].launch&amp;quot;/&amp;gt;&amp;#13;&amp;#10;&quot;/>
+                    &lt;launch memento=&quot;&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot; standalone=&amp;quot;no&amp;quot;?&amp;gt;&amp;#13;&amp;#10;&amp;lt;launchConfiguration local=&amp;quot;false&amp;quot; path=&amp;quot;/unleash-scm-provider-git/launch/build_scm-provider-git [clean install].launch&amp;quot;/&amp;gt;&amp;#13;&amp;#10;&quot;/>
+                    &lt;launch memento=&quot;&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot; standalone=&amp;quot;no&amp;quot;?&amp;gt;&amp;#13;&amp;#10;&amp;lt;launchConfiguration local=&amp;quot;false&amp;quot; path=&amp;quot;/unleash-scm-provider-svn/launch/build_scm-provider-svn [clean install].launch&amp;quot;/&amp;gt;&amp;#13;&amp;#10;&quot;/>
+                &lt;/mruHistory>
+                &lt;favorites/>
+            &lt;/launchGroup>
+            &lt;launchGroup id=&quot;org.eclipse.debug.ui.launchGroup.profile&quot;>
+                &lt;mruHistory/>
+                &lt;favorites/>
+            &lt;/launchGroup>
+            &lt;launchGroup id=&quot;org.eclipse.eclemma.ui.launchGroup.coverage&quot;>
+                &lt;mruHistory/>
+                &lt;favorites/>
+            &lt;/launchGroup>
+            &lt;launchGroup id=&quot;org.eclipse.ui.externaltools.launchGroup&quot;>
+                &lt;mruHistory/>
+                &lt;favorites/>
+            &lt;/launchGroup>
+            &lt;launchGroup id=&quot;org.eclipse.debug.ui.launchGroup.run&quot;>
+                &lt;mruHistory>
+                    &lt;launch memento=&quot;&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot; standalone=&amp;quot;no&amp;quot;?&amp;gt;&amp;#13;&amp;#10;&amp;lt;launchConfiguration local=&amp;quot;false&amp;quot; path=&amp;quot;/unleash-parent/releng/launch/build_maven-plugin [clean install].launch&amp;quot;/&amp;gt;&amp;#13;&amp;#10;&quot;/>
+                    &lt;launch memento=&quot;&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot; standalone=&amp;quot;no&amp;quot;?&amp;gt;&amp;#13;&amp;#10;&amp;lt;launchConfiguration local=&amp;quot;false&amp;quot; path=&amp;quot;/unleash/launch/build_jenkins-plugin [clean install].launch&amp;quot;/&amp;gt;&amp;#13;&amp;#10;&quot;/>
+                    &lt;launch memento=&quot;&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot; standalone=&amp;quot;no&amp;quot;?&amp;gt;&amp;#13;&amp;#10;&amp;lt;launchConfiguration local=&amp;quot;false&amp;quot; path=&amp;quot;/cdi-plugin-hooks/launch/build_cdi-hooks [clean install].launch&amp;quot;/&amp;gt;&amp;#13;&amp;#10;&quot;/>
+                    &lt;launch memento=&quot;&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot; standalone=&amp;quot;no&amp;quot;?&amp;gt;&amp;#13;&amp;#10;&amp;lt;launchConfiguration local=&amp;quot;false&amp;quot; path=&amp;quot;/cdi-plugin-utils/launch/build_cdi-utils [clean install].launch&amp;quot;/&amp;gt;&amp;#13;&amp;#10;&quot;/>
+                    &lt;launch memento=&quot;&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot; standalone=&amp;quot;no&amp;quot;?&amp;gt;&amp;#13;&amp;#10;&amp;lt;launchConfiguration local=&amp;quot;false&amp;quot; path=&amp;quot;/unleash-scm-provider-git/launch/build_scm-provider-git [clean install].launch&amp;quot;/&amp;gt;&amp;#13;&amp;#10;&quot;/>
+                    &lt;launch memento=&quot;&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot; standalone=&amp;quot;no&amp;quot;?&amp;gt;&amp;#13;&amp;#10;&amp;lt;launchConfiguration local=&amp;quot;false&amp;quot; path=&amp;quot;/unleash-scm-provider-svn/launch/build_scm-provider-svn [clean install].launch&amp;quot;/&amp;gt;&amp;#13;&amp;#10;&quot;/>
+                &lt;/mruHistory>
+                &lt;favorites/>
+            &lt;/launchGroup>
+        &lt;/launchHistory>
+
+      </content>
+    </setupTask>
+    <setupTask
+        xsi:type="setup:ResourceCreationTask"
+        id="mvnplugins.dev.ump.ini.ws.selection"
+        targetURL="configuration:/.settings/org.eclipse.ui.ide.prefs">
+      <description>This will ensure the workspace selection dialog of Eclipse does not come up</description>
+      <content>
+        MAX_RECENT_WORKSPACES=5
+        RECENT_WORKSPACES=${workspace.location|property}
+        RECENT_WORKSPACES_PROTOCOL=3
+        SHOW_WORKSPACE_SELECTION_DIALOG=false
+        eclipse.preferences.version=1
+      </content>
     </setupTask>
     <description>Groups all settings in the eclipse.ini.</description>
   </setupTask>
   <setupTask
       xsi:type="setup:CompoundTask"
-      id="shillner.dev.ump.compile"
+      id="mvnplugins.dev.ump.oomph"
+      name="Oomph">
+    <setupTask
+        xsi:type="setup:EclipseIniTask"
+        id="mvnplugins.dev.ump.oomph.ini.setup"
+        option="-Doomph.setup"
+        value="=true"
+        vm="true"/>
+    <setupTask
+        xsi:type="setup:EclipseIniTask"
+        id="mvnplugins.dev.ump.oomph.ini.questionnaire"
+        option="-Doomph.setup.questionnaire.skip"
+        value="=true"
+        vm="true"/>
+    <setupTask
+        xsi:type="setup:VariableTask"
+        name="oomph.setup.versionRange"
+        value="0.0.0">
+      <description>No version restriction for Oomph setup by default.</description>
+    </setupTask>
+    <setupTask
+        xsi:type="setup:VariableTask"
+        name="oomph.update.url"
+        value="https://download.eclipse.org/oomph/updates/"/>
+    <setupTask
+        xsi:type="setup:CompoundTask"
+        id="mvnplugins.dev.ump.oomph.java8"
+        filter="(|(scope.product.version.name=2020-06)(scope.product.version.name=2020-03)(scope.product.version.name=2019-12)(scope.product.version.name=2019-09)(scope.product.version.name=2019-06)(scope.product.version.name=2019-03)(scope.product.version.name=2018-12)(scope.product.version.name=2018-09)(scope.product.version.name=photon)(scope.product.version.name=oxygen)(scope.product.version.name=neon))"
+        name="Oomph Setup 1.22.0 (Filtered for Eclipse versions up to 2020-06 only)">
+      <setupTask
+          xsi:type="setup:VariableTask"
+          name="oomph.setup.versionRange"
+          value="[0.0.0,1.22.1)"/>
+      <setupTask
+          xsi:type="setup:VariableTask"
+          name="oomph.update.url"
+          value="https://download.eclipse.org/oomph/drops/release/1.22.0/"/>
+      <description>Oomph IUs installed must not be newer than 1.22.0 for Eclipse versions running on Java 8</description>
+    </setupTask>
+    <setupTask
+        xsi:type="setup:CompoundTask"
+        id="mvnplugins.dev.ump.oomph.java11"
+        filter="(|(scope.product.version.name=2022-06)(scope.product.version.name=2022-03)(scope.product.version.name=2021-12)(scope.product.version.name=2021-09)(scope.product.version.name=2021-06)(scope.product.version.name=2021-03)(scope.product.version.name=2020-12)(scope.product.version.name=2020-09))"
+        name="Oomph Setup max version 1.28.0 (Filtered for Eclipse versions up to 2022-06 only)">
+      <setupTask
+          xsi:type="setup:VariableTask"
+          name="oomph.setup.versionRange"
+          value="[0.0.0,1.28.1)"/>
+      <setupTask
+          xsi:type="setup:VariableTask"
+          name="oomph.update.url"
+          value="https://download.eclipse.org/oomph/drops/release/1.28.0/"/>
+      <description>Oomph IUs installed must not be newer than 1.28.0 for Eclipse versions running on Java 11</description>
+    </setupTask>
+    <setupTask
+        xsi:type="setup:CompoundTask"
+        id="mvnplugins.dev.ump.oomph.java17"
+        filter="(|(scope.product.version.name=2024-06)(scope.product.version.name=2024-03)(scope.product.version.name=2023-12)(scope.product.version.name=2023-09)(scope.product.version.name=2023-06)(scope.product.version.name=2023-03)(scope.product.version.name=2022-12)(scope.product.version.name=2022-09))"
+        name="Oomph Setup max version 1.31.0 (Filtered for Eclipse versions up to 2024-06 only)">
+      <setupTask
+          xsi:type="setup:VariableTask"
+          name="oomph.setup.versionRange"
+          value="[0.0.0,1.31.1)"/>
+      <setupTask
+          xsi:type="setup:VariableTask"
+          name="oomph.update.url"
+          value="https://download.eclipse.org/oomph/drops/release/1.31.0/"/>
+      <description>Oomph IUs installed must not be newer than 1.31.0 for Eclipse versions running on Java 17</description>
+    </setupTask>
+    <setupTask
+        xsi:type="setup.p2:P2Task"
+        id="mvnplugins.dev.ump.oomph.plugin">
+      <requirement
+          name="org.eclipse.oomph.setup.feature.group">
+        <annotation
+            source="http://www.eclipse.org/oomph/setup/FeatureSubstitution">
+          <detail
+              key="versionRange">
+            <value>${oomph.setup.versionRange}</value>
+          </detail>
+        </annotation>
+      </requirement>
+      <repository
+          url="${oomph.update.url}"/>
+    </setupTask>
+    <description>Limit maximum Oomph version based on Eclipse version.</description>
+  </setupTask>
+  <setupTask
+      xsi:type="setup:CompoundTask"
+      id="mvnplugins.dev.ump.compile"
       name="Compile">
     <setupTask
         xsi:type="jdt:JRETask"
-        id="shillner.dev.ump.compile.jre"
-        version="JavaSE-1.6"
-        location="${jre.location-1.6}">
+        id="mvnplugins.dev.ump.compile.jre"
+        version="JavaSE-1.8"
+        location="${jre.location-1.8}">
       <description>Define the JRE needed to compile and run the Java projects of ${scope.project.label}</description>
     </setupTask>
   </setupTask>
   <setupTask
       xsi:type="setup:CompoundTask"
-      id="shillner.dev.ump.plugins"
+      id="mvnplugins.dev.ump.variables.maven"
+      name="Maven">
+    <setupTask
+        xsi:type="setup:VariableTask"
+        type="FOLDER"
+        name="ump.mvn.location"
+        defaultValue="${M2_HOME}"
+        label="Maven Installation Folder"/>
+    <setupTask
+        xsi:type="setup:VariableTask"
+        type="FILE"
+        name="ump.mvn.settings.location"
+        value="${ump.mvn.location}/conf/settings.xml"
+        label="Maven Settings File"/>
+    <setupTask
+        xsi:type="setup:VariableTask"
+        type="FILE"
+        name="ump.mvn.settings.user.location"
+        value="${user.home}/.m2/settings.xml"
+        label="Maven User Settings File"/>
+    <description>External Maven Variables</description>
+  </setupTask>
+  <setupTask
+      xsi:type="setup:CompoundTask"
+      id="mvnplugins.dev.ump.plugins"
       name="Plugins">
     <setupTask
         xsi:type="setup.p2:P2Task"
-        id="shillner.dev.ump.plugins.m2e"
+        id="mvnplugins.dev.ump.plugins.xml"
+        label="XML"
+        licenseConfirmationDisabled="true">
+      <requirement
+          name="org.eclipse.wst.xml_ui.feature.feature.group"/>
+      <description>Eclipse XML Editors and Tools</description>
+    </setupTask>
+    <setupTask
+        xsi:type="setup.p2:P2Task"
+        id="mvnplugins.dev.ump.plugins.m2e"
+        disabled="true"
         label="M2E"
         licenseConfirmationDisabled="true">
       <requirement
@@ -85,11 +287,15 @@
           url="http://download.eclipse.org/releases/luna"/>
       <repository
           url="http://repo1.maven.org/maven2/.m2e/connectors/m2eclipse-tycho/0.9.0/N/LATEST/"/>
-      <description>Maven connector</description>
+      <description>
+        Maven connector
+        DISABLED - replaced by referenced setup below
+      </description>
     </setupTask>
     <setupTask
         xsi:type="setup.p2:P2Task"
-        id="shillner.dev.ump.plugins.mylyn"
+        id="mvnplugins.dev.ump.plugins.mylyn"
+        disabled="true"
         label="Mylyn"
         licenseConfirmationDisabled="true">
       <requirement
@@ -106,30 +312,39 @@
           url="http://download.eclipse.org/egit/updates"/>
       <repository
           url="http://update.atlassian.com/atlassian-eclipse-plugin/rest/e3.7"/>
-      <description>Task and build connector</description>
+      <description>
+        Task and build connector
+        DISABLED - requires update to actual Eclipse product version selected
+      </description>
     </setupTask>
-    <description>Groups all plugin and feature installations.</description>
+    <setupTask
+        xsi:type="setup:CompoundTask"
+        href="eclipse-marketplace/eclipse-p2-m2e.setup#/"/>
+    <description>Groups all plugin and feature installations</description>
   </setupTask>
   <setupTask
       xsi:type="setup:CompoundTask"
-      id="shillner.dev.ump.preferences"
+      id="mvnplugins.dev.ump.preferences"
       name="Preferences">
     <setupTask
         xsi:type="setup:CompoundTask"
-        id="shillner.dev.ump.preferences.general"
+        id="mvnplugins.dev.ump.preferences.general"
         name="General">
       <setupTask
           xsi:type="setup:PreferenceTask"
-          id=""
           key="/instance/org.eclipse.ui/SHOW_MEMORY_MONITOR"
           value="true"/>
+      <setupTask
+          xsi:type="setup:PreferenceTask"
+          key="/instance/org.eclipse.ui.ide/WORKSPACE_NAME"
+          value="${installation.location|lastSegment}"/>
       <setupTask
           xsi:type="setup:PreferenceTask"
           key="/instance/org.eclipse.core.resources/encoding"
           value="UTF-8"/>
       <setupTask
           xsi:type="setup:CompoundTask"
-          id="shillner.dev.ump.preferences.general.editors"
+          id="mvnplugins.dev.ump.preferences.general.editors"
           name="Editors">
         <setupTask
             xsi:type="setup:PreferenceTask"
@@ -150,7 +365,7 @@
       </setupTask>
       <setupTask
           xsi:type="setup:CompoundTask"
-          id="shillner.dev.ump.preferences.general.tasktags"
+          id="mvnplugins.dev.ump.preferences.general.tasktags"
           name="Task Tags">
         <setupTask
             xsi:type="setup:PreferenceTask"
@@ -191,7 +406,7 @@
       </setupTask>
       <setupTask
           xsi:type="setup:CompoundTask"
-          id="shillner.dev.ump.preferences.general.rundebug"
+          id="mvnplugins.dev.ump.preferences.general.rundebug"
           name="Run/Debug">
         <setupTask
             xsi:type="setup:PreferenceTask"
@@ -233,11 +448,11 @@
     </setupTask>
     <setupTask
         xsi:type="setup:CompoundTask"
-        id="shillner.dev.ump.preferences.java"
+        id="mvnplugins.dev.ump.preferences.java"
         name="Java">
       <setupTask
           xsi:type="setup:CompoundTask"
-          id="shillner.dev.ump.preferences.java.saveactions"
+          id="mvnplugins.dev.ump.preferences.java.saveactions"
           name="Save Actions">
         <setupTask
             xsi:type="setup:PreferenceTask"
@@ -478,7 +693,7 @@
       </setupTask>
       <setupTask
           xsi:type="setup:CompoundTask"
-          id="shillner.dev.ump.preferences.java.formatter"
+          id="mvnplugins.dev.ump.preferences.java.formatter"
           name="Formatter">
         <setupTask
             xsi:type="setup:PreferenceTask"
@@ -1656,12 +1871,16 @@
     </setupTask>
     <setupTask
         xsi:type="setup:CompoundTask"
-        id="shillner.dev.ump.preferences.maven"
+        id="mvnplugins.dev.ump.preferences.maven"
         name="Maven">
       <setupTask
           xsi:type="setup:PreferenceTask"
           key="/instance/org.eclipse.m2e.core/eclipse.m2.defaultPomEditorPage"
           value="true"/>
+      <setupTask
+          xsi:type="setup:PreferenceTask"
+          key="/instance/org.eclipse.m2e.core/eclipse.m2.defaultRuntime"
+          value="EXT_MAVEN"/>
       <setupTask
           xsi:type="setup:PreferenceTask"
           key="/instance/org.eclipse.m2e.core/eclipse.m2.downloadJavadoc"
@@ -1672,6 +1891,10 @@
           value="true"/>
       <setupTask
           xsi:type="setup:PreferenceTask"
+          key="/instance/org.eclipse.m2e.core/eclipse.m2.globalSettingsFile"
+          value="${ump.mvn.settings.location}"/>
+      <setupTask
+          xsi:type="setup:PreferenceTask"
           key="/instance/org.eclipse.m2e.core/eclipse.m2.globalUpdatePolicy"
           value="false"/>
       <setupTask
@@ -1680,16 +1903,38 @@
           value="warning"/>
       <setupTask
           xsi:type="setup:PreferenceTask"
+          key="/instance/org.eclipse.m2e.core/eclipse.m2.runtimes"
+          value="EXT_MAVEN">
+        <description>'|' separated values</description>
+      </setupTask>
+      <setupTask
+          xsi:type="setup:PreferenceTask"
+          key="/instance/org.eclipse.m2e.core/eclipse.m2.runtimesNodes/EXT_MAVEN/location"
+          value="${ump.mvn.location}"/>
+      <setupTask
+          xsi:type="setup:PreferenceTask"
+          key="/instance/org.eclipse.m2e.core/eclipse.m2.runtimesNodes/EXT_MAVEN/type"
+          value="EXTERNAL"/>
+      <setupTask
+          xsi:type="setup:PreferenceTask"
           key="/instance/org.eclipse.m2e.core/eclipse.m2.updateIndexes"
           value="true"/>
       <setupTask
           xsi:type="setup:PreferenceTask"
           key="/instance/org.eclipse.m2e.core/eclipse.m2.updateProjects"
           value="true"/>
+      <setupTask
+          xsi:type="setup:PreferenceTask"
+          key="/instance/org.eclipse.m2e.core/eclipse.m2.userSettingsFile"
+          value="${ump.mvn.settings.user.location}"/>
+      <setupTask
+          xsi:type="setup:PreferenceTask"
+          key="/instance/org.eclipse.m2e.core/eclipse.m2.hideFoldersOfNestedProjects"
+          value="true"/>
     </setupTask>
     <setupTask
         xsi:type="setup:CompoundTask"
-        id="shillner.dev.ump.preferences.xml"
+        id="mvnplugins.dev.ump.preferences.xml"
         name="XML">
       <setupTask
           xsi:type="setup:PreferenceTask"
@@ -1707,16 +1952,80 @@
           xsi:type="setup:PreferenceTask"
           key="/instance/org.eclipse.wst.xml.core/preserveCDATAContent"
           value="true"/>
+      <setupTask
+          xsi:type="setup:CompoundTask"
+          id="mvnplugins.dev.ump.preferences.xml.wildwebdeveloper"
+          name="Wild Web Developer">
+        <setupTask
+            xsi:type="setup:PreferenceTask"
+            key="/instance/org.eclipse.wildwebdeveloper.xml/org.eclipse.wildwebdeveloper.xml.format.maxLineWidth"
+            value="120"/>
+        <setupTask
+            xsi:type="setup:PreferenceTask"
+            key="/instance/org.eclipse.wildwebdeveloper.xml/org.eclipse.wildwebdeveloper.xml.format.splitAttributesIndentSize"
+            value="2"/>
+        <description>Align format with XML Tools Editor</description>
+      </setupTask>
+      <setupTask
+          xsi:type="setup:CompoundTask"
+          id="mvnplugins.dev.ump.preferences.xml.lspe"
+          name="Language Server">
+        <setupTask
+            xsi:type="setup:PreferenceTask"
+            key="/instance/org.eclipse.lsp4e//org.eclipse.wildwebdeveloper.xml/org.eclipse.core.runtime.xml"
+            value="true"/>
+        <setupTask
+            xsi:type="setup:PreferenceTask"
+            key="/instance/org.eclipse.lsp4e//org.eclipse.wildwebdeveloper.xml/org.eclipse.wildwebdeveloper.dtd"
+            value="true"/>
+        <setupTask
+            xsi:type="setup:PreferenceTask"
+            key="/instance/org.eclipse.lsp4e//org.eclipse.wildwebdeveloper.xml/org.eclipse.wildwebdeveloper.rng"
+            value="true"/>
+        <setupTask
+            xsi:type="setup:PreferenceTask"
+            key="/instance/org.eclipse.lsp4e//org.eclipse.wildwebdeveloper.xml/org.eclipse.wildwebdeveloper.xsd"
+            value="true"/>
+        <setupTask
+            xsi:type="setup:PreferenceTask"
+            key="/instance/org.eclipse.lsp4e//org.eclipse.wildwebdeveloper.xml/org.eclipse.wildwebdeveloper.xsl"
+            value="true"/>
+        <description>Enable lookup to language servers</description>
+      </setupTask>
     </setupTask>
     <description>The preferences for ${scope.project.label}</description>
   </setupTask>
   <setupTask
       xsi:type="setup:CompoundTask"
-      id="shillner.dev.ump.git"
+      id="mvnplugins.dev.ump.git"
       name="Git">
     <setupTask
         xsi:type="setup:VariableTask"
-        id="shillner.dev.cdi.utils.git.branch"
+        id="mvnplugins.dev.ump.git.remotePath"
+        name="ump.remotePath"
+        defaultValue="mavenplugins/unleash-maven-plugin"
+        label="Unleash Plugin Remote Path">
+      <description>The remote repo path of unleash-maven-plugin. Override with probable fork path if applicable.</description>
+    </setupTask>
+    <setupTask
+        xsi:type="setup:VariableTask"
+        id="mvnplugins.dev.ump.git.branch"
+        name="ump.branch"
+        defaultValue="master"
+        label="Unleash Plugin Branch">
+      <description>The name of the branch to be checked out when cloning unleash-maven-plugin</description>
+    </setupTask>
+    <setupTask
+        xsi:type="setup:VariableTask"
+        id="mvnplugins.dev.cdi.utils.git.remotePath"
+        name="cdi-utils.remotePath"
+        defaultValue="mavenplugins/maven-cdi-plugin-utils"
+        label="CDI Utils Remote Path">
+      <description>The remote repo path of maven-cdi-plugin-utils. Override with probable fork path if applicable.</description>
+    </setupTask>
+    <setupTask
+        xsi:type="setup:VariableTask"
+        id="mvnplugins.dev.cdi.utils.git.branch"
         name="cdi-utils.branch"
         defaultValue="master"
         label="CDI Utils Branch">
@@ -1724,7 +2033,15 @@
     </setupTask>
     <setupTask
         xsi:type="setup:VariableTask"
-        id="shillner.dev.cdi.hooks.git.branch"
+        id="mvnplugins.dev.cdi.hooks.git.remotePath"
+        name="cdi-hooks.remotePath"
+        defaultValue="mavenplugins/maven-cdi-plugin-hooks"
+        label="CDI Hooks Remote Path">
+      <description>The remote repo path of maven-cdi-plugin-hooks. Override with probable fork path if applicable.</description>
+    </setupTask>
+    <setupTask
+        xsi:type="setup:VariableTask"
+        id="mvnplugins.dev.cdi.hooks.git.branch"
         name="cdi-hooks.branch"
         defaultValue="master"
         label="CDI Hooks Branch">
@@ -1732,7 +2049,15 @@
     </setupTask>
     <setupTask
         xsi:type="setup:VariableTask"
-        id="shillner.dev.scm.svn.git.branch"
+        id="mvnplugins.dev.scm.svn.git.remotePath"
+        name="scm-svn.remotePath"
+        defaultValue="mavenplugins/unleash-scm-provider-svn"
+        label="SCM Provider SVN Remote Path">
+      <description>The remote repo path of unleash-scm-provider-svn. Override with probable fork path if applicable.</description>
+    </setupTask>
+    <setupTask
+        xsi:type="setup:VariableTask"
+        id="mvnplugins.dev.scm.svn.git.branch"
         name="scm-svn.branch"
         defaultValue="master"
         label="SCM Provider SVN Branch">
@@ -1740,7 +2065,15 @@
     </setupTask>
     <setupTask
         xsi:type="setup:VariableTask"
-        id="shillner.dev.scm.git.git.branch"
+        id="mvnplugins.dev.scm.git.git.remotPath"
+        name="scm-git.remotePath"
+        defaultValue="mavenplugins/unleash-scm-provider-git"
+        label="SCM Provider Git Remote Path">
+      <description>The remote repo path of unleash-scm-provider-git. Override with probable fork path if applicable.</description>
+    </setupTask>
+    <setupTask
+        xsi:type="setup:VariableTask"
+        id="mvnplugins.dev.scm.git.git.branch"
         name="scm-git.branch"
         defaultValue="master"
         label="SCM Provider Git Branch">
@@ -1748,7 +2081,15 @@
     </setupTask>
     <setupTask
         xsi:type="setup:VariableTask"
-        id="shillner.dev.ujp.git.branch"
+        id="mvnplugins.dev.ujp.git.remotePath"
+        name="ujp.remotePath"
+        defaultValue="mavenplugins/jenkins-unleash-plugin"
+        label="Jenkins Plugin Remote Path">
+      <description>The remote repo path of jenkins-unleash-plugin. Override with probable fork path if applicable.</description>
+    </setupTask>
+    <setupTask
+        xsi:type="setup:VariableTask"
+        id="mvnplugins.dev.ujp.git.branch"
         name="ujp.branch"
         defaultValue="master"
         label="Jenkins Plugin Branch">
@@ -1756,10 +2097,11 @@
     </setupTask>
     <setupTask
         xsi:type="git:GitCloneTask"
-        id="shillner.dev.ump.git.clone"
+        id="mvnplugins.dev.ump.git.clone"
         location="${installation.location/repos/maven-plugin}"
-        remoteURI="shillner/unleash-maven-plugin"
-        pushURI="">
+        remoteURI="${ump.remotePath}"
+        pushURI=""
+        checkoutBranch="${ump.branch}">
       <annotation
           source="http://www.eclipse.org/oomph/setup/InducedChoices">
         <detail
@@ -1779,9 +2121,9 @@
     </setupTask>
     <setupTask
         xsi:type="git:GitCloneTask"
-        id="shillner.dev.ujp.git.clone"
+        id="mvnplugins.dev.ujp.git.clone"
         location="${installation.location/repos/jenkins-plugin}"
-        remoteURI="jenkinsci/unleash-plugin"
+        remoteURI="${ujp.remotePath}"
         pushURI=""
         checkoutBranch="${ujp.branch}">
       <annotation
@@ -1803,9 +2145,9 @@
     </setupTask>
     <setupTask
         xsi:type="git:GitCloneTask"
-        id="shillner.dev.scm.svn.git.clone"
+        id="mvnplugins.dev.scm.svn.git.clone"
         location="${installation.location/repos/scm-providers/svn}"
-        remoteURI="shillner/unleash-scm-provider-svn"
+        remoteURI="${scm-svn.remotePath}"
         pushURI=""
         checkoutBranch="${scm-svn.branch}">
       <annotation
@@ -1827,9 +2169,9 @@
     </setupTask>
     <setupTask
         xsi:type="git:GitCloneTask"
-        id="shillner.dev.scm.git.git.clone"
+        id="mvnplugins.dev.scm.git.git.clone"
         location="${installation.location/repos/scm-providers/git}"
-        remoteURI="shillner/unleash-scm-provider-git"
+        remoteURI="${scm-git.remotePath}"
         pushURI=""
         checkoutBranch="${scm-git.branch}">
       <annotation
@@ -1851,9 +2193,9 @@
     </setupTask>
     <setupTask
         xsi:type="git:GitCloneTask"
-        id="shillner.dev.cdi.utils.git.clone"
+        id="mvnplugins.dev.cdi.utils.git.clone"
         location="${installation.location/repos/cdi-plugin-utils}"
-        remoteURI="shillner/maven-cdi-plugin-utils"
+        remoteURI="${cdi-utils.remotePath}"
         pushURI=""
         checkoutBranch="${cdi-utils.branch}">
       <annotation
@@ -1875,9 +2217,9 @@
     </setupTask>
     <setupTask
         xsi:type="git:GitCloneTask"
-        id="shillner.dev.cdi.hooks.git.clone"
+        id="mvnplugins.dev.cdi.hooks.git.clone"
         location="${installation.location/repos/cdi-plugin-hooks}"
-        remoteURI="shillner/maven-cdi-plugin-hooks"
+        remoteURI="${cdi-hooks.remotePath}"
         pushURI=""
         checkoutBranch="${cdi-hooks.branch}">
       <annotation
@@ -1899,49 +2241,49 @@
     </setupTask>
     <setupTask
         xsi:type="maven:MavenImportTask"
-        id="shillner.dev.ump.git.import-projects"
+        id="mvnplugins.dev.ump.git.import-projects"
         projectNameTemplate="">
       <sourceLocator
-          rootFolder="${shillner.dev.ump.git.clone.location}"
+          rootFolder="${mvnplugins.dev.ump.git.clone.location}"
           locateNestedProjects="true"/>
       <sourceLocator
-          rootFolder="${shillner.dev.ujp.git.clone.location}"
+          rootFolder="${mvnplugins.dev.ujp.git.clone.location}"
           locateNestedProjects="true"/>
       <sourceLocator
-          rootFolder="${shillner.dev.scm.svn.git.clone.location}"
+          rootFolder="${mvnplugins.dev.scm.svn.git.clone.location}"
           locateNestedProjects="true"/>
       <sourceLocator
-          rootFolder="${shillner.dev.scm.git.git.clone.location}"
+          rootFolder="${mvnplugins.dev.scm.git.git.clone.location}"
           locateNestedProjects="true"/>
       <sourceLocator
-          rootFolder="${shillner.dev.cdi.utils.git.clone.location}"
+          rootFolder="${mvnplugins.dev.cdi.utils.git.clone.location}"
           locateNestedProjects="true"/>
       <sourceLocator
-          rootFolder="${shillner.dev.cdi.hooks.git.clone.location}"
+          rootFolder="${mvnplugins.dev.cdi.hooks.git.clone.location}"
           locateNestedProjects="true"/>
     </setupTask>
     <description>Groups all git-related actions.</description>
   </setupTask>
   <setupTask
       xsi:type="setup.workingsets:WorkingSetTask"
-      id="shillner.dev.ump.workingsets">
+      id="mvnplugins.dev.ump.workingsets">
     <workingSet
         name="Maven Plugin"
-        id="shillner.dev.ump.workingsets.maven-plugin">
+        id="mvnplugins.dev.ump.workingsets.maven-plugin">
       <predicate
           xsi:type="predicates:RepositoryPredicate"
           project="unleash-parent"/>
     </workingSet>
     <workingSet
         name="Jenkins Plugin"
-        id="shillner.dev.ump.workingsets.jenkins-plugin">
+        id="mvnplugins.dev.ump.workingsets.jenkins-plugin">
       <predicate
           xsi:type="predicates:RepositoryPredicate"
           project="unleash"/>
     </workingSet>
     <workingSet
         name="Unleash-SCM-Providers"
-        id="shillner.dev.ump.workingsets.unleash-scm-providers">
+        id="mvnplugins.dev.ump.workingsets.unleash-scm-providers">
       <predicate
           xsi:type="predicates:OrPredicate">
         <operand
@@ -1954,7 +2296,7 @@
     </workingSet>
     <workingSet
         name="CDI"
-        id="shillner.dev.ump.workingsets.cdi">
+        id="mvnplugins.dev.ump.workingsets.cdi">
       <predicate
           xsi:type="predicates:OrPredicate">
         <operand
@@ -1969,60 +2311,61 @@
   </setupTask>
   <setupTask
       xsi:type="setup:CompoundTask"
-      id="shillner.dev.ump.launch"
-      predecessor="shillner.dev.ump.workingsets"
+      id="mvnplugins.dev.ump.launch"
+      predecessor="mvnplugins.dev.ump.workingsets"
       name="Launch Configurations">
     <setupTask
         xsi:type="launching:LaunchTask"
-        id="shillner.dev.ump.launch.build"
+        id="mvnplugins.dev.ump.launch.build"
         launcher="build_maven-plugin [clean install]">
       <description>Initially builds the unleash-maven-plugin for a clean development environment.</description>
     </setupTask>
     <setupTask
         xsi:type="launching:LaunchTask"
-        id="shillner.dev.ujp.launch.build"
+        id="mvnplugins.dev.ujp.launch.build"
         launcher="build_jenkins-plugin [clean install]">
       <description>Initially builds the unleash-jenkins-plugin for a clean development environment.</description>
     </setupTask>
     <setupTask
         xsi:type="launching:LaunchTask"
-        id="shillner.dev.scm.svn.launch.build"
+        id="mvnplugins.dev.scm.svn.launch.build"
         launcher="build_scm-provider-svn [clean install]">
       <description>Initially builds the scm provider for SVN for a clean development environment.</description>
     </setupTask>
     <setupTask
         xsi:type="launching:LaunchTask"
-        id="shillner.dev.scm.git.launch.build"
+        id="mvnplugins.dev.scm.git.launch.build"
         launcher="build_scm-provider-git [clean install]">
       <description>Initially builds the scm provider for Git for a clean development environment.</description>
     </setupTask>
     <setupTask
         xsi:type="launching:LaunchTask"
-        id="shillner.dev.cdi.utils.launch.build"
+        id="mvnplugins.dev.cdi.utils.launch.build"
         launcher="build_cdi-utils [clean install]">
       <description>Initially builds the CDI utils for a clean development environment.</description>
     </setupTask>
     <setupTask
         xsi:type="launching:LaunchTask"
-        id="shillner.dev.cdi.hooks.launch.build"
+        id="mvnplugins.dev.cdi.hooks.launch.build"
         launcher="build_cdi-hooks [clean install]">
       <description>Initially builds the CDI hooks for a clean development environment.</description>
     </setupTask>
   </setupTask>
   <setupTask
       xsi:type="setup:CompoundTask"
-      id="shillner.dev.ump.mylyn"
+      id="mvnplugins.dev.ump.mylyn"
+      disabled="true"
       name="Mylyn">
     <setupTask
         xsi:type="setup:VariableTask"
-        id="shillner.dev.jenkinsci.user.id"
+        id="mvnplugins.dev.jenkinsci.user.id"
         name="jenkinsci.user.id"
         label="JenkinsCI Username">
       <description>The username for the jenkinsCI issue tracker</description>
     </setupTask>
     <setupTask
         xsi:type="setup:VariableTask"
-        id="shillner.dev.jenkinsci.user.password"
+        id="mvnplugins.dev.jenkinsci.user.password"
         type="PASSWORD"
         name="jenkinsci.user.password"
         label="JenkinsCI Password">
@@ -2030,9 +2373,9 @@
     </setupTask>
     <setupTask
         xsi:type="mylyn:MylynQueriesTask"
-        id="shillner.dev.ump.mylyn.queries"
+        id="mvnplugins.dev.ump.mylyn.queries"
         connectorKind="github"
-        repositoryURL="https://github.com/shillner/unleash-maven-plugin"
+        repositoryURL="https://github.com/mavenplugins/unleash-maven-plugin"
         userID="${github.user.id}"
         password="${github.user.password}">
       <query
@@ -2045,7 +2388,7 @@
     </setupTask>
     <setupTask
         xsi:type="mylyn:MylynQueriesTask"
-        id="shillner.dev.ujp.mylyn.queries"
+        id="mvnplugins.dev.ujp.mylyn.queries"
         connectorKind="jira"
         repositoryURL="https://issues.jenkins-ci.org"
         userID="${jenkinsci.user.id}"
@@ -2064,9 +2407,9 @@
     </setupTask>
     <setupTask
         xsi:type="mylyn:MylynQueriesTask"
-        id="shillner.dev.scm.svn.mylyn.queries"
+        id="mvnplugins.dev.scm.svn.mylyn.queries"
         connectorKind="github"
-        repositoryURL="https://github.com/shillner/unleash-scm-provider-svn"
+        repositoryURL="https://github.com/mavenplugins/unleash-scm-provider-svn"
         userID="${github.user.id}"
         password="${github.user.password}">
       <query
@@ -2079,9 +2422,9 @@
     </setupTask>
     <setupTask
         xsi:type="mylyn:MylynQueriesTask"
-        id="shillner.dev.scm.git.mylyn.queries"
+        id="mvnplugins.dev.scm.git.mylyn.queries"
         connectorKind="github"
-        repositoryURL="https://github.com/shillner/unleash-scm-provider-git"
+        repositoryURL="https://github.com/mavenplugins/unleash-scm-provider-git"
         userID="${github.user.id}"
         password="${github.user.password}">
       <query
@@ -2094,9 +2437,9 @@
     </setupTask>
     <setupTask
         xsi:type="mylyn:MylynQueriesTask"
-        id="shillner.dev.cdi.utils.mylyn.queries"
+        id="mvnplugins.dev.cdi.utils.mylyn.queries"
         connectorKind="github"
-        repositoryURL="https://github.com/shillner/maven-cdi-plugin-utils"
+        repositoryURL="https://github.com/mavenplugins/maven-cdi-plugin-utils"
         userID="${github.user.id}"
         password="${github.user.password}">
       <query
@@ -2109,9 +2452,9 @@
     </setupTask>
     <setupTask
         xsi:type="mylyn:MylynQueriesTask"
-        id="shillner.dev.cdi.hooks.mylyn.queries"
+        id="mvnplugins.dev.cdi.hooks.mylyn.queries"
         connectorKind="github"
-        repositoryURL="https://github.com/shillner/maven-cdi-plugin-hooks"
+        repositoryURL="https://github.com/mavenplugins/maven-cdi-plugin-hooks"
         userID="${github.user.id}"
         password="${github.user.password}">
       <query
@@ -2122,7 +2465,10 @@
       </query>
       <description>All Mylyn Queries</description>
     </setupTask>
-    <description>Mylyn reladted configuration settings</description>
+    <description>
+      DISABLED - requires update of Mylyn P2 task aligned with actual Eclipse product version selected.
+      Mylyn related configuration settings
+    </description>
   </setupTask>
   <stream name="master"/>
   <logicalProjectContainer
