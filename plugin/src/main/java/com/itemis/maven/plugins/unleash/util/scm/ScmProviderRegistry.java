@@ -161,7 +161,6 @@ public class ScmProviderRegistry {
   }
 
   private String getPrivateKey() {
-    String privateKey = null;
     if (StringUtils.isNotBlank(this.scmSshPrivateKeyEnvVar)) {
       return Strings.emptyToNull(System.getenv(this.scmSshPrivateKeyEnvVar));
     }

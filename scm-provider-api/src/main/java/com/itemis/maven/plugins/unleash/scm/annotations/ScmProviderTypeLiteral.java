@@ -10,6 +10,8 @@ import javax.enterprise.util.AnnotationLiteral;
  * @author <a href="mailto:stanley.hillner@itemis.de">Stanley Hillner</a>
  * @since 1.0.0
  */
+@SuppressWarnings("all") // Suppress "The annotation type ScmProviderType should not be used as a superinterface for
+                         // ScmProviderTypeLiteral"
 public class ScmProviderTypeLiteral extends AnnotationLiteral<ScmProviderType> implements ScmProviderType {
   private static final long serialVersionUID = -1508425066754437151L;
   private String scmName;

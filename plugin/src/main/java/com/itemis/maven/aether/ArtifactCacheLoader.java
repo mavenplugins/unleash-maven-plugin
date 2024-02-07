@@ -29,7 +29,8 @@ class ArtifactCacheLoader extends CacheLoader<ArtifactCoordinates, Optional<Arti
   private RepositorySystem repoSystem;
   private RepositorySystemSession repoSession;
   private List<RemoteRepository> remoteProjectRepos;
-  private Logger log;
+  @SuppressWarnings("unused")
+  private final Logger log;
 
   public ArtifactCacheLoader(RepositorySystem repoSystem, RepositorySystemSession repoSession,
       List<RemoteRepository> remoteProjectRepos, Logger log) {
