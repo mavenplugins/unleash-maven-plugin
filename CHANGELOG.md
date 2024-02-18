@@ -65,6 +65,22 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - TBD
 
 
+## [2.11.0]
+<!-- !!! Align version in badge URLs as well !!! -->
+[![2.11.0 Badge](https://img.shields.io/nexus/r/io.github.mavenplugins/unleash-maven-plugin?server=https://s01.oss.sonatype.org&label=Maven%20Central&queryOpt=:v=2.11.0)](https://central.sonatype.com/artifact/io.github.mavenplugins/unleash-maven-plugin/2.11.0)
+
+### Summary
+- Add enhancements provided by RockwellAutomation
+
+### Updates
+- Replace POM property variables in scmMessagePrefix - #2
+- Fix TagScm for empty scm properties - #3
+- Add action `logScmProviderName` - #3
+- Fix checks to tolerate the reactor projects own snapshot dependency artifacts and/or own snapshot plugins - #4
+- Replace newline symbol '\n' by actual new line character in message prefix - #5
+- Prefix tag comments with scmMessagePrefix - #6
+
+
 ## [2.10.0]
 <!-- !!! Align version in badge URLs as well !!! -->
 [![2.10.0 Badge](https://img.shields.io/nexus/r/io.github.mavenplugins/unleash-maven-plugin?server=https://s01.oss.sonatype.org&label=Maven%20Central&queryOpt=:v=2.10.0)](https://central.sonatype.com/artifact/io.github.mavenplugins/unleash-maven-plugin/2.10.0)
@@ -95,5 +111,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - This is just a dummy placeholder to make the parser of GHCICD/release-notes-from-changelog@v1 happy!
 -->
 
-[Unreleased]: https://github.com/mavenplugins/unleash-maven-plugin/compare/v2.10.0..HEAD
+[Unreleased]: https://github.com/mavenplugins/unleash-maven-plugin/compare/v2.11.0..HEAD
+[2.11.0]: https://github.com/mavenplugins/unleash-maven-plugin/compare/v2.10.0..v2.11.0
 [2.10.0]: https://github.com/mavenplugins/unleash-maven-plugin/releases/tag/v2.10.0
