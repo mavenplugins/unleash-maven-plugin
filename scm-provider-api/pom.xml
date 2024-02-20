@@ -15,8 +15,8 @@
 
   <dependencies>
     <dependency>
-      <groupId>javax.enterprise</groupId>
-      <artifactId>cdi-api</artifactId>
+      <groupId>io.github.mavenplugins</groupId>
+      <artifactId>cdi-plugin-utils</artifactId>
     </dependency>
     <dependency>
       <groupId>org.apache.commons</groupId>
