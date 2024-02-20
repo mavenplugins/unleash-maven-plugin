@@ -12,6 +12,7 @@ import com.itemis.maven.plugins.cdi.ExecutionContext;
 import com.itemis.maven.plugins.cdi.annotations.ProcessingStep;
 import com.itemis.maven.plugins.cdi.logging.Logger;
 import com.itemis.maven.plugins.unleash.util.scm.MavenScmUtil;
+import com.itemis.maven.plugins.unleash.util.scm.ScmProviderRegistry;
 
 /**
  * A Mojo that just logs SCM tagName and prefix message passed to and resolved by the Mojo.<br>
@@ -24,8 +25,8 @@ public class LogScmProviderName implements CDIMojoProcessingStep {
   @Inject
   private Logger log;
 
-  // @Inject
-  // private ScmProviderRegistry scmProviderRegistry;
+  @Inject
+  private ScmProviderRegistry scmProviderRegistry;
 
   // @Inject
   // private ReleaseMetadata metadata;
@@ -48,6 +49,8 @@ public class LogScmProviderName implements CDIMojoProcessingStep {
           "Could not determine SCM provider name from your POM configuration! Please check the SCM section of your POM and provide connections in the correct format (see also: https://maven.apache.org/scm/scm-url-format.html).");
     } else {
       this.log.info("Resolved required SCM provider implementation to '" + providerName.get() + "'");
+      // Validate that the provider has been registered and is available in runtime
+      this.scmProviderRegistry.getProvider();
     }
   }
 }
