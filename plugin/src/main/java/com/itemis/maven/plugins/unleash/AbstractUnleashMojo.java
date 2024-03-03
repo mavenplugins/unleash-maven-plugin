@@ -219,8 +219,8 @@ public class AbstractUnleashMojo extends AbstractCDIMojo {
 
   @MojoProduces
   @Named("artifactSpyPlugin")
-  private ArtifactCoordinates artifactSpyPluginCoordinates = new ArtifactCoordinates("com.itemis.maven.plugins",
-      "artifact-spy-plugin", "1.0.6", "maven-plugin");
+  private ArtifactCoordinates artifactSpyPluginCoordinates = new ArtifactCoordinates("io.github.mavenplugins",
+      "artifact-spy-plugin", "1.0.7", "maven-plugin");
 
   @MojoProduces
   private PluginParameterExpressionEvaluator getExpressionEvaluator() {
