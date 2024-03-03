@@ -70,7 +70,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 [![2.11.0 Badge](https://img.shields.io/nexus/r/io.github.mavenplugins/unleash-maven-plugin?server=https://s01.oss.sonatype.org&label=Maven%20Central&queryOpt=:v=2.11.0)](https://central.sonatype.com/artifact/io.github.mavenplugins/unleash-maven-plugin/2.11.0)
 
 ### Summary
-- Add enhancements provided by RockwellAutomation
+- Add enhancements provided by RockwellAutomation and hmdebenque
+- Update requirements:
+  - Apache Maven `3.3.9` or higher
 
 ### Updates
 - Replace POM property variables in scmMessagePrefix - #2
@@ -79,6 +81,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Fix checks to tolerate the reactor projects own snapshot dependency artifacts and/or own snapshot plugins - #4
 - Replace newline symbol '\n' by actual new line character in message prefix - #5
 - Prefix tag comments with scmMessagePrefix - #6
+- Refactor pom.xml deps + update versions - co-authored by hmdebenque
+
+- AbstractUnleashMojo.java:
+  - update coordinates for artifact-spy-plugin to `io.github.mavenplugins:artifact-spy-plugin:1.0.7`
+
+- README.md:
+  - Update requirement: Apache Maven `3.3.9` or higher
 
 
 ## [2.10.0]
