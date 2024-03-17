@@ -2,7 +2,7 @@ google_site_verification: YlVT2JQ5mn390epgBzUbxKe9-fDvVzLAGy-XUb1fS4M
 plugins:
   - jekyll-relative-links
   - jemoji
-  #- jekyll-sitemap
+  - jekyll-sitemap
 relative_links:
   enabled: true
   collections: true
