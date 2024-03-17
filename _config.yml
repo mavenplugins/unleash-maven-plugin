@@ -9,4 +9,5 @@ relative_links:
 include:
   - README.md
 markdown: GFM
-theme: jekyll-theme-tactile
+#theme: jekyll-theme-tactile
+theme: jekyll-theme-slate
