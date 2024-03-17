@@ -1,0 +1,12 @@
+#google_site_verification: onQcXpAvtHBrUI5LlroHNE_FP0b2qvFyPq7VZw36iEY
+plugins:
+  - jekyll-relative-links
+  - jemoji
+  #- jekyll-sitemap
+relative_links:
+  enabled: true
+  collections: true
+include:
+  - README.md
+
+theme: jekyll-theme-tactile
