@@ -6,6 +6,8 @@ plugins:
 relative_links:
   enabled: true
   collections: true
+exclude:
+  - "*.md"
 include:
   - README.md
 markdown: GFM
