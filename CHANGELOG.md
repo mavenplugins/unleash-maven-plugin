@@ -82,9 +82,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Replace newline symbol '\n' by actual new line character in message prefix - #5
 - Prefix tag comments with scmMessagePrefix - #6
 - Refactor pom.xml deps + update versions - co-authored by hmdebenque
+- Fix file URI relativizing on Windows OS - #8
 
 - AbstractUnleashMojo.java:
   - update coordinates for artifact-spy-plugin to `io.github.mavenplugins:artifact-spy-plugin:1.0.7`
+
+- FileToRelativePath.java:
+  - convert File URIs to lower case on Windows OS runtimes
+
+- DetectReleaseArtifacts.java:
+  - make use of FileToRelativePath for file URI relativizing
 
 - README.md:
   - Update requirement: Apache Maven `3.3.9` or higher
