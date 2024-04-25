@@ -25,6 +25,7 @@ import com.itemis.maven.plugins.cdi.annotations.ProcessingStep;
 import com.itemis.maven.plugins.cdi.logging.Logger;
 import com.itemis.maven.plugins.unleash.ReleaseMetadata;
 import com.itemis.maven.plugins.unleash.ReleasePhase;
+import com.itemis.maven.plugins.unleash.util.functions.FileToRelativePath;
 import com.itemis.maven.plugins.unleash.util.functions.ProjectToString;
 
 /**
@@ -70,7 +71,7 @@ public class DetectReleaseArtifacts implements CDIMojoProcessingStep {
           // in case of pom artifacts the poms are copied to a different location to ensure we upload the correct
           // version of the pom since the pom evolves during the release build.
           if (Objects.equal(p.getFile().getName(), relativePath)) {
-            relativePath = this.project.getBasedir().toURI().relativize(p.getFile().toURI()).toString();
+            relativePath = new FileToRelativePath(this.project.getBasedir()).apply(p.getFile());
             artifactFile = new File(this.unleashOutputFolder, relativePath);
             artifactFile.getParentFile().mkdirs();
 
