@@ -73,6 +73,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Add enhancements provided by RockwellAutomation and hmdebenque
 - Update requirements:
   - Apache Maven `3.3.9` or higher
+- Update dependency `io.github.mavenplugins:cdi-plugin-utils:3.4.0` -> `io.github.mavenplugins:cdi-plugin-utils:3.4.1`
 
 ### Updates
 - Replace POM property variables in scmMessagePrefix - #2
@@ -83,6 +84,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Prefix tag comments with scmMessagePrefix - #6
 - Refactor pom.xml deps + update versions - co-authored by hmdebenque
 - Fix file URI relativizing on Windows OS - #8
+- Update dependency `io.github.mavenplugins:cdi-plugin-utils:3.4.0` -> `io.github.mavenplugins:cdi-plugin-utils:3.4.1`
 
 - AbstractUnleashMojo.java:
   - update coordinates for artifact-spy-plugin to `io.github.mavenplugins:artifact-spy-plugin:1.0.7`
