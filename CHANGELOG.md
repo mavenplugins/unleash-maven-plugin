@@ -74,6 +74,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Update requirements:
   - Apache Maven `3.3.9` or higher
 - Update dependency `io.github.mavenplugins:cdi-plugin-utils:3.4.0` -> `io.github.mavenplugins:cdi-plugin-utils:3.4.1`
+- Fix JavaDoc warnings
 
 ### Updates
 - Replace POM property variables in scmMessagePrefix - #2
@@ -94,6 +95,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 - DetectReleaseArtifacts.java:
   - make use of FileToRelativePath for file URI relativizing
+
+- ProjectToCoordinates.java,
+  ProjectToString.java,
+  IsSnapshotProject.java,
+  CheckoutRequest.java,
+  CommitRequest.java,
+  HistoryRequest.java,
+  TagRequest.java,
+  UpdateRequest.java:
+  - Fix JavaDoc warnings - no functional change
 
 - README.md:
   - Update requirement: Apache Maven `3.3.9` or higher

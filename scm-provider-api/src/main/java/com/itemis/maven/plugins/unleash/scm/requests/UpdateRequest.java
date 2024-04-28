@@ -69,7 +69,6 @@ public class UpdateRequest {
     /**
      * Adds some working directory-relative paths of files or folders to the list of paths to update.<br>
      * Once some paths are added only these files are updated, nothing else!<br>
-     * You can use {@link #paths(null)} to unset the list of files and update all changes of the working copy.
      *
      * @param paths some filepaths to update.
      * @return the builder itself.
@@ -85,7 +84,7 @@ public class UpdateRequest {
      * Sets the working directory-relative paths of files or folders to update. This method totally overrides all paths
      * added previously!<br>
      * Once some paths are added only these files are updated, nothing else!<br>
-     * Use {@link #paths(null)} to unset the list of files and update all changes of the working copy.
+     * Use {@code paths(null)} to unset the list of files and update all changes of the working copy.
      *
      * @param paths the filepaths to update.
      * @return the builder itself.
@@ -100,8 +99,8 @@ public class UpdateRequest {
     }
 
     /**
-     * @param revision the revision to which the working copy shall be updated. If this revision is omitted, HEAD is
-     *          assumed.
+     * @param revision the revision to which the working copy shall be updated.<br>
+     *                   If this revision is omitted, HEAD is assumed.
      * @return the builder itself.
      */
     public Builder toRevision(String revision) {
@@ -174,7 +173,7 @@ public class UpdateRequest {
 
     /**
      * @param mergeClient the merge client to be used in case of merge conflicts and merge strategy
-     *          {@link MergeStrategy#FULL_MERGE}.
+     *                      {@link MergeStrategy#FULL_MERGE}.
      * @return the builder itself.
      */
     public Builder mergeClient(MergeClient mergeClient) {

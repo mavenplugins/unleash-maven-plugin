@@ -133,7 +133,6 @@ public class CheckoutRequest {
     /**
      * Adds some repository-relative paths of files or folders to the list of paths to checkout.<br>
      * Once some paths are added only these files are checked out, nothing else!<br>
-     * You can use {@link #paths(null)} to unset the list of files and checkout the whole repository.
      *
      * @param paths some filepaths to checkout.
      * @return the builder itself.
@@ -149,7 +148,7 @@ public class CheckoutRequest {
      * Sets the repository-relative paths of files or folders to checkout. This method totally overrides all paths added
      * previously!<br>
      * Once some paths are added only these files are checked out, nothing else!<br>
-     * Use {@link #paths(null)} to unset the list of files and checkout the whole repository.
+     * Use {@code paths(null)} to unset the list of files and checkout the whole repository.
      *
      * @param paths the filepaths to checkout.
      * @return the builder itself.

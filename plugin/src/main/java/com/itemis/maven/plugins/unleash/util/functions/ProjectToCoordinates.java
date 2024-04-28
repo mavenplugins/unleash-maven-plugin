@@ -7,7 +7,7 @@ import com.itemis.maven.aether.ArtifactCoordinates;
 import com.itemis.maven.plugins.unleash.util.PomUtil;
 
 /**
- * A function to convert a {@link Project} to a {@link ArtifactCoordinates} object.<br>
+ * A function to convert a {@link MavenProject} to a {@link ArtifactCoordinates} object.<br>
  * There are several implementations that include different properties of the pom and may set defaults.
  *
  * @author <a href="mailto:stanley.hillner@itemis.de">Stanley Hillner</a>

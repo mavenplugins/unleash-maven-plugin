@@ -87,9 +87,10 @@ public class HistoryRequest {
 
     /**
      * @param remoteRepositoryUrl the remote URL to retrieve the history from. If this url is omitted, the history will
-     *          be retrieved locally or from the remote repository from which the local working directory has been
-     *          cloned. Note that some SCM providers may not support history retrieval from remote repositories. In this
-     *          case those implementations may throw an exception.
+     *                              be retrieved locally or from the remote repository from which the local working
+     *                              directory has been cloned.<br>
+     *                              Note that some SCM providers may not support history retrieval from remote
+     *                              repositories. In this case those implementations may throw an exception.
      * @return the builder itself.
      */
     public Builder fromRemote(String remoteRepositoryUrl) {
@@ -132,7 +133,7 @@ public class HistoryRequest {
      * Note that the start tag is expected to be older than the end tag.<br>
      * Specifying a start tag will unset an already set start revision and vice versa.
      *
-     * @param endRevision the tag at which the revision history shall start.
+     * @param startTag the tag at which the revision history shall start.
      * @return the builder itself.
      */
     public Builder startTag(String startTag) {
@@ -147,7 +148,7 @@ public class HistoryRequest {
      * Note that the end tag is expected to be younger than the start tag.<br>
      * Specifying an end tag will unset an already set end revision and vice versa.
      *
-     * @param endRevision the tag at which the revision history shall end.
+     * @param endTag the tag at which the revision history shall end.
      * @return the builder itself.
      */
     public Builder endTag(String endTag) {

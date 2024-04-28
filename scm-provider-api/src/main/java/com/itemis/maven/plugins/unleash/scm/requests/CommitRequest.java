@@ -99,7 +99,6 @@ public class CommitRequest {
     /**
      * Adds some working directory-relative paths of files or folders to the list of paths to commit.<br>
      * Once some paths are added only these files are committed, nothing else!<br>
-     * You can use {@link #paths(null)} to unset the list of files and commit all changes of the working copy.
      *
      * @param paths some filepaths to commit.
      * @return the builder itself.
@@ -115,7 +114,7 @@ public class CommitRequest {
      * Sets the working directory-relative paths of files or folders to commit. This method totally overrides all paths
      * added previously!<br>
      * Once some paths are added only these files are committed, nothing else!<br>
-     * Use {@link #paths(null)} to unset the list of files and commit all changes of the working copy.
+     * Use {@code paths(null)} to unset the list of files and commit all changes of the working copy.
      *
      * @param paths the filepaths to commit.
      * @return the builder itself.
@@ -194,7 +193,7 @@ public class CommitRequest {
 
     /**
      * @param mergeClient the merge client to be used in case of merge conflicts and merge strategy
-     *          {@link MergeStrategy#FULL_MERGE}.
+     *                      {@link MergeStrategy#FULL_MERGE}.
      * @return the builder itself.
      */
     public Builder mergeClient(MergeClient mergeClient) {

@@ -6,7 +6,7 @@ import com.google.common.base.Predicate;
 import com.itemis.maven.plugins.unleash.util.MavenVersionUtil;
 
 /**
- * A predicate determining whether a {@link Project} has a SNAPSHOT version assigned.
+ * A predicate determining whether a {@link MavenProject} has a SNAPSHOT version assigned.
  *
  * @author <a href="mailto:stanley.hillner@itemis.de">Stanley Hillner</a>
  * @since 1.0.0

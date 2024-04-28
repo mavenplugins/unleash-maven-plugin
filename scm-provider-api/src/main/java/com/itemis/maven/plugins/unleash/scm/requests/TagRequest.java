@@ -167,8 +167,8 @@ public class TagRequest {
      * @param scmMessagePrefix
      * @return the builder itself.
      */
-    public Builder scmMessagePrefix(String message) {
-      this.request.scmMessagePrefix = message;
+    public Builder scmMessagePrefix(String scmMessagePrefix) {
+      this.request.scmMessagePrefix = scmMessagePrefix;
       return this;
     }
 
