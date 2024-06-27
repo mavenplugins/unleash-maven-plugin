@@ -5,6 +5,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:setup="http://www.eclipse.org/oomph/setup/1.0"
     xmlns:setup.p2="http://www.eclipse.org/oomph/setup/p2/1.0"
+    id="mvnplugins.dev.ump.p2.m2e"
     name="M2E P2">
   <setupTask
       xsi:type="setup:VariableTask"
@@ -80,6 +81,7 @@
   </setupTask>
   <setupTask
       xsi:type="setup.p2:P2Task"
+      id="mvnplugins.dev.ump.p2.m2e.neon"
       filter="(|(scope.product.version.name=neon)(scope.product.version.name=oxygen)(scope.product.version.name=photon))"
       label="M2E (Neon)"
       licenseConfirmationDisabled="true">
@@ -98,6 +100,7 @@
   </setupTask>
   <setupTask
       xsi:type="setup.p2:P2Task"
+      id="mvnplugins.dev.ump.p2.m2e.1182"
       filter="(|(scope.product.version.name=2022-06)(scope.product.version.name=2022-03)(scope.product.version.name=2021-12)(scope.product.version.name=2021-09)(scope.product.version.name=2021-06)(scope.product.version.name=2021-03)(scope.product.version.name=2020-12)(scope.product.version.name=2020-09)(scope.product.version.name=2020-06)(scope.product.version.name=2020-03)(scope.product.version.name=2019-12)(scope.product.version.name=2019-09)(scope.product.version.name=2019-06)(scope.product.version.name=2019-03)(scope.product.version.name=2018-12)(scope.product.version.name=2018-09))"
       label="M2E (2018-09 to 2022-06)"
       licenseConfirmationDisabled="true">

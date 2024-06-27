@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<setup:CompoundTask
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:setup="http://www.eclipse.org/oomph/setup/1.0"
+    xmlns:setup.p2="http://www.eclipse.org/oomph/setup/p2/1.0"
+    id="mvnplugins.dev.ump.p2.ecd"
+    name="ECD Decompiler P2">
+  <setupTask
+      xsi:type="setup:VariableTask"
+      type="BOOLEAN"
+      name="install.decompiler.plugin"
+      value="true">
+    <description>Controls whether or not to install Java Decompiler plugin</description>
+  </setupTask>
+  <setupTask
+      xsi:type="setup.p2:P2Task"
+      id="mvnplugins.dev.ump.p2.ecd.311"
+      filter="(&amp;(install.decompiler.plugin=true)(scope.product.version.name=neon))"
+      label="ECD 3.1.1">
+    <requirement
+        name="org.sf.feeling.decompiler.feature.group"/>
+    <requirement
+        name="org.sf.feeling.decompiler.source.feature.group"/>
+    <requirement
+        name="org.sf.feeling.decompiler.procyon.feature.group"/>
+    <requirement
+        name="org.sf.feeling.decompiler.jd.feature.group"/>
+    <requirement
+        name="org.sf.feeling.decompiler.jad.feature.group"/>
+    <requirement
+        name="org.sf.feeling.decompiler.cfr.feature.group"/>
+    <repository
+        url="https://p2site.github.io/p2.ecd-plugin/3.1.1/"/>
+  </setupTask>
+  <setupTask
+      xsi:type="setup.p2:P2Task"
+      id="mvnplugins.dev.ump.p2.ecd.340"
+      filter="(&amp;(install.decompiler.plugin=true)(!(scope.product.version.name=neon)))"
+      label="ECD 3.4.0">
+    <requirement
+        name="org.sf.feeling.decompiler.feature.group"
+        versionRange="[0.0.0,3.5.0)"/>
+    <requirement
+        name="org.sf.feeling.decompiler.source.feature.group"
+        versionRange="[0.0.0,3.5.0)"/>
+    <requirement
+        name="org.sf.feeling.decompiler.procyon.feature.group"
+        versionRange="[0.0.0,3.5.0)"/>
+    <requirement
+        name="org.sf.feeling.decompiler.jd.feature.group"
+        versionRange="[0.0.0,3.5.0)"/>
+    <requirement
+        name="org.sf.feeling.decompiler.cfr.feature.group"
+        versionRange="[0.0.0,3.5.0)"/>
+    <requirement
+        name="org.sf.feeling.decompiler.quiltflower.feature.group"
+        versionRange="[0.0.0,3.5.0)"/>
+    <requirement
+        name="org.sf.feeling.decompiler.jad.feature.group"
+        versionRange="[0.0.0,3.5.0)"
+        filter="(osgi.os=_NONE_)"
+        description="2023-05-02: Disabled by filter, since this is outdated and has been removed on recent ECD"/>
+    <repository
+        url="https://p2site.github.io/p2.ecd-plugin/3.4.0/"/>
+    <description>
+      Limited for now to version 3.4.0 for stability since 3.5.x did remove other artifacts.
+      Changed repo URL from https://ecd-plugin.github.io/update/ to https://p2site.github.io/ecd-plugin/3.4.0/.
+    </description>
+  </setupTask>
+</setup:CompoundTask>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<setup:CompoundTask
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:setup="http://www.eclipse.org/oomph/setup/1.0"
+    xmlns:setup.p2="http://www.eclipse.org/oomph/setup/p2/1.0"
+    id="mvnplugins.dev.ump.p2.eclemma"
+    name="ECLEMMA P2">
+  <setupTask
+      xsi:type="setup.p2:P2Task"
+      id="mvnplugins.dev.ump.p2.eclemma.319"
+      label="ECLEMMA >=3.1.9">
+    <requirement
+        name="org.eclipse.eclemma.feature.feature.group"
+        versionRange="[3.1.9,9.9.9)"/>
+    <repository
+        url="https://download.eclipse.org/eclemma/releases/"/>
+    <description>Version 3.1.8 failed after an update - see https://www.mail-archive.com/jacoco@googlegroups.com/msg05444.html</description>
+  </setupTask>
+</setup:CompoundTask>
