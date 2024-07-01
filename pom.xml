@@ -63,7 +63,7 @@
     <!-- UNLEASH -->
     <version.unleash-maven-plugin>${project.version}</version.unleash-maven-plugin>
     <version.artifact-spy-plugin>1.0.7</version.artifact-spy-plugin>
-    <version.cdi-plugin-utils>3.4.1</version.cdi-plugin-utils>
+    <version.cdi-plugin-utils>3.5.0-SNAPSHOT</version.cdi-plugin-utils>
     <!-- MAVEN -->
     <version.maven>3.3.9</version.maven>
     <version.maven-invoker>3.0.1</version.maven-invoker>
