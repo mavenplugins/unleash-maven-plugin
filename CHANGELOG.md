@@ -65,6 +65,22 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - TBD
 
 
+## [2.12.0]
+<!-- !!! Align version in badge URLs as well !!! -->
+[![2.12.0 Badge](https://img.shields.io/nexus/r/io.github.mavenplugins/unleash-maven-plugin?server=https://s01.oss.sonatype.org&label=Maven%20Central&queryOpt=:v=2.12.0)](https://central.sonatype.com/artifact/io.github.mavenplugins/unleash-maven-plugin/2.12.0)
+
+### Summary
+- Add Workflow action `exitWithRollbackNoError` to abort the workflow  with a rollback of previous actions but with Maven success.<br>
+  This is supposed for test purpose only. See [maven-cdi-plugin-utils #4](https://github.com/mavenplugins/maven-cdi-plugin-utils/issues/4).
+
+### Updates
+- ThrowEnforceRollbackWithoutErrorException.java:
+  - added
+
+- pom.xml:
+  - update dependency `io.github.mavenplugins:cdi-plugin-utils:3.4.0` -> `io.github.mavenplugins:cdi-plugin-utils:3.5.0`
+
+
 ## [2.11.0]
 <!-- !!! Align version in badge URLs as well !!! -->
 [![2.11.0 Badge](https://img.shields.io/nexus/r/io.github.mavenplugins/unleash-maven-plugin?server=https://s01.oss.sonatype.org&label=Maven%20Central&queryOpt=:v=2.11.0)](https://central.sonatype.com/artifact/io.github.mavenplugins/unleash-maven-plugin/2.11.0)
@@ -140,6 +156,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - This is just a dummy placeholder to make the parser of GHCICD/release-notes-from-changelog@v1 happy!
 -->
 
-[Unreleased]: https://github.com/mavenplugins/unleash-maven-plugin/compare/v2.11.0..HEAD
+[Unreleased]: https://github.com/mavenplugins/unleash-maven-plugin/compare/v2.12.0..HEAD
+[2.12.0]: https://github.com/mavenplugins/unleash-maven-plugin/compare/v2.11.0..v2.12.0
 [2.11.0]: https://github.com/mavenplugins/unleash-maven-plugin/compare/v2.10.0..v2.11.0
 [2.10.0]: https://github.com/mavenplugins/unleash-maven-plugin/releases/tag/v2.10.0
