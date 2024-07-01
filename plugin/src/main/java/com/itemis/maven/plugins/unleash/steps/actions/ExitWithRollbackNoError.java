@@ -25,6 +25,8 @@ public class ExitWithRollbackNoError implements CDIMojoProcessingStep {
 
   @Override
   public void execute(ExecutionContext context) throws EnforceRollbackWithoutErrorException {
-    this.log.warn(ACTION_ID + ": Enforce the normal end of the workflow with rollback of previous actions!");
+    final String message = ACTION_ID + ": Enforce the normal end of the workflow with rollback of previous actions!";
+    this.log.warn(message);
+    throw new EnforceRollbackWithoutErrorException(message);
   }
 }
