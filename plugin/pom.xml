@@ -21,7 +21,7 @@
 
   <dependencies>
     <!-- ENV DEPENDENCIES -->
-    <!-- thoses two are declared Unused by dependency plugin-->
+    <!-- those two are declared Unused by dependency plugin-->
     <dependency>
       <groupId>org.eclipse.tycho</groupId>
       <artifactId>tycho-versions-plugin</artifactId>
@@ -47,6 +47,10 @@
         <exclusion>
           <groupId>org.apache.maven</groupId>
           <artifactId>maven-model</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.codehaus.plexus</groupId>
+          <artifactId>plexus-utils</artifactId>
         </exclusion>
       </exclusions>
     </dependency>
@@ -106,6 +110,13 @@
     <dependency>
       <groupId>org.codehaus.plexus</groupId>
       <artifactId>plexus-interactivity-api</artifactId>
+      <!-- Exclude dependencies provided by Maven runtime -->
+      <exclusions>
+        <exclusion>
+          <groupId>org.codehaus.plexus</groupId>
+          <artifactId>plexus-utils</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
     <dependency>
       <groupId>org.codehaus.mojo</groupId>
@@ -127,6 +138,10 @@
         <exclusion>
           <groupId>org.apache.maven</groupId>
           <artifactId>maven-model</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.codehaus.plexus</groupId>
+          <artifactId>plexus-utils</artifactId>
         </exclusion>
       </exclusions>
     </dependency>
