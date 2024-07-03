@@ -9,9 +9,6 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 
-import javax.inject.Inject;
-import javax.inject.Named;
-
 import org.apache.maven.model.Dependency;
 import org.apache.maven.model.DependencyManagement;
 import org.apache.maven.model.Profile;
@@ -36,6 +33,9 @@ import com.itemis.maven.plugins.unleash.util.functions.DependencyToCoordinates;
 import com.itemis.maven.plugins.unleash.util.functions.ProjectToCoordinates;
 import com.itemis.maven.plugins.unleash.util.functions.ProjectToString;
 import com.itemis.maven.plugins.unleash.util.predicates.IsSnapshotDependency;
+
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 
 /**
  * Checks that none of the project modules has SNAPSHOT dependencies since this would potentially lead to

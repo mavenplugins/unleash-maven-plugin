@@ -5,9 +5,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
-import javax.inject.Inject;
-import javax.inject.Named;
-
 import org.apache.maven.execution.MavenExecutionRequest;
 import org.apache.maven.execution.MavenSession;
 import org.apache.maven.plugin.MojoExecutionException;
@@ -28,6 +25,9 @@ import com.itemis.maven.plugins.cdi.ExecutionContext;
 import com.itemis.maven.plugins.cdi.annotations.ProcessingStep;
 import com.itemis.maven.plugins.cdi.logging.Logger;
 import com.itemis.maven.plugins.unleash.util.ReleaseUtil;
+
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 
 /**
  * Performs the actual release build but does not install or deploy artifacts to the repositories. These steps are

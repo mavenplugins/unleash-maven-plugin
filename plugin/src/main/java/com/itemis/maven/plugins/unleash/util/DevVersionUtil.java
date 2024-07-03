@@ -2,10 +2,6 @@ package com.itemis.maven.plugins.unleash.util;
 
 import java.util.List;
 
-import javax.annotation.PostConstruct;
-import javax.inject.Inject;
-import javax.inject.Named;
-
 import org.apache.commons.lang3.StringUtils;
 import org.apache.maven.model.Scm;
 import org.apache.maven.project.MavenProject;
@@ -21,6 +17,10 @@ import com.itemis.maven.plugins.unleash.scm.requests.CommitRequest.Builder;
 import com.itemis.maven.plugins.unleash.util.functions.FileToRelativePath;
 import com.itemis.maven.plugins.unleash.util.scm.ScmPomVersionsMergeClient;
 import com.itemis.maven.plugins.unleash.util.scm.ScmProviderRegistry;
+
+import jakarta.annotation.PostConstruct;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 
 /**
  * Provides some utility methods for the processing steps that update the projects with the new development versions.

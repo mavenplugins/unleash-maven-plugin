@@ -1,7 +1,5 @@
 package com.itemis.maven.plugins.unleash.steps.actions.tycho;
 
-import javax.inject.Inject;
-
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 
@@ -11,6 +9,8 @@ import com.itemis.maven.plugins.cdi.annotations.ProcessingStep;
 import com.itemis.maven.plugins.cdi.annotations.RollbackOnError;
 import com.itemis.maven.plugins.cdi.logging.Logger;
 import com.itemis.maven.plugins.unleash.ReleasePhase;
+
+import jakarta.inject.Inject;
 
 /**
  * Uses Eclipse Tycho features to upgrade the POMs and MANIFESTs with the release versions. It also updates

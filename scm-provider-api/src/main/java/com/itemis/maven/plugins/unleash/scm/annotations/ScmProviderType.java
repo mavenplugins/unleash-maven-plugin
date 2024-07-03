@@ -9,9 +9,9 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
-import javax.inject.Qualifier;
-
 import com.itemis.maven.plugins.unleash.scm.ScmProvider;
+
+import jakarta.inject.Qualifier;
 
 /**
  * A CDI qualifier annotation for the qualification of beans implementing the {@link ScmProvider} interface. This

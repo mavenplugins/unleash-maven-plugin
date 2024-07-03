@@ -3,9 +3,6 @@ package com.itemis.maven.plugins.unleash.steps.actions;
 import java.util.List;
 import java.util.Map;
 
-import javax.inject.Inject;
-import javax.inject.Named;
-
 import org.apache.commons.lang3.StringUtils;
 import org.apache.maven.model.Scm;
 import org.apache.maven.plugin.MojoExecutionException;
@@ -38,6 +35,9 @@ import com.itemis.maven.plugins.unleash.util.functions.ProjectToCoordinates;
 import com.itemis.maven.plugins.unleash.util.functions.ProjectToString;
 import com.itemis.maven.plugins.unleash.util.scm.ScmPomVersionsMergeClient;
 import com.itemis.maven.plugins.unleash.util.scm.ScmProviderRegistry;
+
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 
 /**
  * Creates an SCM tag on the local and remote repository using the appropriate SCM provider.

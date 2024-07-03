@@ -5,9 +5,6 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
 
-import javax.inject.Inject;
-import javax.inject.Named;
-
 import org.apache.maven.artifact.repository.ArtifactRepository;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
@@ -25,6 +22,9 @@ import com.itemis.maven.plugins.cdi.annotations.RollbackOnError;
 import com.itemis.maven.plugins.cdi.logging.Logger;
 import com.itemis.maven.plugins.unleash.ReleaseMetadata;
 import com.itemis.maven.plugins.unleash.util.functions.AetherToMavenArtifact;
+
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 
 /**
  * Installs all release artifacts into the local repository without invoking a Maven build process.

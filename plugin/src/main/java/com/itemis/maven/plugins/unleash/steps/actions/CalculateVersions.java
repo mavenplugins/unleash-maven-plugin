@@ -2,9 +2,6 @@ package com.itemis.maven.plugins.unleash.steps.actions;
 
 import java.util.List;
 
-import javax.inject.Inject;
-import javax.inject.Named;
-
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.project.MavenProject;
@@ -24,6 +21,9 @@ import com.itemis.maven.plugins.unleash.util.PomUtil;
 import com.itemis.maven.plugins.unleash.util.ReleaseUtil;
 import com.itemis.maven.plugins.unleash.util.VersionUpgradeStrategy;
 import com.itemis.maven.plugins.unleash.util.functions.ProjectToString;
+
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 
 /**
  * Calculates the versions for all modules of the project used during the release build.<br>

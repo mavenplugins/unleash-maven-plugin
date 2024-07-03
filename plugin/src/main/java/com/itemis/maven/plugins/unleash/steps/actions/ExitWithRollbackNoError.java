@@ -1,12 +1,12 @@
 package com.itemis.maven.plugins.unleash.steps.actions;
 
-import javax.inject.Inject;
-
 import com.itemis.maven.plugins.cdi.CDIMojoProcessingStep;
 import com.itemis.maven.plugins.cdi.ExecutionContext;
 import com.itemis.maven.plugins.cdi.annotations.ProcessingStep;
 import com.itemis.maven.plugins.cdi.exception.EnforceRollbackWithoutErrorException;
 import com.itemis.maven.plugins.cdi.logging.Logger;
+
+import jakarta.inject.Inject;
 
 /**
  * A {@link CDIMojoProcessingStep} that enforces abort of the Workflow with rolling back of previous actions but with

@@ -1,8 +1,5 @@
 package com.itemis.maven.plugins.unleash.steps.actions;
 
-import javax.inject.Inject;
-import javax.inject.Named;
-
 import org.apache.commons.lang3.StringUtils;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
@@ -24,6 +21,9 @@ import com.itemis.maven.plugins.unleash.util.functions.ProjectToCoordinates;
 import com.itemis.maven.plugins.unleash.util.functions.ProjectToString;
 import com.itemis.maven.plugins.unleash.util.scm.ScmPomVersionsMergeClient;
 import com.itemis.maven.plugins.unleash.util.scm.ScmProviderRegistry;
+
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 
 /**
  * Updates the POMs of all modules of the project with the new development version, reverts all SCM changes so that the

@@ -9,8 +9,6 @@ import java.util.Properties;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import javax.inject.Named;
-
 import org.apache.maven.RepositoryUtils;
 import org.apache.maven.artifact.repository.ArtifactRepository;
 import org.apache.maven.artifact.repository.ArtifactRepositoryPolicy;
@@ -45,6 +43,8 @@ import com.itemis.maven.plugins.cdi.annotations.MojoProduces;
 import com.itemis.maven.plugins.unleash.util.ReleaseUtil;
 import com.itemis.maven.plugins.unleash.util.Repository;
 import com.itemis.maven.plugins.unleash.util.VersionUpgradeStrategy;
+
+import jakarta.inject.Named;
 
 public class AbstractUnleashMojo extends AbstractCDIMojo {
   public static final String PROPERTY_REPO_BASE = "multiDeploy.repo";

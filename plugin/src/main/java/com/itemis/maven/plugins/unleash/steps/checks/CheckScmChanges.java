@@ -1,8 +1,5 @@
 package com.itemis.maven.plugins.unleash.steps.checks;
 
-import javax.inject.Inject;
-import javax.inject.Named;
-
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 
@@ -14,6 +11,9 @@ import com.itemis.maven.plugins.cdi.logging.Logger;
 import com.itemis.maven.plugins.unleash.ReleaseMetadata;
 import com.itemis.maven.plugins.unleash.scm.ScmProvider;
 import com.itemis.maven.plugins.unleash.util.scm.ScmProviderRegistry;
+
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 
 /**
  * Checks the remote SCM repository for changes in the case that a commit was requested before tagging the repository.

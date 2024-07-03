@@ -1,6 +1,6 @@
 package com.itemis.maven.plugins.unleash.scm.annotations;
 
-import javax.enterprise.util.AnnotationLiteral;
+import jakarta.enterprise.util.AnnotationLiteral;
 
 /**
  * The annotation literal for the {@link ScmProviderType} qualifier annotation.<br>

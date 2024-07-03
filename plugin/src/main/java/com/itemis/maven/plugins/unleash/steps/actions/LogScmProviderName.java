@@ -1,7 +1,5 @@
 package com.itemis.maven.plugins.unleash.steps.actions;
 
-import javax.inject.Inject;
-
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.project.MavenProject;
@@ -13,6 +11,8 @@ import com.itemis.maven.plugins.cdi.annotations.ProcessingStep;
 import com.itemis.maven.plugins.cdi.logging.Logger;
 import com.itemis.maven.plugins.unleash.util.scm.MavenScmUtil;
 import com.itemis.maven.plugins.unleash.util.scm.ScmProviderRegistry;
+
+import jakarta.inject.Inject;
 
 /**
  * A Mojo that just logs SCM tagName and prefix message passed to and resolved by the Mojo.<br>

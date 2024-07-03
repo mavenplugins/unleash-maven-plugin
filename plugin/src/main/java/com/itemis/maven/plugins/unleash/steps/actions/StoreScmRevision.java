@@ -1,7 +1,5 @@
 package com.itemis.maven.plugins.unleash.steps.actions;
 
-import javax.inject.Inject;
-
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 
@@ -12,6 +10,8 @@ import com.itemis.maven.plugins.cdi.logging.Logger;
 import com.itemis.maven.plugins.unleash.ReleaseMetadata;
 import com.itemis.maven.plugins.unleash.scm.ScmProvider;
 import com.itemis.maven.plugins.unleash.util.scm.ScmProviderRegistry;
+
+import jakarta.inject.Inject;
 
 /**
  * A Mojo that just stores the local SCM revision information in the release metadata.<br>

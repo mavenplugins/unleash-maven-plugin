@@ -2,9 +2,6 @@ package com.itemis.maven.plugins.unleash.steps.actions.tycho;
 
 import java.util.List;
 
-import javax.inject.Inject;
-import javax.inject.Named;
-
 import org.apache.commons.lang3.StringUtils;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
@@ -25,6 +22,9 @@ import com.itemis.maven.plugins.unleash.util.DevVersionUtil;
 import com.itemis.maven.plugins.unleash.util.PomUtil;
 import com.itemis.maven.plugins.unleash.util.scm.ScmPomVersionsMergeClient;
 import com.itemis.maven.plugins.unleash.util.scm.ScmProviderRegistry;
+
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 
 /**
  * Uses Eclipse Tycho features to upgrade the POMs and MANIFESTs with the next development versions. It also updates

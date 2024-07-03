@@ -2,14 +2,6 @@ package com.itemis.maven.plugins.unleash.util.scm;
 
 import java.lang.reflect.Method;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
-import javax.enterprise.inject.Any;
-import javax.enterprise.inject.Instance;
-import javax.inject.Inject;
-import javax.inject.Named;
-import javax.inject.Singleton;
-
 import org.apache.commons.lang3.StringUtils;
 import org.apache.maven.project.MavenProject;
 
@@ -20,6 +12,14 @@ import com.itemis.maven.plugins.unleash.scm.ScmProvider;
 import com.itemis.maven.plugins.unleash.scm.annotations.ScmProviderTypeLiteral;
 import com.itemis.maven.plugins.unleash.scm.impl.DefaultScmProviderInitialization;
 import com.itemis.maven.plugins.unleash.util.logging.JavaLoggerAdapter;
+
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
+import jakarta.enterprise.inject.Any;
+import jakarta.enterprise.inject.Instance;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
+import jakarta.inject.Singleton;
 
 /**
  * A singleton registry determining the correct {@link ScmProvider} implementation which is derived from the

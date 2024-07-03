@@ -3,10 +3,6 @@ package com.itemis.maven.aether;
 import java.io.File;
 import java.util.List;
 
-import javax.inject.Inject;
-import javax.inject.Named;
-import javax.inject.Singleton;
-
 import org.eclipse.aether.RepositorySystem;
 import org.eclipse.aether.RepositorySystemSession;
 import org.eclipse.aether.artifact.Artifact;
@@ -19,6 +15,10 @@ import com.google.common.base.Optional;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.LoadingCache;
 import com.itemis.maven.plugins.cdi.logging.Logger;
+
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
+import jakarta.inject.Singleton;
 
 /**
  * Resolves artifacts from the aether using the repository system.
@@ -43,8 +43,8 @@ public class ArtifactResolver {
    * Tries to resolve an artifact that is identified by its coordinates.
    *
    * @param coordinates the coordinates of the artifact to resolve.
-   * @param remoteOnly {@code true} if the artifact resolving shall be performed remotely only which means that the
-   *          artifact will only be delivered if it is present in any of the remote repositories.
+   * @param remoteOnly  {@code true} if the artifact resolving shall be performed remotely only which means that the
+   *                      artifact will only be delivered if it is present in any of the remote repositories.
    * @return the result of the artifact resolution containing the file and the id of the repository from which is has
    *         been resolved.
    */

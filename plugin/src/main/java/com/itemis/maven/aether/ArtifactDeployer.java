@@ -3,10 +3,6 @@ package com.itemis.maven.aether;
 import java.util.Collection;
 import java.util.Set;
 
-import javax.inject.Inject;
-import javax.inject.Named;
-import javax.inject.Singleton;
-
 import org.eclipse.aether.RepositorySystemSession;
 import org.eclipse.aether.artifact.Artifact;
 import org.eclipse.aether.deployment.DeployRequest;
@@ -16,6 +12,10 @@ import org.eclipse.aether.impl.Deployer;
 import org.eclipse.aether.repository.RemoteRepository;
 
 import com.itemis.maven.plugins.unleash.ReleaseMetadata;
+
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
+import jakarta.inject.Singleton;
 
 /**
  * Deploys artifacts into the remote Maven repositories.

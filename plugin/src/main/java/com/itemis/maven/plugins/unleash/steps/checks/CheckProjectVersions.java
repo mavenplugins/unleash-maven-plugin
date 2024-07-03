@@ -2,9 +2,6 @@ package com.itemis.maven.plugins.unleash.steps.checks;
 
 import java.util.List;
 
-import javax.inject.Inject;
-import javax.inject.Named;
-
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.project.MavenProject;
@@ -16,6 +13,9 @@ import com.itemis.maven.plugins.cdi.annotations.ProcessingStep;
 import com.itemis.maven.plugins.cdi.logging.Logger;
 import com.itemis.maven.plugins.unleash.util.functions.ProjectToString;
 import com.itemis.maven.plugins.unleash.util.predicates.IsSnapshotProject;
+
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 
 /**
  * Checks that at least one of the projects is releasable which means that at least one of the projects must have

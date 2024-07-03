@@ -2,15 +2,15 @@ package com.itemis.maven.aether;
 
 import java.util.Collection;
 
-import javax.inject.Inject;
-import javax.inject.Singleton;
-
 import org.eclipse.aether.RepositorySystemSession;
 import org.eclipse.aether.artifact.Artifact;
 import org.eclipse.aether.impl.Installer;
 import org.eclipse.aether.installation.InstallRequest;
 import org.eclipse.aether.installation.InstallResult;
 import org.eclipse.aether.installation.InstallationException;
+
+import jakarta.inject.Inject;
+import jakarta.inject.Singleton;
 
 /**
  * Installs artifacts into the local Maven repository.
@@ -28,7 +28,7 @@ public class ArtifactInstaller {
 
   /**
    * Installs the given artifacts into the local Maven repository.
-   * 
+   *
    * @param artifacts the artifacts to install.
    * @return the artifacts that have been installed successfully.
    * @throws InstallationException if anything goes wrong during the installation process.

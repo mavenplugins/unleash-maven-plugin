@@ -4,12 +4,12 @@
   <parent>
     <groupId>io.github.mavenplugins</groupId>
     <artifactId>org-parent</artifactId>
-    <version>3</version>
+    <version>4</version>
     <relativePath/>
   </parent>
 
   <artifactId>unleash-parent</artifactId>
-  <version>2.12.0-SNAPSHOT</version>
+  <version>3.0.0-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>Unleash Parent</name>
@@ -63,11 +63,11 @@
     <!-- UNLEASH -->
     <version.unleash-maven-plugin>${project.version}</version.unleash-maven-plugin>
     <version.artifact-spy-plugin>1.0.7</version.artifact-spy-plugin>
-    <version.cdi-plugin-utils>3.5.0-SNAPSHOT</version.cdi-plugin-utils>
+    <version.cdi-plugin-utils>4.0.0-SNAPSHOT</version.cdi-plugin-utils>
     <!-- MAVEN -->
     <version.maven>3.3.9</version.maven>
     <version.maven-invoker>3.0.1</version.maven-invoker>
-    <version.maven-plugin-plugin>3.4</version.maven-plugin-plugin>
+    <version.maven-plugin-plugin>3.5.2</version.maven-plugin-plugin>
     <version.versions-maven-plugin>2.5</version.versions-maven-plugin>
     <version.plexus-interactivity-api>1.0-alpha-6</version.plexus-interactivity-api>
     <version.tycho-versions-plugin>1.1.0</version.tycho-versions-plugin>

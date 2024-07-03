@@ -2,9 +2,6 @@ package com.itemis.maven.plugins.unleash.steps.actions;
 
 import java.util.List;
 
-import javax.inject.Inject;
-import javax.inject.Named;
-
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.project.MavenProject;
@@ -18,6 +15,9 @@ import com.itemis.maven.plugins.cdi.ExecutionContext;
 import com.itemis.maven.plugins.cdi.annotations.ProcessingStep;
 import com.itemis.maven.plugins.cdi.logging.Logger;
 import com.itemis.maven.plugins.unleash.util.PomUtil;
+
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 
 /**
  * Removes the artifact-spy-plugin from the reactor pom of the project.<br>
