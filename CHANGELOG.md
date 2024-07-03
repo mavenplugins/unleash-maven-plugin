@@ -73,14 +73,27 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - Add Workflow action `exitWithRollbackNoError` to abort the workflow  with a rollback of previous actions but with Maven success.<br>
   This is supposed for test purpose only. See [maven-cdi-plugin-utils #4](https://github.com/mavenplugins/maven-cdi-plugin-utils/issues/4).
 - Update dependency `io.github.mavenplugins:cdi-plugin-utils:3.4.1` -> `io.github.mavenplugins:cdi-plugin-utils:4.0.0`
-  - => work for Java 17 by CDI WELD 4.0.3.Final with Jakarta Inject API
+  - => This plugin now works for **Java 8, 11, 17 and 21**
+
+### Compatibility
+- 👉 This release requires to be used with the following minimum versions of addons:
+  - `unleash-scm-provider-git: >= 3.0.0`
+  - `unleash-scm-provider-svn: >= 3.0.0`
+  - `cdi-plugin-hooks:         >= 0.2.0`
+  Reason: CDI dependencies changed from Javax to Jakarta EE
 
 ### Updates
-- ThrowEnforceRollbackWithoutErrorException.java:
-  - added
+- ExitWithRollbackNoError.java:
+  - workflow action `exitWithRollbackNoError` added
 
 - pom.xml:
   - update dependency `io.github.mavenplugins:cdi-plugin-utils:3.4.1` -> `io.github.mavenplugins:cdi-plugin-utils:4.0.0`
+  - improved and fixed Maven dependencies to meet scope `provided` Maven plugin dependency requirements
+  - other dependency version updates:
+    - `plexus-interactivity-api:  1.0-alpha-6 -> 1.3`
+    - `maven-plugin-plugin:       3.5.2 -> 3.13.1`
+    - `plexus-component-metadata: 1.7.1 -> 2.2.0`
+    - `versions-maven-plugin:     2.5 -> 2.15.0`
 
 
 ## [2.11.0]

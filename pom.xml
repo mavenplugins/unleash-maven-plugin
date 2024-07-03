@@ -65,14 +65,14 @@
     <!-- UNLEASH -->
     <version.unleash-maven-plugin>${project.version}</version.unleash-maven-plugin>
     <version.artifact-spy-plugin>1.0.7</version.artifact-spy-plugin>
-    <version.cdi-plugin-utils>4.0.0-SNAPSHOT</version.cdi-plugin-utils>
+    <version.cdi-plugin-utils>4.0.0</version.cdi-plugin-utils>
     <!-- MAVEN -->
     <version.maven>3.3.9</version.maven>
     <version.maven-invoker>3.0.1</version.maven-invoker>
     <version.maven-plugin-plugin>3.13.1</version.maven-plugin-plugin>
     <version.plexus-component-metadata>2.2.0</version.plexus-component-metadata>
     <version.versions-maven-plugin>2.15.0</version.versions-maven-plugin>
-    <version.plexus-interactivity-api>1.0-alpha-6</version.plexus-interactivity-api>
+    <version.plexus-interactivity-api>1.3</version.plexus-interactivity-api>
     <version.tycho-versions-plugin>1.1.0</version.tycho-versions-plugin>
     <!-- 3rd PARTY -->
     <version.guava>23.0</version.guava>

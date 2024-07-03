@@ -7,6 +7,10 @@ Unleash Maven Plugin - More Efficient And Reliable Maven Releases
 The Unleash Maven Plugin provides functionality to release Maven projects as it is possible with the Maven Release Plugin. While the idea and the core feature (building release artifacts) is the similar, there are many serious differences that make the unleash plugin much more reliable and efficient than the official release plugin. It is furthermore highly extensible and adaptable to your specific requirements when building releases.
 
 
+🚀 JAVA 8 - JAVA 21 Ready Since Version 3.0.0 🚀
+===============================================
+
+
 Development Continued
 ---------------------
 In 2020 the founder of this plugin - [Stanley Hillner](https://github.com/shillner) - has announced that he is not able to continue with maintenance and development on it. See [No Development announcement](https://github.com/shillner/unleash-maven-plugin#no-longer-under-development).<br>
@@ -16,7 +20,9 @@ As we are still using this plugin intensively for a couple of years now, we woul
 - GitHub Action CICD jobs have been implemented to deploy releases and snapshots to Maven Central.
 - According to each Maven Central deployed release an appropriate GitHub release will be created with ChangeLog details for that release - see [Latest release](https://github.com/mavenplugins/unleash-maven-plugin/releases/latest).
 - The first release with this groupId will be code and feature wise identical to the most recent release provided by [Stanley Hillner](https://github.com/shillner).
-- Pending fixes and/or pull requests on forks of the original repo will be reviewed and merged into this repo as soon as possible.
+- Pending fixes and/or pull requests on forks of the original repo did have been reviewed and merged into this repo.
+- The most recent release version works for JAVA 8 to JAVA 21 and for any Maven version >= 3.3.9
+- An End to End CICD testing project is running daily to test for a matrix of Java and Maven versions -  see [Test Maven Unleash E2E](https://github.com/mavenplugins/unleash-test-sandbox/actions/workflows/test_unleash_e2e.yml)
 
 :green_heart: **Any contribution via pull requests is more than welcome!** :green_heart:
 
@@ -76,3 +82,8 @@ On any CI server you have the option to create a separate "release job" that set
 
 The Jenkins plugin can be found here: [Unleash Plugin](https://wiki.jenkins-ci.org/display/JENKINS/Unleash+Plugin)
 Simply install it using the Jenkins Plugin manager and you are all set ;)
+
+
+Contributors
+------------
+[![Code Contributors](https://contrib.rocks/image?repo=mavenplugins/unleash-maven-plugin)](https://github.com/mavenplugins/unleash-maven-plugin/graphs/contributors)
