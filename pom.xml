@@ -66,6 +66,11 @@
     <version.unleash-maven-plugin>${project.version}</version.unleash-maven-plugin>
     <version.artifact-spy-plugin>1.0.7</version.artifact-spy-plugin>
     <version.cdi-plugin-utils>4.0.0</version.cdi-plugin-utils>
+    <!-- Resolve chicken/egg unleash by defining specific unleash commandline goal: -->
+    <version.unleash-maven-plugin.perform>2.11.0</version.unleash-maven-plugin.perform>
+    <unleash.goal>perform</unleash.goal>
+    <!-- This is considered by the reusable GH unleash action: -->
+    <unleash.cmdline.goal>${groupId.unleash-maven-plugin}:${artifactId.unleash-maven-plugin}:${version.unleash-maven-plugin.perform}:${unleash.goal}</unleash.cmdline.goal>
     <!-- MAVEN -->
     <version.maven>3.3.9</version.maven>
     <version.maven-invoker>3.0.1</version.maven-invoker>
