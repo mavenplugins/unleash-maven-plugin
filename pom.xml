@@ -1,11 +1,14 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+  child.project.url.inherit.append.path="false">
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
     <groupId>io.github.mavenplugins</groupId>
     <artifactId>org-parent</artifactId>
-    <version>4</version>
-    <relativePath/>
+    <version>5</version>
+    <relativePath />
   </parent>
 
   <artifactId>unleash-parent</artifactId>
@@ -14,7 +17,7 @@
 
   <name>Unleash Parent</name>
   <description>
-    An alternative release plugin for maven projects that tries to reduce the risk of failure during the
+    An alternative release plugin for Maven projects that tries to reduce the risk of failure during the
     release process as well as the number of builds and scm operations. This plugin shall provide a faster, more stable
     but also more customizable release process.
   </description>
@@ -40,7 +43,8 @@
     </developer>
   </developers>
 
-  <scm>
+  <scm child.scm.connection.inherit.append.path="false" child.scm.developerConnection.inherit.append.path="false"
+    child.scm.url.inherit.append.path="false">
     <connection>scm:git:https://github.com/mavenplugins/unleash-maven-plugin.git</connection>
     <url>https://github.com/mavenplugins/unleash-maven-plugin</url>
     <tag>HEAD</tag>
@@ -65,10 +69,11 @@
     <version.artifact-spy-plugin>1.0.7</version.artifact-spy-plugin>
     <version.cdi-plugin-utils>4.0.0</version.cdi-plugin-utils>
     <!-- Resolve chicken/egg unleash by defining specific unleash commandline goal: -->
-    <version.unleash-maven-plugin.perform>2.11.0</version.unleash-maven-plugin.perform>
+    <version.unleash-maven-plugin.perform>3.0.0</version.unleash-maven-plugin.perform>
     <unleash.goal>perform</unleash.goal>
     <!-- This is considered by the reusable GH unleash action: -->
-    <unleash.cmdline.goal>${groupId.unleash-maven-plugin}:${artifactId.unleash-maven-plugin}:${version.unleash-maven-plugin.perform}:${unleash.goal}</unleash.cmdline.goal>
+    <unleash.cmdline.goal>
+      ${groupId.unleash-maven-plugin}:${artifactId.unleash-maven-plugin}:${version.unleash-maven-plugin.perform}:${unleash.goal}</unleash.cmdline.goal>
     <!-- MAVEN -->
     <version.maven>3.3.9</version.maven>
     <version.maven-invoker>3.0.1</version.maven-invoker>

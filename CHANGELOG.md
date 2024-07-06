@@ -65,6 +65,19 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - TBD
 
 
+## [3.0.1]
+<!-- !!! Align version in badge URLs as well !!! -->
+[![3.0.1 Badge](https://img.shields.io/nexus/r/io.github.mavenplugins/unleash-maven-plugin?server=https://s01.oss.sonatype.org&label=Maven%20Central&queryOpt=:v=3.0.1)](https://central.sonatype.com/artifact/io.github.mavenplugins/unleash-maven-plugin/3.0.1)
+
+### Summary
+- Fix wrong URLs for **Project URL** and **Source Control** rendered on [Maven Central](https://central.sonatype.com) for this project.
+- No functional, code or dependency change
+
+### Updates
+- pom.xml:
+  - add appropriate attributes to nodes `<project>` and `<scm>` - #9
+
+
 ## [3.0.0]
 <!-- !!! Align version in badge URLs as well !!! -->
 [![3.0.0 Badge](https://img.shields.io/nexus/r/io.github.mavenplugins/unleash-maven-plugin?server=https://s01.oss.sonatype.org&label=Maven%20Central&queryOpt=:v=3.0.0)](https://central.sonatype.com/artifact/io.github.mavenplugins/unleash-maven-plugin/3.0.0)
@@ -171,7 +184,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - This is just a dummy placeholder to make the parser of GHCICD/release-notes-from-changelog@v1 happy!
 -->
 
-[Unreleased]: https://github.com/mavenplugins/unleash-maven-plugin/compare/v3.0.0..HEAD
+[Unreleased]: https://github.com/mavenplugins/unleash-maven-plugin/compare/v3.0.1..HEAD
+[3.0.1]: https://github.com/mavenplugins/unleash-maven-plugin/compare/v3.0.0..v3.0.1
 [3.0.0]: https://github.com/mavenplugins/unleash-maven-plugin/compare/v2.11.0..v3.0.0
 [2.11.0]: https://github.com/mavenplugins/unleash-maven-plugin/compare/v2.10.0..v2.11.0
 [2.10.0]: https://github.com/mavenplugins/unleash-maven-plugin/releases/tag/v2.10.0
