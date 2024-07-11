@@ -15,12 +15,6 @@
   </description>
 
   <dependencies>
-    <!-- PROJECT DEPENDENCIES -->
-    <dependency>
-      <groupId>io.github.mavenplugins</groupId>
-      <artifactId>unleash-shared</artifactId>
-    </dependency>
-
     <!-- 3rd PARTY DEPENDENCIES -->
     <dependency>
       <groupId>com.google.guava</groupId>
