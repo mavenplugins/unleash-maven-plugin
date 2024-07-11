@@ -65,6 +65,25 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - TBD
 
 
+## [3.0.3]
+<!-- !!! Align version in badge URLs as well !!! -->
+[![3.0.3 Badge](https://img.shields.io/nexus/r/io.github.mavenplugins/unleash-maven-plugin?server=https://s01.oss.sonatype.org&label=Maven%20Central&queryOpt=:v=3.0.3)](https://central.sonatype.com/artifact/io.github.mavenplugins/unleash-maven-plugin/3.0.3)
+
+### Summary
+- Changes from release 3.0.2 reverted
+
+### Updates
+- pom.xml:
+  - remove module `shared`
+  - remove dependencyManagement for `unleash-shared`
+
+- unleash-utils/pom.xml:
+  - remove dependency to `unleash-shared`
+
+- VersionUpgradeStrategy.java:
+  - move back to `unleash-utils`
+
+
 ## [3.0.2] - DEPRECATED -
 <!-- !!! Align version in badge URLs as well !!! -->
 [![3.0.2 Badge](https://img.shields.io/nexus/r/io.github.mavenplugins/unleash-maven-plugin?server=https://s01.oss.sonatype.org&label=Maven%20Central&queryOpt=:v=3.0.2)](https://central.sonatype.com/artifact/io.github.mavenplugins/unleash-maven-plugin/3.0.2)
@@ -210,7 +229,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - This is just a dummy placeholder to make the parser of GHCICD/release-notes-from-changelog@v1 happy!
 -->
 
-[Unreleased]: https://github.com/mavenplugins/unleash-maven-plugin/compare/v3.0.2..HEAD
+[Unreleased]: https://github.com/mavenplugins/unleash-maven-plugin/compare/v3.0.3..HEAD
+[3.0.3]: https://github.com/mavenplugins/unleash-maven-plugin/compare/v3.0.2..v3.0.3
 [3.0.2]: https://github.com/mavenplugins/unleash-maven-plugin/compare/v3.0.1..v3.0.2
 [3.0.1]: https://github.com/mavenplugins/unleash-maven-plugin/compare/v3.0.0..v3.0.1
 [3.0.0]: https://github.com/mavenplugins/unleash-maven-plugin/compare/v2.11.0..v3.0.0
