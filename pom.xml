@@ -52,8 +52,9 @@
   </issueManagement>
 
   <modules>
-    <module>scm-provider-api</module>
     <module>plugin</module>
+    <module>scm-provider-api</module>
+    <module>shared</module>
     <module>utils</module>
   </modules>
 
@@ -114,6 +115,11 @@
       <dependency>
         <groupId>${groupId.unleash-maven-plugin}</groupId>
         <artifactId>unleash-scm-provider-api</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>${groupId.unleash-maven-plugin}</groupId>
+        <artifactId>unleash-shared</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>

@@ -65,6 +65,31 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - TBD
 
 
+## [3.0.2]
+<!-- !!! Align version in badge URLs as well !!! -->
+[![3.0.2 Badge](https://img.shields.io/nexus/r/io.github.mavenplugins/unleash-maven-plugin?server=https://s01.oss.sonatype.org&label=Maven%20Central&queryOpt=:v=3.0.2)](https://central.sonatype.com/artifact/io.github.mavenplugins/unleash-maven-plugin/3.0.2)
+
+### Summary
+- Move `com.itemis.maven.plugins.unleash.util.VersionUpgradeStrategy` to new Maven module `unleash-shared`.
+  Module `unleash-shared` is a dependency shared by this Maven plugin and the [JenkinsCI unleash-plugin]().
+  This is to get JenkinsCI unleash-plugin rid of useless transient dependencies.
+
+### Updates
+- pom.xml:
+  - add module `shared`
+  - add dependencyManagement for `unleash-shared`
+
+- unleash-utils/pom.xml:
+  - add dependency to `unleash-shared`
+
+- VersionUpgradeStrategy.java:
+  - moved from `unleash-utils` to `unleash-shared`
+  - package and class name pre-served for backward compatibility
+
+- README.md:
+  - add tag to reflect E2E test state
+
+
 ## [3.0.1]
 <!-- !!! Align version in badge URLs as well !!! -->
 [![3.0.1 Badge](https://img.shields.io/nexus/r/io.github.mavenplugins/unleash-maven-plugin?server=https://s01.oss.sonatype.org&label=Maven%20Central&queryOpt=:v=3.0.1)](https://central.sonatype.com/artifact/io.github.mavenplugins/unleash-maven-plugin/3.0.1)
@@ -184,7 +209,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - This is just a dummy placeholder to make the parser of GHCICD/release-notes-from-changelog@v1 happy!
 -->
 
-[Unreleased]: https://github.com/mavenplugins/unleash-maven-plugin/compare/v3.0.1..HEAD
+[Unreleased]: https://github.com/mavenplugins/unleash-maven-plugin/compare/v3.0.2..HEAD
+[3.0.2]: https://github.com/mavenplugins/unleash-maven-plugin/compare/v3.0.1..v3.0.2
 [3.0.1]: https://github.com/mavenplugins/unleash-maven-plugin/compare/v3.0.0..v3.0.1
 [3.0.0]: https://github.com/mavenplugins/unleash-maven-plugin/compare/v2.11.0..v3.0.0
 [2.11.0]: https://github.com/mavenplugins/unleash-maven-plugin/compare/v2.10.0..v2.11.0

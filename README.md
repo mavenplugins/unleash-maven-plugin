@@ -81,7 +81,7 @@ Releases should be built by Continuous Integration Servers only. This is much sa
 
 On any CI server you have the option to create a separate "release job" that sets all necessary optional and calls the  unleash goals manually. When you build this job a new release will be built. Although this is possible and the simplest solution it is quite uncomfortable and error prone since you will have to maintain two different build jobs for the same project. To face this problem there is a plugin for the [Jenkins CI server](https://jenkins.io/) which lets you trigger a release build for an existing Maven job. It is able to store plugin settings globally and locally to make release building as easy as clicking a link.
 
-The Jenkins plugin can be found here: [Unleash Plugin](https://wiki.jenkins-ci.org/display/JENKINS/Unleash+Plugin)
+The Jenkins plugin can be found here: [Unleash Plugin](https://github.com/jenkinsci/unleash-plugin)
 Simply install it using the Jenkins Plugin manager and you are all set ;)
 
 
