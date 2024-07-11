@@ -71,7 +71,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Summary
 - Move `com.itemis.maven.plugins.unleash.util.VersionUpgradeStrategy` to new Maven module `unleash-shared`.
-  Module `unleash-shared` is a dependency shared by this Maven plugin and the [JenkinsCI unleash-plugin]().
+  Module `unleash-shared` is a dependency shared by this Maven plugin and the [JenkinsCI unleash-plugin](https://github.com/jenkinsci/unleash-plugin).
   This is to get JenkinsCI unleash-plugin rid of useless transient dependencies.
 
 ### Updates
