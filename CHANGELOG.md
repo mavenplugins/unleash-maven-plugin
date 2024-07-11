@@ -65,11 +65,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - TBD
 
 
-## [3.0.2]
+## [3.0.2] - DEPRECATED -
 <!-- !!! Align version in badge URLs as well !!! -->
 [![3.0.2 Badge](https://img.shields.io/nexus/r/io.github.mavenplugins/unleash-maven-plugin?server=https://s01.oss.sonatype.org&label=Maven%20Central&queryOpt=:v=3.0.2)](https://central.sonatype.com/artifact/io.github.mavenplugins/unleash-maven-plugin/3.0.2)
 
 ### Summary
+- DEPRECATED - This release works but changes will be reverted within future releases
 - Move `com.itemis.maven.plugins.unleash.util.VersionUpgradeStrategy` to new Maven module `unleash-shared`.
   Module `unleash-shared` is a dependency shared by this Maven plugin and the [JenkinsCI unleash-plugin](https://github.com/jenkinsci/unleash-plugin).
   This is to get JenkinsCI unleash-plugin rid of useless transient dependencies.
