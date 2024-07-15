@@ -70,18 +70,25 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 [![3.0.3 Badge](https://img.shields.io/nexus/r/io.github.mavenplugins/unleash-maven-plugin?server=https://s01.oss.sonatype.org&label=Maven%20Central&queryOpt=:v=3.0.3)](https://central.sonatype.com/artifact/io.github.mavenplugins/unleash-maven-plugin/3.0.3)
 
 ### Summary
-- Changes from release 3.0.2 reverted
+- 👉 **Reverted** changes from release `3.0.2`
+- More generic replacement of escaped characters for `tagNamePattern` and `scmMessagePrefix`
 
 ### Updates
-- pom.xml:
-  - remove module `shared`
-  - remove dependencyManagement for `unleash-shared`
+- ScmMessagePrefixUtil.java:
+  - add to provide method `public static String unescapeScmMessagePrefix(final String scmMessagePrefixConfigured)`
+  - add JUnit test `ScmMessagePrefixUtilTest`
 
-- unleash-utils/pom.xml:
-  - remove dependency to `unleash-shared`
+- ReleaseUtil.java:
+  - deprecate `public static String getTagName(...)`
+  - replace by `public static String getScmPatternResolved((...)`
 
-- VersionUpgradeStrategy.java:
-  - move back to `unleash-utils`
+- ReleaseMetadata.java:
+  - follow up previous API change
+
+- AbstractUnleashMojo.java:
+  - method getScmMessagePrefix():
+    - follow up previous API change
+    - make use of `ScmMessagePrefixUtil.unescapeScmMessagePrefix(...)`
 
 
 ## [3.0.2] - DEPRECATED -
