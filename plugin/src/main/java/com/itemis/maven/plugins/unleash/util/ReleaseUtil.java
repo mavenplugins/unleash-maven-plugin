@@ -78,8 +78,8 @@ public final class ReleaseUtil {
   }
 
   /**
-   * Calculates an SCM tag name based on a pattern. This pattern can include every parameter reference that can be
-   * resolved by <a href=
+   * Calculates an SCM effective string based on a pattern. This pattern can include every parameter reference that can
+   * be resolved by <a href=
    * "https://maven.apache.org/ref/3.3.9/maven-core/apidocs/org/apache/maven/plugin/PluginParameterExpressionEvaluator.html">PluginParameterExpressionEvaluator</a>.
    *
    * @param pattern   the pattern for the tag name which may contain variables listed above.
@@ -88,7 +88,8 @@ public final class ReleaseUtil {
    *                    references.
    * @return the name of the tag derived from the pattern.
    */
-  public static String getTagName(String pattern, MavenProject project, PluginParameterExpressionEvaluator evaluator) {
+  public static String getScmPatternResolved(String pattern, MavenProject project,
+      PluginParameterExpressionEvaluator evaluator) {
     Preconditions.checkArgument(pattern != null, "Need a tag name pattern to calculate the tag name.");
     Preconditions.checkArgument(evaluator != null, "Need an expression evaluator to calculate the tag name.");
 
@@ -113,6 +114,23 @@ public final class ReleaseUtil {
     } catch (ExpressionEvaluationException e) {
       throw new RuntimeException("Could not resolve expressions in pattern: " + pattern, e);
     }
+  }
+
+  /**
+   * Calculates an SCM tag name based on a pattern. This pattern can include every parameter reference that can be
+   * resolved by <a href=
+   * "https://maven.apache.org/ref/3.3.9/maven-core/apidocs/org/apache/maven/plugin/PluginParameterExpressionEvaluator.html">PluginParameterExpressionEvaluator</a>.
+   *
+   * @param pattern   the pattern for the tag name which may contain variables listed above.
+   * @param project   the Maven project to be used for version calculation during parameter resolution.
+   * @param evaluator the Maven plugin parameter expression evaluator used to evaluate expressions containing parameter
+   *                    references.
+   * @return the name of the tag derived from the pattern.
+   * @deprecated Use {@link #getScmPatternResolved(String, MavenProject, PluginParameterExpressionEvaluator)} instead.
+   */
+  @Deprecated
+  public static String getTagName(String pattern, MavenProject project, PluginParameterExpressionEvaluator evaluator) {
+    return getScmPatternResolved(pattern, project, evaluator);
   }
 
   /**

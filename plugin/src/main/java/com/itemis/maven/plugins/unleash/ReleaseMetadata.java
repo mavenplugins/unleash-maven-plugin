@@ -190,7 +190,7 @@ public class ReleaseMetadata {
 
   public String getScmTagName() {
     if (this.scmTagName == null) {
-      this.scmTagName = ReleaseUtil.getTagName(this.tagNamePattern, this.project, this.expressionEvaluator);
+      this.scmTagName = ReleaseUtil.getScmPatternResolved(this.tagNamePattern, this.project, this.expressionEvaluator);
     }
     return this.scmTagName;
   }

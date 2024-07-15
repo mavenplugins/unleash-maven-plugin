@@ -42,6 +42,7 @@ import com.itemis.maven.plugins.cdi.annotations.MojoInject;
 import com.itemis.maven.plugins.cdi.annotations.MojoProduces;
 import com.itemis.maven.plugins.unleash.util.ReleaseUtil;
 import com.itemis.maven.plugins.unleash.util.Repository;
+import com.itemis.maven.plugins.unleash.util.ScmMessagePrefixUtil;
 import com.itemis.maven.plugins.unleash.util.VersionUpgradeStrategy;
 
 import jakarta.inject.Named;
@@ -164,8 +165,8 @@ public class AbstractUnleashMojo extends AbstractCDIMojo {
   @Named("releaseVersion")
   private String releaseVersion;
 
-  @Parameter(defaultValue = "[unleash-maven-plugin]", property = "unleash.scmMessagePrefix", required = false)
-  private String scmMessagePrefix;
+  @Parameter(name = "scmMessagePrefix", defaultValue = "[unleash-maven-plugin]", property = "unleash.scmMessagePrefix", required = false)
+  private String scmMessagePrefixConfigured;
 
   @MojoProduces
   @Named("scmPassword")
@@ -232,17 +233,27 @@ public class AbstractUnleashMojo extends AbstractCDIMojo {
     return (PluginDescriptor) getPluginContext().get("pluginDescriptor");
   }
 
+  /**
+   * Setter called by injector for property 'scmMessagePrefix'.
+   *
+   * @param scmMessagePrefixConfigured
+   */
+  public void setScmMessagePrefix(String scmMessagePrefixConfigured) {
+    this.scmMessagePrefixConfigured = scmMessagePrefixConfigured;
+  }
+
   @MojoProduces
   @Named("scmMessagePrefix")
   private String getScmMessagePrefix() {
-    // @shaertel: expand newlines configured in message prefix
-    this.scmMessagePrefix = this.scmMessagePrefix.replaceAll("\\\\n", System.lineSeparator());
+    // @shaertel: expand newlines and other control characters in message prefix
+    String scmMessagePrefix = ScmMessagePrefixUtil.unescapeScmMessagePrefix(this.scmMessagePrefixConfigured);
     // @shaertel: accept any white space char as separator
-    if (!this.scmMessagePrefix.matches(".*\\s+$")) {
-      this.scmMessagePrefix = this.scmMessagePrefix + " ";
+    if (!scmMessagePrefix.matches(".*\\s+$")) {
+      scmMessagePrefix = scmMessagePrefix + " ";
     }
     // @mhoffrog: return with probable pom property values replaced
-    return ReleaseUtil.getTagName(Strings.nullToEmpty(this.scmMessagePrefix), this.project, getExpressionEvaluator());
+    return ReleaseUtil.getScmPatternResolved(Strings.nullToEmpty(scmMessagePrefix), this.project,
+        getExpressionEvaluator());
   }
 
   @MojoProduces
