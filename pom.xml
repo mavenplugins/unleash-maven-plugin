@@ -9,7 +9,7 @@
   </parent>
 
   <artifactId>unleash-parent</artifactId>
-  <version>3.0.4-SNAPSHOT</version>
+  <version>3.1.0-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <name>Unleash Parent</name>
@@ -65,7 +65,7 @@
     <version.artifact-spy-plugin>1.0.7</version.artifact-spy-plugin>
     <version.cdi-plugin-utils>4.0.0</version.cdi-plugin-utils>
     <!-- Resolve chicken/egg unleash by defining specific unleash commandline goal: -->
-    <version.unleash-maven-plugin.perform>3.0.0</version.unleash-maven-plugin.perform>
+    <version.unleash-maven-plugin.perform>3.0.3</version.unleash-maven-plugin.perform>
     <unleash.goal>perform</unleash.goal>
     <!-- This is considered by the reusable GH unleash action: -->
     <unleash.cmdline.goal>
