@@ -65,6 +65,20 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - TBD
 
 
+## [3.1.0]
+<!-- !!! Align version in badge URLs as well !!! -->
+[![3.1.0 Badge](https://img.shields.io/nexus/r/io.github.mavenplugins/unleash-maven-plugin?server=https://s01.oss.sonatype.org&label=Maven%20Central&queryOpt=:v=3.1.0)](https://central.sonatype.com/artifact/io.github.mavenplugins/unleash-maven-plugin/3.1.0)
+
+### Summary
+- Add goals `unleash:nextSnapshotVersion` and `unleash:releaseVersion`
+
+### Updates
+- Add Mojo classes:
+  - AbstractVersionMojo.java
+  - NextSnapshotVersionMojo.java
+  - ReleaseVersionMojo.java
+
+
 ## [3.0.3]
 <!-- !!! Align version in badge URLs as well !!! -->
 [![3.0.3 Badge](https://img.shields.io/nexus/r/io.github.mavenplugins/unleash-maven-plugin?server=https://s01.oss.sonatype.org&label=Maven%20Central&queryOpt=:v=3.0.3)](https://central.sonatype.com/artifact/io.github.mavenplugins/unleash-maven-plugin/3.0.3)
@@ -236,7 +250,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - This is just a dummy placeholder to make the parser of GHCICD/release-notes-from-changelog@v1 happy!
 -->
 
-[Unreleased]: https://github.com/mavenplugins/unleash-maven-plugin/compare/v3.0.3..HEAD
+[Unreleased]: https://github.com/mavenplugins/unleash-maven-plugin/compare/v3.1.0..HEAD
+[3.1.0]: https://github.com/mavenplugins/unleash-maven-plugin/compare/v3.0.3..v3.1.0
 [3.0.3]: https://github.com/mavenplugins/unleash-maven-plugin/compare/v3.0.2..v3.0.3
 [3.0.2]: https://github.com/mavenplugins/unleash-maven-plugin/compare/v3.0.1..v3.0.2
 [3.0.1]: https://github.com/mavenplugins/unleash-maven-plugin/compare/v3.0.0..v3.0.1
