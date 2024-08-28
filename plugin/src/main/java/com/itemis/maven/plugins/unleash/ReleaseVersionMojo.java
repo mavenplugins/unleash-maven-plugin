@@ -10,7 +10,9 @@ import com.itemis.maven.plugins.unleash.util.MavenVersionUtil;
  * @author <a href="mailto:mhoffrogge@gmail.com">Markus Hoffrogge</a>
  * @since 3.1.0
  */
-@Mojo(name = "releaseVersion", requiresProject = true)
+@Mojo(name = "releaseVersion", //
+    requiresProject = false // Do NOT recurse through each reactor module of a project!
+)
 public class ReleaseVersionMojo extends AbstractVersionMojo {
 
   @Override

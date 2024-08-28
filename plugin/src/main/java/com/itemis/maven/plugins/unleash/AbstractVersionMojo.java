@@ -55,7 +55,7 @@ public abstract class AbstractVersionMojo extends AbstractMojo {
    * bash) like this:
    *
    * <pre>
-   * RESULT=$(mvn -q -N unleash:nextSnapshotVersion -DforceStdout)
+   * RESULT=$(mvn -q unleash:nextSnapshotVersion -DforceStdout)
    * echo $RESULT
    * </pre>
    *
@@ -65,10 +65,11 @@ public abstract class AbstractVersionMojo extends AbstractMojo {
   private boolean forceStdout;
 
   /**
-   * Allow recursive reactor execution. If not set true, this goal must be run with <code>mvn -N ...</code>.
+   * Allow recursive reactor output. If set false, this goal will output the version of the root module only. If set
+   * true, the goal will output the version of any reactor module of the project.
    */
-  @Parameter(property = "allowRecursiveReactors", defaultValue = "false")
-  private boolean allowRecursiveReactors;
+  @Parameter(property = "allowRecursiveReactorOutput", defaultValue = "false")
+  private boolean allowRecursiveReactorOutput;
 
   /**
    * Utility method to write a content in a given file.
@@ -105,10 +106,16 @@ public abstract class AbstractVersionMojo extends AbstractMojo {
    * @throws MojoExecutionException if any
    * @throws MojoFailureException   if any reflection exceptions occur or missing components.
    */
-  protected void handleResultOutput(String result) throws MojoExecutionException, MojoFailureException {
+  protected void handleResultOutput(String result, int projectIndex)
+      throws MojoExecutionException, MojoFailureException {
     if (this.output != null) {
+      StringBuilder sb = new StringBuilder();
+      if (projectIndex > 0) {
+        sb.append(SystemUtils.LINE_SEPARATOR);
+      }
+      sb.append(result);
       try {
-        writeFile(this.output, result);
+        writeFile(this.output, sb);
       } catch (IOException e) {
         throw new MojoExecutionException("Cannot write result to output: " + this.output, e);
       }
@@ -118,7 +125,6 @@ public abstract class AbstractVersionMojo extends AbstractMojo {
         getLog().info(SystemUtils.LINE_SEPARATOR + result);
       } else {
         if (this.forceStdout) {
-          final int projectIndex = this.reactorProjects.indexOf(this.project);
           if (projectIndex > 0) {
             System.out.print(SystemUtils.LINE_SEPARATOR);
           }
@@ -131,12 +137,11 @@ public abstract class AbstractVersionMojo extends AbstractMojo {
 
   @Override
   public void execute() throws MojoExecutionException, MojoFailureException {
-    if (this.reactorProjects.size() > 1 && !this.allowRecursiveReactors) {
-      throw new MojoExecutionException(
-          "Recursive reactor execution not allowed for this goal - please run with \"mvn -N ...\"");
+    final int projectIndex = this.reactorProjects.indexOf(this.project);
+    if (projectIndex == 0 || this.allowRecursiveReactorOutput) {
+      final String result = calculateVersion(this.project.getVersion());
+      handleResultOutput(result, projectIndex);
     }
-    final String result = calculateVersion(this.project.getVersion());
-    handleResultOutput(result);
   }
 
   /**

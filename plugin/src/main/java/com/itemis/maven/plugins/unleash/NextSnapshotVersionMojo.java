@@ -9,10 +9,13 @@ import com.itemis.maven.plugins.unleash.util.VersionUpgradeStrategy;
 /**
  * Print the release version calculated for this project by {@link MavenVersionUtil#calculateReleaseVersion(String)}.
  *
+ *
  * @author <a href="mailto:mhoffrogge@gmail.com">Markus Hoffrogge</a>
  * @since 3.1.0
  */
-@Mojo(name = "nextSnapshotVersion", requiresProject = true)
+@Mojo(name = "nextSnapshotVersion", //
+    requiresProject = false // Do NOT recurse through each reactor module of a project!
+)
 public class NextSnapshotVersionMojo extends AbstractVersionMojo {
 
   /**
