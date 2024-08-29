@@ -71,8 +71,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Summary
 - Add goals `unleash:nextSnapshotVersion` and `unleash:releaseVersion`
+- Bump parent pom reference `org-parent` to version `7`
 
 ### Updates
+- pom.xml:
+  - update parent pom version
+
 - Add Mojo classes:
   - AbstractVersionMojo.java
   - NextSnapshotVersionMojo.java
