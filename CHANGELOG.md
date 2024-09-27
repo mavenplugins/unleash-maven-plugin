@@ -65,6 +65,55 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - TBD
 
 
+## [3.2.0]
+<!-- !!! Align version in badge URLs as well !!! -->
+[![3.2.0 Badge](https://img.shields.io/nexus/r/io.github.mavenplugins/unleash-maven-plugin?server=https://s01.oss.sonatype.org&label=Maven%20Central&queryOpt=:v=3.2.0)](https://central.sonatype.com/artifact/io.github.mavenplugins/unleash-maven-plugin/3.2.0)
+
+### Summary
+- Preserve leading `0` for increased version parts with the same number of digits if not exceeding the digits required for the new value.
+- Add optional system property `currentVersion` to goals `unleash:nextSnapshotVersion` and `unleash:releaseVersion`.
+  Default is `${project.version}`. This property is being used as the base for any version calculation.
+- Add further `VersionUpgradeStrategy` options:
+  - `BUILD` - 4th version part
+  - `PART_5` - 5th version part
+  - `PART_6` - 6th version part
+  - `PART_7` - 7th version part
+  - `PART_8` - 8th version part
+- Refactor class `FileToRelativePath` as a pre-requisite to fix `unleash-scm-provider-git`
+  to work with Maven projects located in a sub folder of the checkout folder.
+
+### :bug: Bugfix
+- Fix issue raised by workflow step `SetNextDevVersion` for Git SCM projects:
+  If the Maven project base dir is within a sub folder of the git checkout directory,
+  then the next dev modified POMs did not get recognized as changed files to be commited.<br>
+  👉 Requires `unleash-scm-provider-git` version `3.1.0` or later!
+
+### Updates
+- pom.xml:
+  - update parent pom version
+
+- Plugin Mojo classes:
+  - AbstractVersionMojo.java:
+    - add property `currentVersion`
+  - NextSnapshotVersionMojo.java:
+    - fix class comment
+  
+- Version calculation classes:
+  - Version.java:
+    - preserve leading 0's of version part being increased
+  - VersionUpgradeStrategy.java:
+    - add version part options (s. Summary)
+  - MavenVersionUtilTest.java:
+    - Add according test cases
+
+- Others:
+  - Deprecate `com.itemis.maven.plugins.unleash.util.FileToRelativePath`
+    - this is moved to `com.itemis.maven.plugins.unleash.scm.utils.FileToRelativePath`
+  - FollowUp refactored classes:
+    - DetectReleaseArtifacts.java
+    - DevVersionUtil.java
+
+
 ## [3.1.0]
 <!-- !!! Align version in badge URLs as well !!! -->
 [![3.1.0 Badge](https://img.shields.io/nexus/r/io.github.mavenplugins/unleash-maven-plugin?server=https://s01.oss.sonatype.org&label=Maven%20Central&queryOpt=:v=3.1.0)](https://central.sonatype.com/artifact/io.github.mavenplugins/unleash-maven-plugin/3.1.0)
@@ -254,7 +303,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - This is just a dummy placeholder to make the parser of GHCICD/release-notes-from-changelog@v1 happy!
 -->
 
-[Unreleased]: https://github.com/mavenplugins/unleash-maven-plugin/compare/v3.1.0..HEAD
+[Unreleased]: https://github.com/mavenplugins/unleash-maven-plugin/compare/v3.2.0..HEAD
+[3.2.0]: https://github.com/mavenplugins/unleash-maven-plugin/compare/v3.1.0..v3.2.0
 [3.1.0]: https://github.com/mavenplugins/unleash-maven-plugin/compare/v3.0.3..v3.1.0
 [3.0.3]: https://github.com/mavenplugins/unleash-maven-plugin/compare/v3.0.2..v3.0.3
 [3.0.2]: https://github.com/mavenplugins/unleash-maven-plugin/compare/v3.0.1..v3.0.2
