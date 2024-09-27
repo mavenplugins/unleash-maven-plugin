@@ -70,20 +70,20 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 [![3.2.0 Badge](https://img.shields.io/nexus/r/io.github.mavenplugins/unleash-maven-plugin?server=https://s01.oss.sonatype.org&label=Maven%20Central&queryOpt=:v=3.2.0)](https://central.sonatype.com/artifact/io.github.mavenplugins/unleash-maven-plugin/3.2.0)
 
 ### Summary
-- Preserve leading `0` for increased version parts with the same number of digits if not exceeding the digits required for the new value.
-- Add optional system property `currentVersion` to goals `unleash:nextSnapshotVersion` and `unleash:releaseVersion`.
-  Default is `${project.version}`. This property is being used as the base for any version calculation.
-- Add further `VersionUpgradeStrategy` options:
-  - `BUILD` - 4th version part
-  - `PART_5` - 5th version part
-  - `PART_6` - 6th version part
-  - `PART_7` - 7th version part
-  - `PART_8` - 8th version part
+- Preserve leading `0` for increased version parts with the same number of digits if not exceeding the digits required for the new value. - #14<br>
+  - Add optional system property `currentVersion` to goals `unleash:nextSnapshotVersion` and `unleash:releaseVersion`.
+    Default is `${project.version}`. This property is being used as the base for any version calculation.
+  - Add further `VersionUpgradeStrategy` options:
+    - `BUILD` - 4th version part
+    - `PART_5` - 5th version part
+    - `PART_6` - 6th version part
+    - `PART_7` - 7th version part
+    - `PART_8` - 8th version part
 - Refactor class `FileToRelativePath` as a pre-requisite to fix `unleash-scm-provider-git`
-  to work with Maven projects located in a sub folder of the checkout folder.
+  for Maven projects located in a sub folder of the checkout folder. - #15
 
-### :bug: Bugfix
-- Fix issue raised by workflow step `SetNextDevVersion` for Git SCM projects:
+### :bug: Fixes
+- Fix issue raised by workflow step `SetNextDevVersion` for Git SCM projects. - #15<br>
   If the Maven project base dir is within a sub folder of the git checkout directory,
   then the next dev modified POMs did not get recognized as changed files to be commited.<br>
   👉 Requires `unleash-scm-provider-git` version `3.1.0` or later!
