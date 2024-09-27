@@ -10,8 +10,8 @@ import org.apache.commons.lang3.SystemUtils;
 import com.google.common.base.Function;
 
 /**
- * A function to convert a file's absolute path into the relative path starting from a reference file.
- * (identical to former {@link com.itemis.maven.plugins.unleash.util.FileToRelativePath})
+ * A function to convert a file's absolute path into the relative path starting from a reference file
+ * (identical to former com.itemis.maven.plugins.unleash.util.FileToRelativePath within module unleash-mabven-plugin).
  *
  * @author <a href="mailto:stanley.hillner@itemis.de">Stanley Hillner</a>
  * @since 3.2.0
