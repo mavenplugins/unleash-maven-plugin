@@ -22,7 +22,13 @@ public class MavenVersionUtilTest {
   public static Object[][] calculateNextSnapshotVersion() {
     return new Object[][] { { "3.8.1", "3.8.2-SNAPSHOT" }, { "1.0.0-SNAPSHOT", "1.0.1-SNAPSHOT" },
         { "1.12", "1.13-SNAPSHOT" }, { "1.3-SNAPSH", "1.4-SNAPSH-SNAPSHOT" }, { "3-Alpha1", "3-Alpha2-SNAPSHOT" },
-        { "3-Alpha1-SNAPSHOT", "3-Alpha2-SNAPSHOT" }, { "1-SNAPSHOT", "2-SNAPSHOT" }, { "3", "4-SNAPSHOT" } };
+        { "3-Alpha1-SNAPSHOT", "3-Alpha2-SNAPSHOT" }, { "1-SNAPSHOT", "2-SNAPSHOT" }, { "3", "4-SNAPSHOT" },
+        // leading zero cases
+        { "01.02.03.001-SNAPSHOT", "01.02.03.002-SNAPSHOT" }, { "01.02.03.099-SNAPSHOT", "01.02.03.100-SNAPSHOT" },
+        { "3-Alpha01-SNAPSHOT", "3-Alpha02-SNAPSHOT" }, { "3-Alpha+01-SNAPSHOT", "3-Alpha+02-SNAPSHOT" },
+        { "3-Alpha-01-SNAPSHOT", "3-Alpha-02-SNAPSHOT" }, { "3-Alpha.01-SNAPSHOT", "3-Alpha.02-SNAPSHOT" },
+        { "3-Alpha+01.1", "3-Alpha+01.2-SNAPSHOT" }, { "3-Alpha-01.1", "3-Alpha-01.2-SNAPSHOT" },
+        { "3-Alpha.01.1", "3-Alpha.01.2-SNAPSHOT" } };
   }
 
   @DataProvider
@@ -33,6 +39,22 @@ public class MavenVersionUtilTest {
         { "1.3-SNAPSH", VersionUpgradeStrategy.MAJOR, "2.3-SNAPSH-SNAPSHOT" },
         { "3-Alpha1", VersionUpgradeStrategy.DEFAULT, "3-Alpha2-SNAPSHOT" },
         { "3-Alpha1-SNAPSHOT", null, "3-Alpha2-SNAPSHOT" },
+        { "3-Alpha01", VersionUpgradeStrategy.DEFAULT, "3-Alpha02-SNAPSHOT" },
+        { "3-Alpha+01", VersionUpgradeStrategy.MINOR, "3-Alpha+02-SNAPSHOT" },
+        { "3-Alpha-01", VersionUpgradeStrategy.MINOR, "3-Alpha-02-SNAPSHOT" },
+        { "3-Alpha.01", VersionUpgradeStrategy.MINOR, "3-Alpha.02-SNAPSHOT" },
+        { "3-Alpha+01", VersionUpgradeStrategy.INCREMENTAL, "3-Alpha+02-SNAPSHOT" },
+        { "3-Alpha-01", VersionUpgradeStrategy.INCREMENTAL, "3-Alpha-02-SNAPSHOT" },
+        { "3-Alpha.01", VersionUpgradeStrategy.INCREMENTAL, "3-Alpha.02-SNAPSHOT" },
+        { "3-Alpha+01.1", VersionUpgradeStrategy.MINOR, "3-Alpha+02.1-SNAPSHOT" },
+        { "3-Alpha-01.1", VersionUpgradeStrategy.MINOR, "3-Alpha-02.1-SNAPSHOT" },
+        { "3-Alpha.01.1", VersionUpgradeStrategy.MINOR, "3-Alpha.02.1-SNAPSHOT" },
+        { "3-Alpha+01.1", VersionUpgradeStrategy.INCREMENTAL, "3-Alpha+01.2-SNAPSHOT" },
+        { "3-Alpha-01.1", VersionUpgradeStrategy.INCREMENTAL, "3-Alpha-02.1-SNAPSHOT" },
+        { "3-Alpha.01.1", VersionUpgradeStrategy.INCREMENTAL, "3-Alpha.02.1-SNAPSHOT" },
+        { "3-Alpha+01.1.2", VersionUpgradeStrategy.BUILD, "3-Alpha+01.1.3-SNAPSHOT" },
+        { "3-Alpha-01.1.2", VersionUpgradeStrategy.BUILD, "3-Alpha-01.2.2-SNAPSHOT" },
+        { "3-Alpha.01.01.2", VersionUpgradeStrategy.BUILD, "3-Alpha.01.02.2-SNAPSHOT" },
         { "1.1.1-SNAPSHOT", VersionUpgradeStrategy.INCREMENTAL, "1.1.2-SNAPSHOT" } };
   }
 

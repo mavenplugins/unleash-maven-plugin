@@ -62,17 +62,17 @@ class Version {
   }
 
   private void increaseSpecificSegment(short index) {
-    if (index >= this.segments.size() || index < 0) {
-      increaseLowestPossibleSegment();
-    } else {
-      String segment = this.segments.get(index);
+    for (short increasableIndex = index; increasableIndex < this.segments.size()
+        && increasableIndex >= 0; increasableIndex++) {
+      String segment = this.segments.get(increasableIndex);
       String increasedSegment = increaseSegment(segment);
-      if (Objects.equal(segment, increasedSegment)) {
-        increaseLowestPossibleSegment();
-      } else {
-        this.segments.set(index, increasedSegment);
+      if (!Objects.equal(segment, increasedSegment)) {
+        this.segments.set(increasableIndex, increasedSegment);
+        return;
       }
     }
+    // No increasable part found yet
+    increaseLowestPossibleSegment();
   }
 
   private String increaseSegment(String segment) {
@@ -97,8 +97,14 @@ class Version {
       if (start == -1) {
         start = 0;
       }
-      int toIncrease = Integer.parseInt(sb.substring(start, end + 1));
-      sb.replace(start, end + 1, Integer.toString(toIncrease + 1));
+      int lengthForLeadingZeroes = 0;
+      String sNumber = sb.substring(start, end + 1);
+      if (sNumber.startsWith("0")) {
+        lengthForLeadingZeroes = sNumber.length();
+      }
+      int increasedNumber = Integer.parseInt(sNumber) + 1;
+      sNumber = String.format(lengthForLeadingZeroes > 0 ? "%0" + lengthForLeadingZeroes + "d" : "%d", increasedNumber);
+      sb.replace(start, end + 1, sNumber);
     }
 
     return sb.toString();
@@ -111,11 +117,9 @@ class Version {
     }
 
     Iterator<String> segmentsIterator = this.segments.iterator();
-    Iterator<Character> separatorsIterator = this.separators.iterator();
-
     StringBuilder sb = new StringBuilder(segmentsIterator.next());
-    while (separatorsIterator.hasNext()) {
-      sb.append(separatorsIterator.next());
+    for (Character separator : this.separators) {
+      sb.append(separator);
       sb.append(segmentsIterator.next());
     }
 
