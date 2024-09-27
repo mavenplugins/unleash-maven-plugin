@@ -22,7 +22,7 @@ import com.itemis.maven.plugins.cdi.annotations.ProcessingStep;
 import com.itemis.maven.plugins.cdi.logging.Logger;
 import com.itemis.maven.plugins.unleash.ReleaseMetadata;
 import com.itemis.maven.plugins.unleash.ReleasePhase;
-import com.itemis.maven.plugins.unleash.util.functions.FileToRelativePath;
+import com.itemis.maven.plugins.unleash.scm.utils.FileToRelativePath;
 import com.itemis.maven.plugins.unleash.util.functions.ProjectToString;
 
 import jakarta.inject.Inject;

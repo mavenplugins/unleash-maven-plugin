@@ -1,4 +1,4 @@
-package com.itemis.maven.plugins.unleash.util.functions;
+package com.itemis.maven.plugins.unleash.scm.utils;
 
 import java.io.File;
 import java.net.URI;
@@ -11,9 +11,10 @@ import com.google.common.base.Function;
 
 /**
  * A function to convert a file's absolute path into the relative path starting from a reference file.
+ * (identical to former {@link com.itemis.maven.plugins.unleash.util.FileToRelativePath})
  *
  * @author <a href="mailto:stanley.hillner@itemis.de">Stanley Hillner</a>
- * @since 1.0.0
+ * @since 3.2.0
  */
 public class FileToRelativePath implements Function<File, String> {
   private File workingDir;
