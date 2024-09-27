@@ -7,8 +7,8 @@ import com.itemis.maven.plugins.unleash.util.MavenVersionUtil;
 import com.itemis.maven.plugins.unleash.util.VersionUpgradeStrategy;
 
 /**
- * Print the release version calculated for this project by {@link MavenVersionUtil#calculateReleaseVersion(String)}.
- *
+ * Print the next development version calculated for this project by
+ * {@link MavenVersionUtil#calculateNextSnapshotVersion(String, VersionUpgradeStrategy)}
  *
  * @author <a href="mailto:mhoffrogge@gmail.com">Markus Hoffrogge</a>
  * @since 3.1.0

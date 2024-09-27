@@ -72,6 +72,12 @@ public abstract class AbstractVersionMojo extends AbstractMojo {
   private boolean allowRecursiveReactorOutput;
 
   /**
+   * The current version to be used for calculation.
+   */
+  @Parameter(property = "currentVersion", defaultValue = "${project.version}")
+  private String currentVersion;
+
+  /**
    * Utility method to write a content in a given file.
    *
    * @param output  is the wanted output file.
@@ -139,7 +145,7 @@ public abstract class AbstractVersionMojo extends AbstractMojo {
   public void execute() throws MojoExecutionException, MojoFailureException {
     final int projectIndex = this.reactorProjects.indexOf(this.project);
     if (projectIndex == 0 || this.allowRecursiveReactorOutput) {
-      final String result = calculateVersion(this.project.getVersion());
+      final String result = calculateVersion(this.currentVersion);
       handleResultOutput(result, projectIndex);
     }
   }
