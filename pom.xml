@@ -9,7 +9,7 @@
   </parent>
 
   <artifactId>unleash-parent</artifactId>
-  <version>3.2.0-SNAPSHOT</version>
+  <version>3.2.0</version>
   <packaging>pom</packaging>
 
   <name>Unleash Parent</name>
@@ -43,7 +43,7 @@
   <scm child.scm.connection.inherit.append.path="false" child.scm.developerConnection.inherit.append.path="false" child.scm.url.inherit.append.path="false">
     <connection>scm:git:https://github.com/mavenplugins/unleash-maven-plugin.git</connection>
     <url>https://github.com/mavenplugins/unleash-maven-plugin</url>
-    <tag>HEAD</tag>
+    <tag>v3.2.0</tag>
   </scm>
 
   <issueManagement>
