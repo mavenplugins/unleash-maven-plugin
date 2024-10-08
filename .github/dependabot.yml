@@ -1,0 +1,24 @@
+# https://docs.github.com/code-security/dependabot/dependabot-version-updates/configuring-dependabot-version-updates
+
+version: 2
+updates:
+- package-ecosystem: maven
+  directory: /
+  schedule:
+    interval: weekly
+  ignore:
+    # ignore any Maven artifacts - those are provided!
+    - dependency-name: "org.apache.maven:*"
+    - dependency-name: "org.apache.maven.plugin-tools:*"
+    # ignore Maven invoker - will be managed manually!
+    - dependency-name: "org.apache.maven.shared:maven-invoker"
+    # ignore commons-lang3 - will be managed manually!
+    - dependency-name: "org.apache.commons:commons-lang3"
+    # ignore plexus-interactivity-api - will be managed manually!
+    - dependency-name: "org.codehaus.plexus:plexus-interactivity-api"
+    # ignore tycho-versions-plugin - will be managed manually!
+    - dependency-name: "org.eclipse.tycho:tycho-versions-plugin"
+- package-ecosystem: github-actions
+  directory: /
+  schedule:
+    interval: weekly
