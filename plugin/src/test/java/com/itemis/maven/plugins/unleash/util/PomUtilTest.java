@@ -16,12 +16,9 @@ import org.apache.maven.model.Model;
 import org.apache.maven.model.Parent;
 import org.apache.maven.model.Profile;
 import org.apache.maven.project.MavenProject;
-import org.hamcrest.BaseMatcher;
-import org.hamcrest.Description;
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 import org.junit.rules.TemporaryFolder;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -34,8 +31,6 @@ import com.google.common.base.Optional;
 import com.google.common.io.Closeables;
 
 public class PomUtilTest {
-  @Rule
-  public ExpectedException exception = ExpectedException.none();
 
   @Rule
   public TemporaryFolder TemporaryFolder = new TemporaryFolder();
@@ -92,29 +87,19 @@ public class PomUtilTest {
 
   @Test
   public void testParsePOM_Invalid() {
-    this.exception.expect(RuntimeException.class);
-    this.exception.expectCause(new BaseMatcher<Throwable>() {
-
-      @Override
-      public boolean matches(Object item) {
-        return item instanceof SAXParseException;
+    final RuntimeException thrown = Assert.assertThrows(RuntimeException.class, () -> {
+      URL url = getClass().getResource(getClass().getSimpleName() + "/pom2.xml");
+      File f;
+      try {
+        f = new File(url.toURI());
+      } catch (URISyntaxException e) {
+        f = new File(url.getPath());
       }
 
-      @Override
-      public void describeTo(Description description) {
-      }
+      PomUtil.parsePOM(f);
+      Assert.fail("Parser should throw an exception since the document is not well formed!");
     });
-
-    URL url = getClass().getResource(getClass().getSimpleName() + "/pom2.xml");
-    File f;
-    try {
-      f = new File(url.toURI());
-    } catch (URISyntaxException e) {
-      f = new File(url.getPath());
-    }
-
-    PomUtil.parsePOM(f);
-    Assert.fail("Parser should throw an exception since the document is not well formed!");
+    Assert.assertTrue(thrown.getCause() instanceof SAXParseException);
   }
 
   @Test
