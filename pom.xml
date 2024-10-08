@@ -76,7 +76,7 @@
       ${groupId.unleash-maven-plugin}:${artifactId.unleash-maven-plugin}:${version.unleash-maven-plugin.perform}:${unleash.goal}</unleash.cmdline.goal>
     <!-- MAVEN -->
     <version.maven>3.3.9</version.maven>
-    <version.maven-invoker>3.0.1</version.maven-invoker>
+    <version.maven-invoker>3.1.0</version.maven-invoker>
     <version.maven-plugin-plugin>3.13.1</version.maven-plugin-plugin>
     <version.plexus-component-metadata>2.2.0</version.plexus-component-metadata>
     <version.versions-maven-plugin>2.15.0</version.versions-maven-plugin>
