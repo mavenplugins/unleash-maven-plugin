@@ -1,11 +1,14 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" child.project.url.inherit.append.path="false" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  child.project.url.inherit.append.path="false"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
     <groupId>io.github.mavenplugins</groupId>
     <artifactId>org-parent</artifactId>
     <version>8</version>
-    <relativePath/>
+    <relativePath />
   </parent>
 
   <artifactId>unleash-parent</artifactId>
@@ -23,13 +26,6 @@
 
   <developers>
     <developer>
-      <id>shillner</id>
-      <name>Stanley Hillner</name>
-      <organization>itemis AG</organization>
-      <organizationUrl>https://itemis.com/</organizationUrl>
-      <timezone>1</timezone>
-    </developer>
-    <developer>
       <id>mavenplugins</id>
       <!-- Let Maven Central Search show 'Public Project' as known contributors tag -->
       <name>Public Project</name>
@@ -38,9 +34,17 @@
       <organizationUrl>https://github.com/mavenplugins/</organizationUrl>
       <timezone>1</timezone>
     </developer>
+    <developer>
+      <id>shillner</id>
+      <name>Stanley Hillner</name>
+      <organization>itemis AG</organization>
+      <organizationUrl>https://itemis.com/</organizationUrl>
+      <timezone>1</timezone>
+    </developer>
   </developers>
 
-  <scm child.scm.connection.inherit.append.path="false" child.scm.developerConnection.inherit.append.path="false" child.scm.url.inherit.append.path="false">
+  <scm child.scm.connection.inherit.append.path="false" child.scm.developerConnection.inherit.append.path="false"
+    child.scm.url.inherit.append.path="false">
     <connection>scm:git:https://github.com/mavenplugins/unleash-maven-plugin.git</connection>
     <url>https://github.com/mavenplugins/unleash-maven-plugin</url>
     <tag>HEAD</tag>
@@ -63,9 +67,9 @@
     <!-- UNLEASH -->
     <version.unleash-maven-plugin>${project.version}</version.unleash-maven-plugin>
     <version.artifact-spy-plugin>1.0.7</version.artifact-spy-plugin>
-    <version.cdi-plugin-utils>4.0.0</version.cdi-plugin-utils>
+    <version.cdi-plugin-utils>4.0.1-SNAPSHOT</version.cdi-plugin-utils>
     <!-- Resolve chicken/egg unleash by defining specific unleash commandline goal: -->
-    <version.unleash-maven-plugin.perform>3.1.0</version.unleash-maven-plugin.perform>
+    <version.unleash-maven-plugin.perform>3.2.0</version.unleash-maven-plugin.perform>
     <unleash.goal>perform</unleash.goal>
     <!-- This is considered by the reusable GH unleash action: -->
     <unleash.cmdline.goal>
@@ -79,10 +83,10 @@
     <version.plexus-interactivity-api>1.3</version.plexus-interactivity-api>
     <version.tycho-versions-plugin>1.1.0</version.tycho-versions-plugin>
     <!-- 3rd PARTY -->
-    <version.guava>23.0</version.guava>
+    <version.guava.minimum_provided>33.0.0-jre</version.guava.minimum_provided>
     <version.commons-lang3>3.4</version.commons-lang3>
     <!-- TEST -->
-    <version.junit>4.12</version.junit>
+    <version.junit>4.13.2</version.junit>
     <version.junit-dataprovider>1.13.1</version.junit-dataprovider>
     <version.mockito-all>1.10.19</version.mockito-all>
   </properties>
@@ -150,11 +154,6 @@
       </dependency>
 
       <!-- 3rd PARTY DEPENDENCIES -->
-      <dependency>
-        <groupId>com.google.guava</groupId>
-        <artifactId>guava</artifactId>
-        <version>${version.guava}</version>
-      </dependency>
       <dependency>
         <groupId>org.apache.commons</groupId>
         <artifactId>commons-lang3</artifactId>

@@ -2,9 +2,7 @@ package com.itemis.maven.plugins.unleash.util;
 
 import org.codehaus.plexus.components.interactivity.Prompter;
 import org.junit.Assert;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.mockito.Matchers;
 import org.mockito.Mockito;
@@ -36,9 +34,6 @@ public class ReleaseUtilTest {
   // return new Object[][] { { "test", null }, { null, p }, { null, null } };
   // }
 
-  @Rule
-  public ExpectedException exception = ExpectedException.none();
-
   // @Test
   // @UseDataProvider("getTagName")
   // public void testGetTagName(String tagNamePattern, MavenProject project, String expectedTagName) {
@@ -46,10 +41,9 @@ public class ReleaseUtilTest {
   // Assert.assertEquals(expectedTagName, name);
   // }
   //
-  // @Test
+  // @Test(expected = IllegalArgumentException.class)
   // @UseDataProvider("getTagName_Exception")
   // public void testGetTagNameNoProject(String tagNamePattern, MavenProject project) {
-  // this.exception.expect(IllegalArgumentException.class);
   // ReleaseUtil.getTagName(tagNamePattern, project);
   // }
 
