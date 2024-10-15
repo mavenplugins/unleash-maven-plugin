@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.Writer;
 import java.util.List;
 
-import org.apache.commons.lang3.SystemUtils;
 import org.apache.maven.execution.MavenSession;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
@@ -117,7 +116,7 @@ public abstract class AbstractVersionMojo extends AbstractMojo {
     if (this.output != null) {
       StringBuilder sb = new StringBuilder();
       if (projectIndex > 0) {
-        sb.append(SystemUtils.LINE_SEPARATOR);
+        sb.append(System.lineSeparator());
       }
       sb.append(result);
       try {
@@ -128,11 +127,11 @@ public abstract class AbstractVersionMojo extends AbstractMojo {
       getLog().info("Result written to: " + this.output);
     } else {
       if (getLog().isInfoEnabled()) {
-        getLog().info(SystemUtils.LINE_SEPARATOR + result);
+        getLog().info(System.lineSeparator() + result);
       } else {
         if (this.forceStdout) {
           if (projectIndex > 0) {
-            System.out.print(SystemUtils.LINE_SEPARATOR);
+            System.out.print(System.lineSeparator());
           }
           System.out.print(result);
           System.out.flush();
