@@ -18,6 +18,8 @@ updates:
     - dependency-name: "org.codehaus.mojo:versions-maven-plugin"
     # ignore commons-lang3 - will be managed manually!
     - dependency-name: "org.apache.commons:commons-lang3"
+    # ignore commons-text - will be managed manually!
+    - dependency-name: "org.apache.commons:commons-text"
     # ignore plexus-interactivity-api - will be managed manually!
     - dependency-name: "org.codehaus.plexus:plexus-interactivity-api"
     # ignore tycho-versions-plugin - will be managed manually!
