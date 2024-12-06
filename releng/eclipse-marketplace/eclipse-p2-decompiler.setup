@@ -37,8 +37,9 @@
   <setupTask
       xsi:type="setup.p2:P2Task"
       id="mvnplugins.dev.ump.p2.ecd.340"
-      filter="(&amp;(install.decompiler.plugin=true)(!(scope.product.version.name=neon)))"
-      label="ECD 3.4.0">
+      filter="(&amp;(install.decompiler.plugin=true)(|(scope.product.version.name=2020-06)(scope.product.version.name=2020-03)(scope.product.version.name=2019-12)(scope.product.version.name=2019-09)(scope.product.version.name=2019-06)(scope.product.version.name=2019-03)(scope.product.version.name=2018-12)(scope.product.version.name=2018-09)(scope.product.version.name=photon)(scope.product.version.name=oxygen)))"
+      label="ECD 3.4.0"
+      profileProperties="scope.product.version.name=${scope.product.version.name}">
     <requirement
         name="org.sf.feeling.decompiler.feature.group"
         versionRange="[0.0.0,3.5.0)"/>
@@ -52,21 +53,91 @@
         name="org.sf.feeling.decompiler.jd.feature.group"
         versionRange="[0.0.0,3.5.0)"/>
     <requirement
-        name="org.sf.feeling.decompiler.cfr.feature.group"
-        versionRange="[0.0.0,3.5.0)"/>
-    <requirement
-        name="org.sf.feeling.decompiler.quiltflower.feature.group"
-        versionRange="[0.0.0,3.5.0)"/>
-    <requirement
         name="org.sf.feeling.decompiler.jad.feature.group"
         versionRange="[0.0.0,3.5.0)"
         filter="(osgi.os=_NONE_)"
         description="2023-05-02: Disabled by filter, since this is outdated and has been removed on recent ECD"/>
+    <requirement
+        name="org.sf.feeling.decompiler.cfr.feature.group"
+        versionRange="[0.0.0,3.5.0)"/>
+    <requirement
+        name="org.sf.feeling.decompiler.quiltflower.feature.group"
+        versionRange="[0.0.0,3.5.0)"
+        optional="true"
+        max="0"
+        description="Note: Quiltflower requires Java 11 => we have to filter it up to Eclipse 2020-06 including. In addition we have to trigger this P2 task on BOOTSTRAP only, since the requirement filter works as expected on BOOTSTRAP only!"/>
     <repository
         url="https://p2site.github.io/p2.ecd-plugin/3.4.0/"/>
     <description>
+      Java-8 platforms - only quiltflower requires Java 11 - so we exclude it.
       Limited for now to version 3.4.0 for stability since 3.5.x did remove other artifacts.
       Changed repo URL from https://ecd-plugin.github.io/update/ to https://p2site.github.io/ecd-plugin/3.4.0/.
+    </description>
+  </setupTask>
+  <setupTask
+      xsi:type="setup.p2:P2Task"
+      id="mvnplugins.dev.ump.p2.ecd.350"
+      filter="(&amp;(install.decompiler.plugin=true)(|(scope.product.version.name=2022-06)(scope.product.version.name=2022-03)(scope.product.version.name=2021-12)(scope.product.version.name=2021-09)(scope.product.version.name=2021-06)(scope.product.version.name=2021-03)(scope.product.version.name=2020-12)(scope.product.version.name=2020-09)))"
+      label="ECD 3.5.0"
+      profileProperties="scope.product.version.name=${scope.product.version.name}">
+    <requirement
+        name="org.sf.feeling.decompiler.feature.group"
+        versionRange="[0.0.0,3.5.1)"/>
+    <requirement
+        name="org.sf.feeling.decompiler.cfr.feature.group"
+        versionRange="[0.0.0,3.5.1)"/>
+    <requirement
+        name="org.sf.feeling.decompiler.fernflower.feature.group"
+        versionRange="[0.0.0,3.5.1)"
+        optional="true"
+        max="0"
+        description="Note: Fernflower requires Java 17 => we have to filter it up to Eclipse 2022-03 including. In addition we have to trigger this P2 task on BOOTSTRAP only, since the requirement filter works as expected on BOOTSTRAP only!"/>
+    <requirement
+        name="org.sf.feeling.decompiler.jd.feature.group"
+        versionRange="[0.0.0,3.5.1)"/>
+    <requirement
+        name="org.sf.feeling.decompiler.procyon.feature.group"
+        versionRange="[0.0.0,3.5.1)"/>
+    <requirement
+        name="org.sf.feeling.decompiler.vineflower.feature.group"
+        versionRange="[0.0.0,3.5.1)"/>
+    <repository
+        url="https://p2site.github.io/p2.ecd-plugin/3.5.0/signed/"/>
+    <description>
+      Java-11 platforms - only fernflower requires Java 17 - so we exclude it.
+      Quiltflower has been removed in this release.
+      Changed repo URL from https://ecd-plugin.github.io/update/ to https://p2site.github.io/p2.ecd-plugin/3.5.0/signed/.
+    </description>
+  </setupTask>
+  <setupTask
+      xsi:type="setup.p2:P2Task"
+      id="mvnplugins.dev.ump.p2.ecd.351"
+      filter="(&amp;(install.decompiler.plugin=true)(!(|(scope.product.version.name=2022-06)(scope.product.version.name=2022-03)(scope.product.version.name=2021-12)(scope.product.version.name=2021-09)(scope.product.version.name=2021-06)(scope.product.version.name=2021-03)(scope.product.version.name=2020-12)(scope.product.version.name=2020-09)(scope.product.version.name=2020-06)(scope.product.version.name=2020-03)(scope.product.version.name=2019-12)(scope.product.version.name=2019-09)(scope.product.version.name=2019-06)(scope.product.version.name=2019-03)(scope.product.version.name=2018-12)(scope.product.version.name=2018-09)(scope.product.version.name=photon)(scope.product.version.name=oxygen)(scope.product.version.name=neon))))"
+      label="ECD 3.5.1"
+      profileProperties="scope.product.version.name=${scope.product.version.name}">
+    <requirement
+        name="org.sf.feeling.decompiler.feature.group"
+        versionRange="[0.0.0,3.6.0)"/>
+    <requirement
+        name="org.sf.feeling.decompiler.cfr.feature.group"
+        versionRange="[0.0.0,3.6.0)"/>
+    <requirement
+        name="org.sf.feeling.decompiler.fernflower.feature.group"
+        versionRange="[0.0.0,3.6.0)"/>
+    <requirement
+        name="org.sf.feeling.decompiler.jd.feature.group"
+        versionRange="[0.0.0,3.6.0)"/>
+    <requirement
+        name="org.sf.feeling.decompiler.procyon.feature.group"
+        versionRange="[0.0.0,3.6.0)"/>
+    <requirement
+        name="org.sf.feeling.decompiler.vineflower.feature.group"
+        versionRange="[0.0.0,3.6.0)"/>
+    <repository
+        url="https://p2site.github.io/p2.ecd-plugin/3.5.1/signed/"/>
+    <description>
+      Java-17 platforms.
+      Changed repo URL from https://ecd-plugin.github.io/update/ to https://p2site.github.io/p2.ecd-plugin/3.5.1/signed/.
     </description>
   </setupTask>
 </setup:CompoundTask>

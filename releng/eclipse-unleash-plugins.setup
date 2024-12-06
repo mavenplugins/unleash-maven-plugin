@@ -320,13 +320,13 @@
     </setupTask>
     <setupTask
         xsi:type="setup:CompoundTask"
-        href="eclipse-marketplace/eclipse-p2-m2e.setup#/"/>
+        href="eclipse-marketplace/eclipse-p2-m2e.setup#mvnplugins.dev.ump.p2.m2e"/>
     <setupTask
         xsi:type="setup:CompoundTask"
-        href="eclipse-marketplace/eclipse-p2-decompiler.setup#/"/>
+        href="eclipse-marketplace/eclipse-p2-decompiler.setup#mvnplugins.dev.ump.p2.ecd"/>
     <setupTask
         xsi:type="setup:CompoundTask"
-        href="eclipse-marketplace/eclipse-p2-eclemma.setup#/"/>
+        href="eclipse-marketplace/eclipse-p2-eclemma.setup#mvnplugins.dev.ump.p2.eclemma"/>
     <description>Groups all plugin and feature installations</description>
   </setupTask>
   <setupTask
@@ -1888,9 +1888,27 @@
           key="/instance/org.eclipse.jdt.ui/org.eclipse.jdt.ui.keywordthis"
           value="true"/>
       <setupTask
+          xsi:type="setup:VariableTask"
+          id="mvnplugins.dev.ump.preferences.java.author"
+          filter="(osgi.os=win32)"
+          name="code.author"
+          defaultValue="${USERNAME}"
+          label="Code Author">
+        <description>The author name for java doc comments</description>
+      </setupTask>
+      <setupTask
+          xsi:type="setup:VariableTask"
+          id="mvnplugins.dev.ump.preferences.java.author"
+          filter="(osgi.os=linux)"
+          name="code.author"
+          defaultValue="${USER}"
+          label="Code Author">
+        <description>The author name for java doc comments</description>
+      </setupTask>
+      <setupTask
           xsi:type="setup:PreferenceTask"
           key="/instance/org.eclipse.jdt.ui/org.eclipse.jdt.ui.text.custom_code_templates"
-          value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?>&lt;templates>&lt;template autoinsert=&quot;false&quot; context=&quot;gettercomment_context&quot; deleted=&quot;false&quot; description=&quot;Comment for getter method&quot; enabled=&quot;true&quot; id=&quot;org.eclipse.jdt.ui.text.codetemplates.gettercomment&quot; name=&quot;gettercomment&quot;>/**&#xA; * @return &#xA; */&lt;/template>&#xA;&lt;template autoinsert=&quot;false&quot; context=&quot;settercomment_context&quot; deleted=&quot;false&quot; description=&quot;Comment for setter method&quot; enabled=&quot;true&quot; id=&quot;org.eclipse.jdt.ui.text.codetemplates.settercomment&quot; name=&quot;settercomment&quot;>/**&#xA; * @param $${param} &#xA; */&lt;/template>&#xA;&lt;template autoinsert=&quot;false&quot; context=&quot;typecomment_context&quot; deleted=&quot;false&quot; description=&quot;Comment for created types&quot; enabled=&quot;true&quot; id=&quot;org.eclipse.jdt.ui.text.codetemplates.typecomment&quot; name=&quot;typecomment&quot;>/**&#xA; *&#xA; * @author &amp;lt;a href=&quot;mailto:stanley.hillner@itemis.de&quot;&amp;gt;Stanley Hillner&amp;lt;/a&amp;gt;&#xA; *&#xA; * $${tags}&#xA; */&lt;/template>&lt;/templates>"/>
+          value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?>&lt;templates>&lt;template autoinsert=&quot;false&quot; context=&quot;gettercomment_context&quot; deleted=&quot;false&quot; description=&quot;Comment for getter method&quot; enabled=&quot;true&quot; id=&quot;org.eclipse.jdt.ui.text.codetemplates.gettercomment&quot; name=&quot;gettercomment&quot;>/**&#xA; * @return &#xA; */&lt;/template>&#xA;&lt;template autoinsert=&quot;false&quot; context=&quot;settercomment_context&quot; deleted=&quot;false&quot; description=&quot;Comment for setter method&quot; enabled=&quot;true&quot; id=&quot;org.eclipse.jdt.ui.text.codetemplates.settercomment&quot; name=&quot;settercomment&quot;>/**&#xA; * @param $${param} &#xA; */&lt;/template>&#xA;&lt;template autoinsert=&quot;false&quot; context=&quot;typecomment_context&quot; deleted=&quot;false&quot; description=&quot;Comment for created types&quot; enabled=&quot;true&quot; id=&quot;org.eclipse.jdt.ui.text.codetemplates.typecomment&quot; name=&quot;typecomment&quot;>/**&#xA; *&#xA; * @author ${code.author}&#xA; *&#xA; * $${tags}&#xA; */&lt;/template>&lt;/templates>"/>
       <setupTask
           xsi:type="setup:PreferenceTask"
           key="/instance/org.eclipse.jdt.ui/org.eclipse.jdt.ui.text.custom_templates"
@@ -2004,7 +2022,44 @@
       <setupTask
           xsi:type="setup:CompoundTask"
           id="mvnplugins.dev.ump.preferences.xml.lspe"
-          name="Language Server">
+          excludedTriggers="STARTUP MANUAL"
+          filter="(|(scope.product.version.name=2022-06)(scope.product.version.name=2022-03)(scope.product.version.name=2021-12)(scope.product.version.name=2021-09)(scope.product.version.name=2021-06)(scope.product.version.name=2021-03)(scope.product.version.name=2020-12)(scope.product.version.name=2020-09)(scope.product.version.name=2020-06)(scope.product.version.name=2022-06)(scope.product.version.name=2020-03)(scope.product.version.name=2019-12)(scope.product.version.name=2019-09)(scope.product.version.name=2019-06)(scope.product.version.name=2019-03)(scope.product.version.name=2018-12)(scope.product.version.name=2018-09))"
+          name="Disable Language Server (up to 2022-06)">
+        <setupTask
+            xsi:type="setup:PreferenceTask"
+            key="/instance/org.eclipse.lsp4e//org.eclipse.wildwebdeveloper.xml/org.eclipse.core.runtime.xml"
+            value="false"/>
+        <setupTask
+            xsi:type="setup:PreferenceTask"
+            key="/instance/org.eclipse.lsp4e//org.eclipse.wildwebdeveloper.xml/org.eclipse.wildwebdeveloper.dtd"
+            value="false"/>
+        <setupTask
+            xsi:type="setup:PreferenceTask"
+            key="/instance/org.eclipse.lsp4e//org.eclipse.wildwebdeveloper.xml/org.eclipse.wildwebdeveloper.rng"
+            value="false"/>
+        <setupTask
+            xsi:type="setup:PreferenceTask"
+            key="/instance/org.eclipse.lsp4e//org.eclipse.wildwebdeveloper.xml/org.eclipse.wildwebdeveloper.xsd"
+            value="false"/>
+        <setupTask
+            xsi:type="setup:PreferenceTask"
+            key="/instance/org.eclipse.lsp4e//org.eclipse.wildwebdeveloper.xml/org.eclipse.wildwebdeveloper.xsl"
+            value="false"/>
+        <description>
+          Disable lookup to language servers.
+            The filter of this task must comply with filtering M2E version setup in marketplace/global-p2-m2e.setup M2E [version range] task.
+            Reason: Up to last Eclipse (2022-06) running on Java11, we enforce to make use of m2e 1.18.2 max, since
+                    1.19.x does not support the former pom editor anymore and it has a couple of critical bugs.
+                    M2E 2.x requires Java17. 
+                    As we did also face issues with the Lemminx integration of those versions, we disable Language Servers
+                    by default to get rid of pom.xml lookup errors when editing pom.xml.
+        </description>
+      </setupTask>
+      <setupTask
+          xsi:type="setup:CompoundTask"
+          id="mvnplugins.dev.ump.preferences.xml.lspe"
+          filter="(!(|(scope.product.version.name=2022-06)(scope.product.version.name=2022-03)(scope.product.version.name=2021-12)(scope.product.version.name=2021-09)(scope.product.version.name=2021-06)(scope.product.version.name=2021-03)(scope.product.version.name=2020-12)(scope.product.version.name=2020-09)(scope.product.version.name=2020-06)(scope.product.version.name=2022-06)(scope.product.version.name=2020-03)(scope.product.version.name=2019-12)(scope.product.version.name=2019-09)(scope.product.version.name=2019-06)(scope.product.version.name=2019-03)(scope.product.version.name=2018-12)(scope.product.version.name=2018-09)))"
+          name="Enable Language Server (since 2022-09)">
         <setupTask
             xsi:type="setup:PreferenceTask"
             key="/instance/org.eclipse.lsp4e//org.eclipse.wildwebdeveloper.xml/org.eclipse.core.runtime.xml"
@@ -2118,9 +2173,9 @@
         xsi:type="setup:VariableTask"
         id="mvnplugins.dev.ujp.git.remotePath"
         name="ujp.remotePath"
-        defaultValue="mavenplugins/jenkins-unleash-plugin"
+        defaultValue="mavenplugins/jenkins-unleash-plugin-fork"
         label="Jenkins Plugin Remote Path">
-      <description>The remote repo path of jenkins-unleash-plugin. Override with probable fork path if applicable.</description>
+      <description>The remote repo path of jenkins-unleash-plugin-fork. Override with probable fork path if applicable.</description>
     </setupTask>
     <setupTask
         xsi:type="setup:VariableTask"

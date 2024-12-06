@@ -138,7 +138,14 @@
     </requirement>
     <repository
         url="https://archive.eclipse.org/technology/m2e/releases/1.18.2/"/>
-    <description>We explicitly add the specific M2E 1.18.2 repo to let these Eclipse products find this version</description>
+    <description>
+      We explicitly add the specific M2E 1.18.2 repo to let newer Eclipse products find this version.
+      The filter of this task is required to limit M2E version to 1.18.2 max up to Eclipse 2022-06 - the last running on Java11.
+      M2E 1.19.x does not support the former pom editor anymore and it has a couple of critical bugs.
+      M2E 2.x requires Java17. 
+      As we did also face issues with the Lemminx integration of those versions, we disable Language Servers
+      by default to get rid of pom.xml lookup errors when editing pom.xml.
+    </description>
   </setupTask>
   <description>
 
