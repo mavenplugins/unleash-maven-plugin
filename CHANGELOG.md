@@ -40,22 +40,37 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 <!--
 ## [Unreleased]
 
-### Additions
+### 🚨 Removed
 - TBD
 
-### Changes
+### 💥 Breaking
 - TBD
 
-### Deprecated
+### 📢 Deprecated
 - TBD
 
-###	Removals
+### 🚀 New Features
 - TBD
 
-### Fixes
+### 🐛 Fixes
 - TBD
 
-###	Security
+### ✨ Improvements
+- TBD
+
+### 🔧 Internal Changes
+- TBD
+
+### 🚦 Tests
+- TBD
+
+### 📦 Updates
+- TBD
+
+### 🔒 Security
+- TBD
+
+### 📝 Documentation Updates
 - TBD
 -->
 
@@ -63,6 +78,57 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changes
 - TBD
+
+
+## [3.2.1]
+<!-- !!! Align version in badge URLs as well !!! -->
+[![3.2.1 Badge](https://img.shields.io/nexus/r/io.github.mavenplugins/unleash-maven-plugin?server=https://s01.oss.sonatype.org&label=Maven%20Central&queryOpt=:v=3.2.1)](https://central.sonatype.com/artifact/io.github.mavenplugins/unleash-maven-plugin/3.2.1)
+
+### Summary
+- Fix vulnerability warnings on dependencies:
+  - Update dependency `io.github.mavenplugins:cdi-plugin-utils:4.0.0` -> `io.github.mavenplugins:cdi-plugin-utils:4.0.1`
+  - Replace explicit dependency to `com.google.guava:guava` by transient dependency through `io.github.mavenplugins:cdi-plugin-utils`
+  - Update dependency `junit:junit:4.12` -> `junit:junit:4.13.2`
+  - Update dependency `org.apache.maven.shared:maven-invoker:3.0.1` -> `org.apache.maven.shared:maven-invoker:3.1.0`
+  - Update managed dependency `org.apache.commons:commons-lang3:3.4` -> unmanaged `org.apache.commons:commons-lang3:3.12.0`
+  - Add unmanaged dependency `org.apache.commons:commons-text:1.10.0`
+  - Update provided dependency to Maven version `3.3.9` -> `3.8.1`
+- No further functional change
+
+### 📦 Updates
+- pom.xml:
+  - Update dependency `io.github.mavenplugins:cdi-plugin-utils:4.0.0` -> `io.github.mavenplugins:cdi-plugin-utils:4.0.1`
+  - Remove dependency management definition for `com.google.guava:guava`
+  - Update dependency `junit:junit:4.12` -> `junit:junit:4.13.2`
+  - Update property `<version.guava>23.0</version.guava>` -> `<version.guava.minimum_provided>33.0.0-jre</version.guava.minimum_provided>`
+  - Update dependency `org.apache.maven.shared:maven-invoker:3.0.1` -> `org.apache.maven.shared:maven-invoker:3.1.0`
+  - Update property `<version.commons-lang3>3.4</version.commons-lang3>` -> `<version.commons-lang3>3.12.0</version.commons-lang3>`
+  - Remove dependency management for `org.apache.commons:commons-lang3`
+  - Add property `<version.commons-text>1.10.0</version.commons-text>`
+  - Update property `<version.maven>3.3.9</version.maven>` -> `<version.maven>3.8.1</version.maven>`
+  - Remove `org.apache.maven:maven-core` from dependency management
+
+- unleash-maven-plugin/pom.xml:
+  - Update managed dependency `org.apache.commons:commons-lang3:3.4` -> unmanaged `org.apache.commons:commons-lang3:3.12.0`
+  - Add unmanaged dependency `org.apache.commons:commons-text:1.10.0`
+
+- utils/pom.xml:
+  - Update dependency scope for `com.google.guava:guava` to `provided`
+
+- scm-provider-api/pom.xml:
+  - Remove explicit dependency to `com.google.guava:guava`
+  - Update managed dependency `org.apache.commons:commons-lang3:3.4` -> unmanaged `org.apache.commons:commons-lang3:3.12.0`
+
+### 🔧 Internal Changes
+- AbstractVersionMojo.java:
+  - Replace usage of deprecated `SystemUtils.LINE_SEPARATOR` by `System.lineSeparator()`
+
+- ScmMessagePrefixUtil.java:
+  - Replace usage of deprecated `org.apache.commons.lang3.StringEscapeUtils` by `org.apache.commons.text.StringEscapeUtils`
+
+### 🚦 Tests
+- PomUtilTest.java, ReleaseUtilTest.java:
+  - Fix for deprecation warning on `ExpectedException.none()`
 
 
 ## [3.2.0]
@@ -303,7 +369,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - This is just a dummy placeholder to make the parser of GHCICD/release-notes-from-changelog@v1 happy!
 -->
 
-[Unreleased]: https://github.com/mavenplugins/unleash-maven-plugin/compare/v3.2.0..HEAD
+[Unreleased]: https://github.com/mavenplugins/unleash-maven-plugin/compare/v3.2.1..HEAD
+[3.2.1]: https://github.com/mavenplugins/unleash-maven-plugin/compare/v3.2.0..v3.2.1
 [3.2.0]: https://github.com/mavenplugins/unleash-maven-plugin/compare/v3.1.0..v3.2.0
 [3.1.0]: https://github.com/mavenplugins/unleash-maven-plugin/compare/v3.0.3..v3.1.0
 [3.0.3]: https://github.com/mavenplugins/unleash-maven-plugin/compare/v3.0.2..v3.0.3

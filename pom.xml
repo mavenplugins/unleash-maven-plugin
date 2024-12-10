@@ -75,7 +75,11 @@
     <unleash.cmdline.goal>
       ${groupId.unleash-maven-plugin}:${artifactId.unleash-maven-plugin}:${version.unleash-maven-plugin.perform}:${unleash.goal}</unleash.cmdline.goal>
     <!-- MAVEN -->
-    <version.maven>3.3.9</version.maven>
+    <version.maven>3.8.1</version.maven>
+    <!-- Minimum Maven version to build this project: -->
+    <!-- 3.6.1 required since attribute child.project.url.inherit.append.path is being used. -->
+    <!-- 3.6.3 required by maven-plugin-plugin 3.13.1 -->
+    <maven.enforce.version.range>[3.6.3,)</maven.enforce.version.range>
     <version.maven-invoker>3.1.0</version.maven-invoker>
     <version.maven-plugin-plugin>3.13.1</version.maven-plugin-plugin>
     <version.plexus-component-metadata>2.2.0</version.plexus-component-metadata>
@@ -129,11 +133,6 @@
       </dependency>
 
       <!-- MAVEN DEPENDENCIES -->
-      <dependency>
-        <groupId>org.apache.maven</groupId>
-        <artifactId>maven-core</artifactId>
-        <version>${version.maven}</version>
-      </dependency>
       <dependency>
         <groupId>org.apache.maven.shared</groupId>
         <artifactId>maven-invoker</artifactId>
