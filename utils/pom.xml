@@ -23,7 +23,7 @@
       <groupId>com.google.guava</groupId>
       <artifactId>guava</artifactId>
       <version>${version.guava.minimum_provided}</version>
-      <!-- In Maven runtime this will be provided by cdi-utils. -->
+      <!-- In Maven runtime this will be provided by cdi-plugin-utils. -->
       <!-- In JenkinsCI runtime this will provided by Jenkins. -->
       <scope>provided</scope>
     </dependency>
