@@ -85,27 +85,22 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 [![3.2.1 Badge](https://img.shields.io/nexus/r/io.github.mavenplugins/unleash-maven-plugin?server=https://s01.oss.sonatype.org&label=Maven%20Central&queryOpt=:v=3.2.1)](https://central.sonatype.com/artifact/io.github.mavenplugins/unleash-maven-plugin/3.2.1)
 
 ### Summary
-- Fix vulnerability warnings on dependencies:
-  - Update dependency `io.github.mavenplugins:cdi-plugin-utils:4.0.0` -> `io.github.mavenplugins:cdi-plugin-utils:4.0.1`
-  - Replace explicit dependency to `com.google.guava:guava` by transient dependency through `io.github.mavenplugins:cdi-plugin-utils`
-  - Update dependency `junit:junit:4.12` -> `junit:junit:4.13.2`
-  - Update dependency `org.apache.maven.shared:maven-invoker:3.0.1` -> `org.apache.maven.shared:maven-invoker:3.1.0`
-  - Update managed dependency `org.apache.commons:commons-lang3:3.4` -> unmanaged `org.apache.commons:commons-lang3:3.12.0`
-  - Add unmanaged dependency `org.apache.commons:commons-text:1.10.0`
-  - Update provided dependency to Maven version `3.3.9` -> `3.8.1`
+- Fix vulnerability warnings on dependencies - see **📦 Updates** for details.
 - No further functional change
 
 ### 📦 Updates
 - pom.xml:
   - Update dependency `io.github.mavenplugins:cdi-plugin-utils:4.0.0` -> `io.github.mavenplugins:cdi-plugin-utils:4.0.1`
   - Remove dependency management definition for `com.google.guava:guava`
+  - Replace explicit dependency to `com.google.guava:guava` by transient dependency through `io.github.mavenplugins:cdi-plugin-utils`
   - Update dependency `junit:junit:4.12` -> `junit:junit:4.13.2`
   - Update property `<version.guava>23.0</version.guava>` -> `<version.guava.minimum_provided>33.0.0-jre</version.guava.minimum_provided>`
   - Update dependency `org.apache.maven.shared:maven-invoker:3.0.1` -> `org.apache.maven.shared:maven-invoker:3.1.0`
   - Update property `<version.commons-lang3>3.4</version.commons-lang3>` -> `<version.commons-lang3>3.12.0</version.commons-lang3>`
-  - Remove dependency management for `org.apache.commons:commons-lang3`
+  - Update managed dependency `org.apache.commons:commons-lang3:3.4` -> unmanaged `org.apache.commons:commons-lang3:3.12.0`
   - Add property `<version.commons-text>1.10.0</version.commons-text>`
-  - Update property `<version.maven>3.3.9</version.maven>` -> `<version.maven>3.8.1</version.maven>`
+  - Add unmanaged dependency `org.apache.commons:commons-text:1.10.0`
+  - Update provided dependency to Maven version `3.3.9` -> `3.8.1`
   - Remove `org.apache.maven:maven-core` from dependency management
 
 - unleash-maven-plugin/pom.xml:
