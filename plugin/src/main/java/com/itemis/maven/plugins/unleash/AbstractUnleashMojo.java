@@ -219,9 +219,23 @@ public class AbstractUnleashMojo extends AbstractCDIMojo {
   private Set<Repository> additionalDeploymentRepositories;
 
   @MojoProduces
+  @Parameter(property = "unleash.artifactSpyPluginGroupId", required = false, defaultValue = "io.github.mavenplugins")
+  private String artifactSpyPluginGroupId;
+
+  @MojoProduces
+  @Parameter(property = "unleash.artifactSpyPluginArtifactId", required = false, defaultValue = "artifact-spy-plugin")
+  private String artifactSpyPluginArtifactId;
+
+  @MojoProduces
+  @Parameter(property = "unleash.artifactSpyPluginVersion", required = false, defaultValue = "1.1.0")
+  private String artifactSpyPluginVersion;
+
+  @MojoProduces
   @Named("artifactSpyPlugin")
-  private ArtifactCoordinates artifactSpyPluginCoordinates = new ArtifactCoordinates("io.github.mavenplugins",
-      "artifact-spy-plugin", "1.0.7", "maven-plugin");
+  private ArtifactCoordinates getArtifactSpyPluginCoordinates() {
+    return new ArtifactCoordinates(this.artifactSpyPluginGroupId, this.artifactSpyPluginArtifactId,
+        this.artifactSpyPluginVersion, "maven-plugin");
+  }
 
   @MojoProduces
   private PluginParameterExpressionEvaluator getExpressionEvaluator() {

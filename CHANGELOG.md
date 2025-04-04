@@ -80,6 +80,42 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - TBD
 
 
+## [3.3.0]
+<!-- !!! Align version in badge URLs as well !!! -->
+[![3.3.0 Badge](https://img.shields.io/nexus/r/io.github.mavenplugins/unleash-maven-plugin?server=https://s01.oss.sonatype.org&label=Maven%20Central&queryOpt=:v=3.3.0)](https://central.sonatype.com/artifact/io.github.mavenplugins/unleash-maven-plugin/3.3.0)
+
+### Summary
+- Fix overriding POM artifact with a file built in a POM type project (root caused by `artifact-spy-plugin`)
+- Update `artifact-spy-plugin` version to `1.1.0`
+- Enhance to configure the `artifact-spy-plugin` version
+
+### 🐛 Fixes
+- Fix overriding POM artifact with a file built in a POM type project (root caused by `artifact-spy-plugin`)
+
+### ✨ Improvements
+- AbstractUnleashMojo.java:
+  - Add parameters:
+    - `artifactSpyPluginGroupId`, property: `unleash.artifactSpyPluginGroupId`, default: `io.github.mavenplugins`
+    - `artifactSpyPluginArtifactId`, property: `unleash.artifactSpyPluginArtifactId`, default: `artifact-spy-plugin`
+    - `artifactSpyPluginVersion`, property: `unleash.artifactSpyPluginVersion`, default: `1.1.0`
+  - Update CDI producer for `artifactSpyPlugin` to provide Maven coordinates using the before mentioned parameters
+
+### 📦 Updates
+- pom.xml:
+  - Update property `<version.artifact-spy-plugin>1.0.7</version.artifact-spy-plugin>` -> `<version.artifact-spy-plugin>1.1.0</version.artifact-spy-plugin>`
+  - Add property `<version.plexus-utils>4.0.2</version.plexus-utils>`
+  - Add property `<version.plexus-xml>3.0.1</version.plexus-xml>`
+  - Exclude transient Maven dependencies from dependency to `io.github.mavenplugins:artifact-spy-plugin`
+
+- unleash-maven-plugin/pom.xml:
+  - Add unmanaged dependency `org.codehaus.plexus:plexus-utils:${version.plexus-utils}`
+  - Add unmanaged dependency `org.codehaus.plexus:plexus-xml:${version.plexus-xml}`
+
+### 🔧 Internal Changes
+- AbstractVersionMojo.java:
+  - Replace usage of deprecated `WriterFactory.newPlatformWriter(File)` by `Files.newBufferedWriter(File.toPath())`
+
+
 ## [3.2.1]
 <!-- !!! Align version in badge URLs as well !!! -->
 [![3.2.1 Badge](https://img.shields.io/nexus/r/io.github.mavenplugins/unleash-maven-plugin?server=https://s01.oss.sonatype.org&label=Maven%20Central&queryOpt=:v=3.2.1)](https://central.sonatype.com/artifact/io.github.mavenplugins/unleash-maven-plugin/3.2.1)
@@ -364,7 +400,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - This is just a dummy placeholder to make the parser of GHCICD/release-notes-from-changelog@v1 happy!
 -->
 
-[Unreleased]: https://github.com/mavenplugins/unleash-maven-plugin/compare/v3.2.1..HEAD
+[Unreleased]: https://github.com/mavenplugins/unleash-maven-plugin/compare/v3.3.0..HEAD
+[3.3.0]: https://github.com/mavenplugins/unleash-maven-plugin/compare/v3.2.1..v3.3.0
 [3.2.1]: https://github.com/mavenplugins/unleash-maven-plugin/compare/v3.2.0..v3.2.1
 [3.2.0]: https://github.com/mavenplugins/unleash-maven-plugin/compare/v3.1.0..v3.2.0
 [3.1.0]: https://github.com/mavenplugins/unleash-maven-plugin/compare/v3.0.3..v3.1.0
