@@ -47,8 +47,8 @@ public class AddSpyPlugin implements CDIMojoProcessingStep {
 
   @Override
   public void execute(ExecutionContext context) throws MojoExecutionException, MojoFailureException {
-    this.log.info(
-        "Adding artifact-spy-plugin to the build configuration. This plugin is required to detect all artifacts that are produced by the release build for later installation and deployment.");
+    this.log.info("Adding " + this.artifactSpyPluginCoordinates
+        + " to the build configuration - required to detect all artifacts that are produced by the release build for installation and deployment.");
     this.cachedPOMs = Maps.newHashMap();
     for (MavenProject p : this.reactorProjects) {
       Optional<Document> parsedPOM = PomUtil.parsePOM(p);

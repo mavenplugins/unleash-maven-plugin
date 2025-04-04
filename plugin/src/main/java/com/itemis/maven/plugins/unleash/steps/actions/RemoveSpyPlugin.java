@@ -41,7 +41,7 @@ public class RemoveSpyPlugin implements CDIMojoProcessingStep {
 
   @Override
   public void execute(ExecutionContext context) throws MojoExecutionException, MojoFailureException {
-    this.log.info("Removing artifact-spy-plugin from build configuration.");
+    this.log.info("Removing " + this.artifactSpyPluginCoordinates + " from build configuration.");
     try {
       for (MavenProject p : this.reactorProjects) {
         Optional<Document> document = PomUtil.parsePOM(p);
