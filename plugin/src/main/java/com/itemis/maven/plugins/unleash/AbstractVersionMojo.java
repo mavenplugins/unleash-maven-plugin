@@ -3,6 +3,7 @@ package com.itemis.maven.plugins.unleash;
 import java.io.File;
 import java.io.IOException;
 import java.io.Writer;
+import java.nio.file.Files;
 import java.util.List;
 
 import org.apache.maven.execution.MavenSession;
@@ -11,7 +12,6 @@ import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
-import org.codehaus.plexus.util.WriterFactory;
 
 /**
  * Base class with some Version Mojo functionalities.
@@ -101,7 +101,9 @@ public abstract class AbstractVersionMojo extends AbstractMojo {
     }
 
     output.getParentFile().mkdirs();
-    try (Writer out = WriterFactory.newPlatformWriter(output)) {
+    // Use Files.newBufferedWriter directly, since WriterFactory is deprecated
+    // try (Writer out = WriterFactory.newPlatformWriter(output)) {
+    try (Writer out = Files.newBufferedWriter(output.toPath())) {
       out.write(content);
     }
   }
