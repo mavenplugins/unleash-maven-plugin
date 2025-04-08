@@ -85,12 +85,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 [![3.3.0 Badge](https://img.shields.io/nexus/r/io.github.mavenplugins/unleash-maven-plugin?server=https://s01.oss.sonatype.org&label=Maven%20Central&queryOpt=:v=3.3.0)](https://central.sonatype.com/artifact/io.github.mavenplugins/unleash-maven-plugin/3.3.0)
 
 ### Summary
-- Fix overriding POM artifact with a file built in a POM type project (root caused by `artifact-spy-plugin`)
+- Fix overriding POM artifact with a file built in a POM type project. Root caused by [artifact-spy-plugin #4](https://github.com/mavenplugins/artifact-spy-plugin/issues/4)
 - Update `artifact-spy-plugin` version to `1.1.0`
 - Enhance to configure the `artifact-spy-plugin` version
 
 ### 🐛 Fixes
-- Fix overriding POM artifact with a file built in a POM type project (root caused by `artifact-spy-plugin`)
+- Fix overriding POM artifact with a file built in a POM type project. Root caused by [artifact-spy-plugin #4](https://github.com/mavenplugins/artifact-spy-plugin/issues/4)
 
 ### ✨ Improvements
 - AbstractUnleashMojo.java:
