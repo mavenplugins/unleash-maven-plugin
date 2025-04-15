@@ -86,11 +86,18 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Summary
 - Fix overriding POM artifact with a file built in a POM type project. Root caused by [artifact-spy-plugin #4](https://github.com/mavenplugins/artifact-spy-plugin/issues/4)
+- Allow configuration of alternate deploy repositories identical to `maven-deploy-plugin`
 - Update `artifact-spy-plugin` version to `1.1.0`
 - Enhance to configure the `artifact-spy-plugin` version
 
 ### 🐛 Fixes
 - Fix overriding POM artifact with a file built in a POM type project. Root caused by [artifact-spy-plugin #4](https://github.com/mavenplugins/artifact-spy-plugin/issues/4)
+
+### 🚀 New Features
+- Allow configuration of alternate deploy repositories identical to `maven-deploy-plugin`:
+  - `altDeploymentRepository`
+  - `altSnapshotDeploymentRepository`
+  - `altReleaseDeploymentRepository`
 
 ### ✨ Improvements
 - AbstractUnleashMojo.java:

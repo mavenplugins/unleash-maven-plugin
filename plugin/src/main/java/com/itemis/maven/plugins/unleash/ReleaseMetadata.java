@@ -5,11 +5,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.maven.RepositoryUtils;
+import org.apache.maven.artifact.ArtifactUtils;
 import org.apache.maven.artifact.repository.ArtifactRepository;
+import org.apache.maven.execution.MavenSession;
 import org.apache.maven.model.Scm;
+import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.PluginParameterExpressionEvaluator;
 import org.apache.maven.project.MavenProject;
 import org.apache.maven.settings.Settings;
@@ -22,6 +27,7 @@ import com.google.common.base.Optional;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.itemis.maven.aether.ArtifactCoordinates;
+import com.itemis.maven.plugins.cdi.logging.Logger;
 import com.itemis.maven.plugins.unleash.util.PomPropertyResolver;
 import com.itemis.maven.plugins.unleash.util.PomUtil;
 import com.itemis.maven.plugins.unleash.util.ReleaseUtil;
@@ -53,11 +59,17 @@ public class ReleaseMetadata {
   private static final String PROPERTIES_KEY_VERSION_REACTOR_PRE_RELEASE = "version.reactor.pre.release";
   private static final String PROPERTIES_KEY_VERSION_REACTOR_RELEASE = "version.reactor.release";
   private static final String PROPERTIES_KEY_VERSION_REACTOR_POST_RELEASE = "version.reactor.post.release";
+  private static final Pattern ALT_LEGACY_REPO_SYNTAX_PATTERN = Pattern.compile("(.+?)::(.+?)::(.+)");
+  private static final Pattern ALT_REPO_SYNTAX_PATTERN = Pattern.compile("(.+?)::(.+)");
 
+  @Inject
+  private Logger log;
   @Inject
   private MavenProject project;
   @Inject
   private Settings settings;
+  @Inject
+  private MavenSession session;
   @Inject
   private PluginParameterExpressionEvaluator expressionEvaluator;
   @Inject
@@ -72,6 +84,15 @@ public class ReleaseMetadata {
   @Inject
   @Named("releaseArgs")
   private Properties releaseArgs;
+  @Inject
+  @Named("altDeploymentRepository")
+  private String altDeploymentRepository;
+  @Inject
+  @Named("altSnapshotDeploymentRepository")
+  private String altSnapshotDeploymentRepository;
+  @Inject
+  @Named("altReleaseDeploymentRepository")
+  private String altReleaseDeploymentRepository;
 
   private String initialScmRevision;
   private String scmRevisionBeforeNextDevVersion;
@@ -96,7 +117,7 @@ public class ReleaseMetadata {
   }
 
   @PostConstruct
-  public void init() {
+  public void init() throws MojoExecutionException {
     // setting the artifact version to a release version temporarily since the dist repository checks for a snapshot
     // version of the artifact. Maybe this can be implemented in a different manner but then we would have to setup the
     // repository manually
@@ -104,14 +125,7 @@ public class ReleaseMetadata {
     String oldVersion = projectArtifact.getVersion();
     projectArtifact.setVersion("1");
 
-    // replace properties in remote repository URL and getting the remote repo
-    ArtifactRepository artifactRepository = this.project.getDistributionManagementArtifactRepository();
-    if (artifactRepository != null) {
-      PomPropertyResolver propertyResolver = new PomPropertyResolver(this.project, this.settings, this.profiles,
-          this.releaseArgs);
-      artifactRepository.setUrl(propertyResolver.expandPropertyReferences(artifactRepository.getUrl()));
-      this.deploymentRepository = RepositoryUtils.toRepo(artifactRepository);
-    }
+    this.deploymentRepository = getEffectiveDeploymentRepository();
 
     // resetting the artifact version
     projectArtifact.setVersion(oldVersion);
@@ -285,4 +299,117 @@ public class ReleaseMetadata {
     p.setProperty(PROPERTIES_KEY_REL_REPO_URL,
         this.deploymentRepository != null ? this.deploymentRepository.getUrl() : "");
   }
+
+  private String replacePropertiesInRemoteUrl(String url) {
+    PomPropertyResolver propertyResolver = new PomPropertyResolver(this.project, this.settings, this.profiles,
+        this.releaseArgs);
+    return propertyResolver.expandPropertyReferences(url);
+  }
+
+  /**
+   * Taken from original maven-deploy-plugin <code>DeployMojo.getDeploymentRepository()</code>.
+   * Plus keeping this plugin's feature regarding property replacement in remote repository URL.
+   *
+   * @see https://github.com/apache/maven-deploy-plugin/blob/maven-deploy-plugin-3.1.4/src/main/java/org/apache/maven/plugins/deploy/DeployMojo.java
+   * @see https://github.com/shillner/unleash-maven-plugin/pull/101
+   */
+  private RemoteRepository getEffectiveDeploymentRepository() throws MojoExecutionException {
+    RemoteRepository repo = null;
+
+    String altDeploymentRepo;
+    if (ArtifactUtils.isSnapshot(this.project.getVersion()) && this.altSnapshotDeploymentRepository != null) {
+      altDeploymentRepo = this.altSnapshotDeploymentRepository;
+    } else if (!ArtifactUtils.isSnapshot(this.project.getVersion()) && this.altReleaseDeploymentRepository != null) {
+      altDeploymentRepo = this.altReleaseDeploymentRepository;
+    } else {
+      altDeploymentRepo = this.altDeploymentRepository;
+    }
+
+    if (altDeploymentRepo != null) {
+      this.log.info("Using alternate deployment repository " + altDeploymentRepo);
+
+      Matcher matcher = ALT_LEGACY_REPO_SYNTAX_PATTERN.matcher(altDeploymentRepo);
+
+      if (matcher.matches()) {
+        String id = matcher.group(1).trim();
+        String layout = matcher.group(2).trim();
+        String url = matcher.group(3).trim();
+
+        if ("default".equals(layout)) {
+          this.log
+              .warn("Using legacy syntax for alternative repository. " + "Use \"" + id + "::" + url + "\" instead.");
+          repo = getRemoteRepository(id, url);
+        } else {
+          throw new MojoExecutionException(
+              "Invalid legacy syntax and layout for alternative repository: \"" + altDeploymentRepo + "\". Use \"" + id
+                  + "::" + url + "\" instead, since only default layout is supported.");
+        }
+      } else {
+        matcher = ALT_REPO_SYNTAX_PATTERN.matcher(altDeploymentRepo);
+
+        if (!matcher.matches()) {
+          throw new MojoExecutionException(
+              "Invalid syntax for alternative repository: \"" + altDeploymentRepo + "\". Use \"id::url\".");
+        } else {
+          String id = matcher.group(1).trim();
+          String url = matcher.group(2).trim();
+
+          repo = getRemoteRepository(id, url);
+        }
+      }
+    }
+
+    if (repo == null) {
+      ArtifactRepository artifactRepository = this.project.getDistributionManagementArtifactRepository();
+      if (artifactRepository != null) {
+        // replace properties in remote repository URL
+        artifactRepository.setUrl(replacePropertiesInRemoteUrl(artifactRepository.getUrl()));
+      }
+      repo = RepositoryUtils.toRepo(artifactRepository);
+    }
+
+    if (repo == null) {
+      String msg = "Deployment failed: repository element was not specified in the POM inside"
+          + " distributionManagement element or in -DaltDeploymentRepository=id::url parameter";
+
+      throw new MojoExecutionException(msg);
+    }
+
+    return repo;
+  }
+
+  /**
+   * Creates resolver {@link RemoteRepository} equipped with needed whistles and bells.
+   *
+   * Taken from original maven-deploy-plugin
+   * <code>AbstractDeployMojo.getRemoteRepository(final String repositoryId, final String url)</code>.
+   * Plus keeping this plugin's feature regarding property replacement in remote repository URL.
+   *
+   * @see https://github.com/apache/maven-deploy-plugin/blob/maven-deploy-plugin-3.1.4/src/main/java/org/apache/maven/plugins/deploy/AbstractDeployMojo.java
+   * @see https://github.com/shillner/unleash-maven-plugin/pull/101
+   */
+  private RemoteRepository getRemoteRepository(final String repositoryId, final String url) {
+    // replace properties in remote repository URL and getting the remote repo
+    String resolvedUrl = replacePropertiesInRemoteUrl(url);
+    // TODO: RepositorySystem#newDeploymentRepository does this very same thing!
+    RemoteRepository result = new RemoteRepository.Builder(repositoryId, "default", resolvedUrl).build();
+
+    if (result.getAuthentication() == null || result.getProxy() == null) {
+      RemoteRepository.Builder builder = new RemoteRepository.Builder(result);
+
+      if (result.getAuthentication() == null) {
+        builder.setAuthentication(
+            this.session.getRepositorySession().getAuthenticationSelector().getAuthentication(result));
+      }
+
+      if (result.getProxy() == null) {
+        builder.setProxy(this.session.getRepositorySession().getProxySelector().getProxy(result));
+      }
+
+      result = builder.build();
+    }
+
+    return result;
+  }
+
 }
