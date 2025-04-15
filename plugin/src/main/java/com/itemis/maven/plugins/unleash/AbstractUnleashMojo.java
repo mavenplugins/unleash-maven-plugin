@@ -219,24 +219,75 @@ public class AbstractUnleashMojo extends AbstractCDIMojo {
   private Set<Repository> additionalDeploymentRepositories;
 
   /**
+   * Specifies an alternative repository to which the project artifacts should be deployed (other than those specified
+   * in &lt;distributionManagement&gt;). <br/>
+   * Format: <code>id::url</code>
+   * <dl>
+   * <dt>id</dt>
+   * <dd>The id can be used to pick up the correct credentials from the settings.xml</dd>
+   * <dt>url</dt>
+   * <dd>The location of the repository</dd>
+   * </dl>
+   * <b>Note:</b> In version 2.x, the format was <code>id::<i>layout</i>::url</code> where <code><i>layout</i></code>
+   * could be <code>default</code> (ie. Maven 2) or <code>legacy</code> (ie. Maven 1), but since 3.0.0 the layout part
+   * has been removed because Maven 3 only supports Maven 2 repository layout.
+   *
    * @since 3.3.0
    */
   @MojoProduces
-  @Parameter(property = "unleash.artifactSpyPluginGroupId", required = false, defaultValue = "io.github.mavenplugins")
+  @Named("altDeploymentRepository")
+  @Parameter(property = "altDeploymentRepository", required = false)
+  private String altDeploymentRepository;
+
+  /**
+   * The alternative repository to use when the project has a snapshot version.
+   *
+   * <b>Note:</b> In version 2.x, the format was <code>id::<i>layout</i>::url</code> where <code><i>layout</i></code>
+   * could be <code>default</code> (ie. Maven 2) or <code>legacy</code> (ie. Maven 1), but since 3.0.0 the layout part
+   * has been removed because Maven 3 only supports Maven 2 repository layout.
+   *
+   * @since 3.3.0
+   * @see AbstractUnleashMojo#altDeploymentRepository
+   */
+  @MojoProduces
+  @Named("altSnapshotDeploymentRepository")
+  @Parameter(property = "altSnapshotDeploymentRepository", required = false)
+  private String altSnapshotDeploymentRepository;
+
+  /**
+   * The alternative repository to use when the project has a final version.
+   *
+   * <b>Note:</b> In version 2.x, the format was <code>id::<i>layout</i>::url</code> where <code><i>layout</i></code>
+   * could be <code>default</code> (ie. Maven 2) or <code>legacy</code> (ie. Maven 1), but since 3.0.0 the layout part
+   * has been removed because Maven 3 only supports Maven 2 repository layout.
+   *
+   * @since 3.3.0
+   * @see AbstractUnleashMojo#altDeploymentRepository
+   */
+  @MojoProduces
+  @Named("altReleaseDeploymentRepository")
+  @Parameter(property = "altReleaseDeploymentRepository", required = false)
+  private String altReleaseDeploymentRepository;
+
+  /**
+   * @since 3.3.0
+   */
+  @MojoProduces
+  @Parameter(property = "unleash.artifactSpyPluginGroupId", required = true, defaultValue = "io.github.mavenplugins")
   private String artifactSpyPluginGroupId;
 
   /**
    * @since 3.3.0
    */
   @MojoProduces
-  @Parameter(property = "unleash.artifactSpyPluginArtifactId", required = false, defaultValue = "artifact-spy-plugin")
+  @Parameter(property = "unleash.artifactSpyPluginArtifactId", required = true, defaultValue = "artifact-spy-plugin")
   private String artifactSpyPluginArtifactId;
 
   /**
    * @since 3.3.0
    */
   @MojoProduces
-  @Parameter(property = "unleash.artifactSpyPluginVersion", required = false, defaultValue = "1.1.0")
+  @Parameter(property = "unleash.artifactSpyPluginVersion", required = true, defaultValue = "1.1.0")
   private String artifactSpyPluginVersion;
 
   @MojoProduces
