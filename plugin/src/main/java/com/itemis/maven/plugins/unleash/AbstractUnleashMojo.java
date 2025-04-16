@@ -4,17 +4,11 @@ import java.io.File;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Properties;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import org.apache.maven.RepositoryUtils;
 import org.apache.maven.artifact.repository.ArtifactRepository;
-import org.apache.maven.artifact.repository.ArtifactRepositoryPolicy;
-import org.apache.maven.artifact.repository.Authentication;
-import org.apache.maven.artifact.repository.MavenArtifactRepository;
-import org.apache.maven.artifact.repository.layout.DefaultRepositoryLayout;
 import org.apache.maven.execution.MavenSession;
 import org.apache.maven.plugin.MojoExecution;
 import org.apache.maven.plugin.PluginParameterExpressionEvaluator;
@@ -22,7 +16,6 @@ import org.apache.maven.plugin.descriptor.PluginDescriptor;
 import org.apache.maven.plugins.annotations.Component;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
-import org.apache.maven.settings.Server;
 import org.apache.maven.settings.Settings;
 import org.codehaus.plexus.PlexusContainer;
 import org.codehaus.plexus.components.interactivity.Prompter;
@@ -37,9 +30,12 @@ import com.google.common.base.Splitter;
 import com.google.common.base.Strings;
 import com.google.common.collect.Maps;
 import com.itemis.maven.aether.ArtifactCoordinates;
+import com.itemis.maven.aether.ArtifactDeployer;
 import com.itemis.maven.plugins.cdi.AbstractCDIMojo;
 import com.itemis.maven.plugins.cdi.annotations.MojoInject;
 import com.itemis.maven.plugins.cdi.annotations.MojoProduces;
+import com.itemis.maven.plugins.unleash.steps.actions.ExitWithRollbackNoError;
+import com.itemis.maven.plugins.unleash.util.PomPropertyResolver;
 import com.itemis.maven.plugins.unleash.util.ReleaseUtil;
 import com.itemis.maven.plugins.unleash.util.Repository;
 import com.itemis.maven.plugins.unleash.util.ScmMessagePrefixUtil;
@@ -219,6 +215,24 @@ public class AbstractUnleashMojo extends AbstractCDIMojo {
   private Set<Repository> additionalDeploymentRepositories;
 
   /**
+   * If set true, then do not perform actual deployment rather than warn level logging each artifact that would have
+   * been deployed as well as the target repo url to deploy to.
+   *
+   * This is intended to be used for e2e testing purpose.
+   *
+   * Note: In combination with {@link ExitWithRollbackNoError} it allows e2e testing of workflows (except the
+   * actual upload to remote repositories).
+   *
+   * @see ArtifactDeployer#deployArtifacts(java.util.Collection)
+   *
+   * @since 3.3.0
+   */
+  @Parameter(defaultValue = "false", property = "unleash.isDeployDryRun", required = true)
+  @MojoProduces
+  @Named("isDeployDryRun")
+  private boolean isDeployDryRun;
+
+  /**
    * Specifies an alternative repository to which the project artifacts should be deployed (other than those specified
    * in &lt;distributionManagement&gt;). <br/>
    * Format: <code>id::url</code>
@@ -396,22 +410,9 @@ public class AbstractUnleashMojo extends AbstractCDIMojo {
     });
 
     return repos.stream().map(repo -> {
-      DefaultRepositoryLayout layout = new DefaultRepositoryLayout();
-      ArtifactRepositoryPolicy snapshotsPolicy = new ArtifactRepositoryPolicy();
-      ArtifactRepositoryPolicy releasesPolicy = new ArtifactRepositoryPolicy();
-
-      ArtifactRepository artifactRepository = new MavenArtifactRepository(repo.getId(), repo.getUrl(), layout,
-          snapshotsPolicy, releasesPolicy);
-      this.settings.getServers().stream().filter(server -> Objects.equals(server.getId(), repo.getId())).findFirst()
-          .ifPresent(server -> artifactRepository.setAuthentication(createServerAuthentication(server)));
-      return RepositoryUtils.toRepo(artifactRepository);
+      return repo.buildRemoteRepository(this.session,
+          new PomPropertyResolver(this.project, this.settings, this.profiles, getReleaseArgs()));
     }).collect(Collectors.toSet());
   }
 
-  private Authentication createServerAuthentication(Server server) {
-    Authentication authentication = new Authentication(server.getUsername(), server.getPassword());
-    authentication.setPrivateKey(server.getPrivateKey());
-    authentication.setPassphrase(server.getPassphrase());
-    return authentication;
-  }
 }

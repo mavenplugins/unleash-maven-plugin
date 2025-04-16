@@ -11,6 +11,7 @@ import org.eclipse.aether.deployment.DeploymentException;
 import org.eclipse.aether.impl.Deployer;
 import org.eclipse.aether.repository.RemoteRepository;
 
+import com.itemis.maven.plugins.cdi.logging.Logger;
 import com.itemis.maven.plugins.unleash.ReleaseMetadata;
 
 import jakarta.inject.Inject;
@@ -26,6 +27,8 @@ import jakarta.inject.Singleton;
 @Singleton
 public class ArtifactDeployer {
   @Inject
+  private Logger log;
+  @Inject
   private Deployer deployer;
   @Inject
   private RepositorySystemSession repoSession;
@@ -34,6 +37,12 @@ public class ArtifactDeployer {
   @Inject
   @Named("additionalDeployemntRepositories")
   private Set<RemoteRepository> additonalDeploymentRepositories;
+  /**
+   * @since 3.3.0
+   */
+  @Inject
+  @Named("isDeployDryRun")
+  private boolean isDeployDryRun;
 
   /**
    * Deploys the given artifacts to the configured remote Maven repositories.
@@ -55,7 +64,18 @@ public class ArtifactDeployer {
     DeployRequest request = new DeployRequest();
     request.setArtifacts(artifacts);
     request.setRepository(repo);
-    DeployResult result = this.deployer.deploy(this.repoSession, request);
-    return result.getArtifacts();
+    final Collection<Artifact> ret;
+    if (this.isDeployDryRun) {
+      // Skip actual deployment to remote repositories
+      request.getArtifacts().forEach((artifact) -> {
+        this.log.warn("Deploy DRYRUN: SKIP deploying " + artifact + " to " + request.getRepository().getUrl());
+      });
+      ret = request.getArtifacts();
+    } else {
+      // Deploy to remote repositories
+      DeployResult result = this.deployer.deploy(this.repoSession, request);
+      ret = result.getArtifacts();
+    }
+    return ret;
   }
 }
