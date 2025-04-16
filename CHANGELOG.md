@@ -85,42 +85,55 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 [![3.3.0 Badge](https://img.shields.io/nexus/r/io.github.mavenplugins/unleash-maven-plugin?server=https://s01.oss.sonatype.org&label=Maven%20Central&queryOpt=:v=3.3.0)](https://central.sonatype.com/artifact/io.github.mavenplugins/unleash-maven-plugin/3.3.0)
 
 ### Summary
-- Fix overriding POM artifact with a file built in a POM type project. Root caused by [artifact-spy-plugin #4](https://github.com/mavenplugins/artifact-spy-plugin/issues/4)
-- Allow configuration of alternate deploy repositories identical to `maven-deploy-plugin`
-- Update `artifact-spy-plugin` version to `1.1.0`
-- Enhance to configure the `artifact-spy-plugin` version
+- Fix overriding POM artifact with a file built in a POM type project. Root caused by [artifact-spy-plugin #4](https://github.com/mavenplugins/artifact-spy-plugin/issues/4) - #23
+  - Update `artifact-spy-plugin` version to `1.1.0`
+  - Enhance to configure the `artifact-spy-plugin` version
+- Allow configuration of alternate deploy repositories identical to `maven-deploy-plugin` - #26
+- Add configuration for workflow step `deployArtifacts` to skip actual deployment to remote repositories - #27
 
 ### 🐛 Fixes
-- Fix overriding POM artifact with a file built in a POM type project. Root caused by [artifact-spy-plugin #4](https://github.com/mavenplugins/artifact-spy-plugin/issues/4)
+- Fix overriding POM artifact with a file built in a POM type project. Root caused by [artifact-spy-plugin #4](https://github.com/mavenplugins/artifact-spy-plugin/issues/4) - #23
+- Fix authentication for `additionalDeployemntRepositories` if `settings.xml` contains Maven encrypted passwords - #27
 
 ### 🚀 New Features
-- Allow configuration of alternate deploy repositories identical to `maven-deploy-plugin`:
-  - `altDeploymentRepository`
-  - `altSnapshotDeploymentRepository`
-  - `altReleaseDeploymentRepository`
+- Allow configuration of `artifact-spy-plugin` - #23
+  - [artifactSpyPluginGroupId](https://github.com/mavenplugins/unleash-maven-plugin/wiki/unleash-perform-goals#artifactspyplugingroupid)
+  - [artifactSpyPluginArtifactId](https://github.com/mavenplugins/unleash-maven-plugin/wiki/unleash-perform-goals#artifactspypluginartifactid)
+  - [artifactSpyPluginVersion](https://github.com/mavenplugins/unleash-maven-plugin/wiki/unleash-perform-goals#artifactspypluginversion)
+- Allow configuration of alternate deploy repositories identical to `maven-deploy-plugin` - #26
+  - [altDeploymentRepository](https://github.com/mavenplugins/unleash-maven-plugin/wiki/unleash-perform-goals#altdeploymentrepository)
+  - [altSnapshotDeploymentRepository](https://github.com/mavenplugins/unleash-maven-plugin/wiki/unleash-perform-goals#altsnapshotdeploymentrepository)
+  - [altReleaseDeploymentRepository](https://github.com/mavenplugins/unleash-maven-plugin/wiki/unleash-perform-goals#altreleasedeploymentrepository)
+- Add configuration `isDeployDryRun`, property `unleash.isDeployDryRun` to skip actual deployment to remote repositories - #27
+  Log the intended deployment details on warn level instead.
+  - [isDeployDryRun](https://github.com/mavenplugins/unleash-maven-plugin/wiki/unleash-perform-goals#isdeploydryrun)
 
 ### ✨ Improvements
 - AbstractUnleashMojo.java:
   - Add parameters:
-    - `artifactSpyPluginGroupId`, property: `unleash.artifactSpyPluginGroupId`, default: `io.github.mavenplugins`
-    - `artifactSpyPluginArtifactId`, property: `unleash.artifactSpyPluginArtifactId`, default: `artifact-spy-plugin`
-    - `artifactSpyPluginVersion`, property: `unleash.artifactSpyPluginVersion`, default: `1.1.0`
-  - Update CDI producer for `artifactSpyPlugin` to provide Maven coordinates using the before mentioned parameters
+    - `altDeploymentRepository`, property: `altDeploymentRepository`, default: empty - #26
+    - `altSnapshotDeploymentRepository`, property: `altSnapshotDeploymentRepository`, default: empty - #26
+    - `altReleaseDeploymentRepository`, property: `altReleaseDeploymentRepository`, default: empty - #26
+    - `artifactSpyPluginGroupId`, property: `unleash.artifactSpyPluginGroupId`, default: `io.github.mavenplugins` - #23
+    - `artifactSpyPluginArtifactId`, property: `unleash.artifactSpyPluginArtifactId`, default: `artifact-spy-plugin` - #23
+    - `artifactSpyPluginVersion`, property: `unleash.artifactSpyPluginVersion`, default: `1.1.0` - #23
+    - `isDeployDryRun`, property: `unleash.isDeployDryRun`, default: `false` - #27
+  - Update CDI producer for `artifactSpyPlugin` to provide Maven coordinates using the before mentioned parameters - #23
 
 ### 📦 Updates
 - pom.xml:
   - Update property `<version.artifact-spy-plugin>1.0.7</version.artifact-spy-plugin>` -> `<version.artifact-spy-plugin>1.1.0</version.artifact-spy-plugin>`
-  - Add property `<version.plexus-utils>4.0.2</version.plexus-utils>`
-  - Add property `<version.plexus-xml>3.0.1</version.plexus-xml>`
-  - Exclude transient Maven dependencies from dependency to `io.github.mavenplugins:artifact-spy-plugin`
+  - Add property `<version.plexus-utils>4.0.2</version.plexus-utils>` - #23
+  - Add property `<version.plexus-xml>3.0.2</version.plexus-xml>` - #23, #25
+  - Exclude transient Maven dependencies from dependency to `io.github.mavenplugins:artifact-spy-plugin` - #23
 
 - unleash-maven-plugin/pom.xml:
-  - Add unmanaged dependency `org.codehaus.plexus:plexus-utils:${version.plexus-utils}`
-  - Add unmanaged dependency `org.codehaus.plexus:plexus-xml:${version.plexus-xml}`
+  - Add unmanaged dependency `org.codehaus.plexus:plexus-utils:${version.plexus-utils}` - #23
+  - Add unmanaged dependency `org.codehaus.plexus:plexus-xml:${version.plexus-xml}` - #23
 
 ### 🔧 Internal Changes
 - AbstractVersionMojo.java:
-  - Replace usage of deprecated `WriterFactory.newPlatformWriter(File)` by `Files.newBufferedWriter(File.toPath())`
+  - Replace usage of deprecated `WriterFactory.newPlatformWriter(File)` by `Files.newBufferedWriter(File.toPath())` - #23
 
 
 ## [3.2.1]
