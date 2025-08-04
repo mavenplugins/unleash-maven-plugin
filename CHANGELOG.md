@@ -80,6 +80,23 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - TBD
 
 
+## [3.3.1]
+<!-- !!! Align version in badge URLs as well !!! -->
+[![3.3.1 Badge](https://img.shields.io/nexus/r/io.github.mavenplugins/unleash-maven-plugin?server=https://s01.oss.sonatype.org&label=Maven%20Central&queryOpt=:v=3.3.1)](https://central.sonatype.com/artifact/io.github.mavenplugins/unleash-maven-plugin/3.3.1)
+
+### Summary
+- Fix issue on Windows OS failing if Maven module relative path names contain upper case characters - #28, #29
+
+### 🐛 Fixes
+- Fix issue on Windows OS failing if Maven module relative path names contain upper case characters - #28, #29
+
+### 🔧 Internal Changes
+- FileToRelativePath.java:
+  - Normalize file path on Windows OS by lower casing drive letter only - #28, #29
+- FileToRelativePathTest.java:
+  - enhance unit test to cover use cases with upper case characters in folder name
+
+
 ## [3.3.0]
 <!-- !!! Align version in badge URLs as well !!! -->
 [![3.3.0 Badge](https://img.shields.io/nexus/r/io.github.mavenplugins/unleash-maven-plugin?server=https://s01.oss.sonatype.org&label=Maven%20Central&queryOpt=:v=3.3.0)](https://central.sonatype.com/artifact/io.github.mavenplugins/unleash-maven-plugin/3.3.0)
@@ -420,7 +437,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - This is just a dummy placeholder to make the parser of GHCICD/release-notes-from-changelog@v1 happy!
 -->
 
-[Unreleased]: https://github.com/mavenplugins/unleash-maven-plugin/compare/v3.3.0..HEAD
+[Unreleased]: https://github.com/mavenplugins/unleash-maven-plugin/compare/v3.3.1..HEAD
+[3.3.1]: https://github.com/mavenplugins/unleash-maven-plugin/compare/v3.3.0..v3.3.1
 [3.3.0]: https://github.com/mavenplugins/unleash-maven-plugin/compare/v3.2.1..v3.3.0
 [3.2.1]: https://github.com/mavenplugins/unleash-maven-plugin/compare/v3.2.0..v3.2.1
 [3.2.0]: https://github.com/mavenplugins/unleash-maven-plugin/compare/v3.1.0..v3.2.0
