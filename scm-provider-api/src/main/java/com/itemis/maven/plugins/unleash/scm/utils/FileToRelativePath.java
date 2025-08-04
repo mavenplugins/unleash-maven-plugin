@@ -2,9 +2,7 @@ package com.itemis.maven.plugins.unleash.scm.utils;
 
 import java.io.File;
 import java.net.URI;
-import java.net.URISyntaxException;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.SystemUtils;
 
 import com.google.common.base.Function;
@@ -25,22 +23,24 @@ public class FileToRelativePath implements Function<File, String> {
 
   @Override
   public String apply(File f) {
-    URI workingDirURI = this.workingDir.toURI();
-    URI fileURI = f.toURI();
+    URI workingDirURI = toURIWithNormalizedDriveLetterOnWindows(this.workingDir);
+    URI fileURI = toURIWithNormalizedDriveLetterOnWindows(f);
+    return workingDirURI.relativize(fileURI).toString();
+  }
+
+  private URI toURIWithNormalizedDriveLetterOnWindows(File file) {
     if (SystemUtils.IS_OS_WINDOWS) {
       // On Windows OS deviations in character case of the drive letter may occur
-      // => we have to normalize by lower casing the URI!
-      String lcURIString = StringUtils.EMPTY;
-      try {
-        lcURIString = workingDirURI.toString().toLowerCase();
-        workingDirURI = new URI(lcURIString);
-        lcURIString = fileURI.toString().toLowerCase();
-        fileURI = new URI(lcURIString);
-      } catch (URISyntaxException e) {
-        throw new RuntimeException("Failed to create URI for path: " + lcURIString, e);
+      // => we have to normalize by lower casing the drive letter!
+      // We use file.getAbsoluteFile() to comply with File.toURI inner coding.
+      String absolutePath = file.getAbsoluteFile().getPath();
+      int driveSeparatorIndex = absolutePath.indexOf(':');
+      if (driveSeparatorIndex > 0) {
+        absolutePath = absolutePath.substring(0, driveSeparatorIndex).toLowerCase()
+            + absolutePath.substring(driveSeparatorIndex);
+        return new File(absolutePath).toURI();
       }
     }
-
-    return workingDirURI.relativize(fileURI).toString();
+    return file.toURI();
   }
 }
