@@ -82,7 +82,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [3.3.1]
 <!-- !!! Align version in badge URLs as well !!! -->
-[![3.3.1 Badge](https://img.shields.io/nexus/r/io.github.mavenplugins/unleash-maven-plugin?server=https://s01.oss.sonatype.org&label=Maven%20Central&queryOpt=:v=3.3.1)](https://central.sonatype.com/artifact/io.github.mavenplugins/unleash-maven-plugin/3.3.1)
+[![3.3.1 Badge](https://img.shields.io/maven-central/v/io.github.mavenplugins/unleash-maven-plugin?label=Maven%20Central&filter=3.3.1)](https://central.sonatype.com/artifact/io.github.mavenplugins/unleash-maven-plugin/3.3.1)
 
 ### Summary
 - Fix issue on Windows OS failing if Maven module relative path names contain upper case characters - #28, #29
@@ -99,7 +99,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [3.3.0]
 <!-- !!! Align version in badge URLs as well !!! -->
-[![3.3.0 Badge](https://img.shields.io/nexus/r/io.github.mavenplugins/unleash-maven-plugin?server=https://s01.oss.sonatype.org&label=Maven%20Central&queryOpt=:v=3.3.0)](https://central.sonatype.com/artifact/io.github.mavenplugins/unleash-maven-plugin/3.3.0)
+[![3.3.0 Badge](https://img.shields.io/maven-central/v/io.github.mavenplugins/unleash-maven-plugin?label=Maven%20Central&filter=3.3.0)](https://central.sonatype.com/artifact/io.github.mavenplugins/unleash-maven-plugin/3.3.0)
 
 ### Summary
 - Fix overriding POM artifact with a file built in a POM type project. Root caused by [artifact-spy-plugin #4](https://github.com/mavenplugins/artifact-spy-plugin/issues/4) - #23
@@ -155,7 +155,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [3.2.1]
 <!-- !!! Align version in badge URLs as well !!! -->
-[![3.2.1 Badge](https://img.shields.io/nexus/r/io.github.mavenplugins/unleash-maven-plugin?server=https://s01.oss.sonatype.org&label=Maven%20Central&queryOpt=:v=3.2.1)](https://central.sonatype.com/artifact/io.github.mavenplugins/unleash-maven-plugin/3.2.1)
+[![3.2.1 Badge](https://img.shields.io/maven-central/v/io.github.mavenplugins/unleash-maven-plugin?label=Maven%20Central&filter=3.2.1)](https://central.sonatype.com/artifact/io.github.mavenplugins/unleash-maven-plugin/3.2.1)
 
 ### Summary
 - Fix vulnerability warnings on dependencies - see **📦 Updates** for details.
@@ -201,7 +201,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [3.2.0]
 <!-- !!! Align version in badge URLs as well !!! -->
-[![3.2.0 Badge](https://img.shields.io/nexus/r/io.github.mavenplugins/unleash-maven-plugin?server=https://s01.oss.sonatype.org&label=Maven%20Central&queryOpt=:v=3.2.0)](https://central.sonatype.com/artifact/io.github.mavenplugins/unleash-maven-plugin/3.2.0)
+[![3.2.0 Badge](https://img.shields.io/maven-central/v/io.github.mavenplugins/unleash-maven-plugin?label=Maven%20Central&filter=3.2.0)](https://central.sonatype.com/artifact/io.github.mavenplugins/unleash-maven-plugin/3.2.0)
 
 ### Summary
 - Preserve leading `0` for increased version parts with the same number of digits if not exceeding the digits required for the new value. - #14<br>
@@ -250,7 +250,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [3.1.0]
 <!-- !!! Align version in badge URLs as well !!! -->
-[![3.1.0 Badge](https://img.shields.io/nexus/r/io.github.mavenplugins/unleash-maven-plugin?server=https://s01.oss.sonatype.org&label=Maven%20Central&queryOpt=:v=3.1.0)](https://central.sonatype.com/artifact/io.github.mavenplugins/unleash-maven-plugin/3.1.0)
+[![3.1.0 Badge](https://img.shields.io/maven-central/v/io.github.mavenplugins/unleash-maven-plugin?label=Maven%20Central&filter=3.1.0)](https://central.sonatype.com/artifact/io.github.mavenplugins/unleash-maven-plugin/3.1.0)
 
 ### Summary
 - Add goals `unleash:nextSnapshotVersion` and `unleash:releaseVersion`
@@ -268,7 +268,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [3.0.3]
 <!-- !!! Align version in badge URLs as well !!! -->
-[![3.0.3 Badge](https://img.shields.io/nexus/r/io.github.mavenplugins/unleash-maven-plugin?server=https://s01.oss.sonatype.org&label=Maven%20Central&queryOpt=:v=3.0.3)](https://central.sonatype.com/artifact/io.github.mavenplugins/unleash-maven-plugin/3.0.3)
+[![3.0.3 Badge](https://img.shields.io/maven-central/v/io.github.mavenplugins/unleash-maven-plugin?label=Maven%20Central&filter=3.0.3)](https://central.sonatype.com/artifact/io.github.mavenplugins/unleash-maven-plugin/3.0.3)
 
 ### Summary
 - 👉 **Reverted** changes from release `3.0.2`
@@ -294,7 +294,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [3.0.2] - DEPRECATED -
 <!-- !!! Align version in badge URLs as well !!! -->
-[![3.0.2 Badge](https://img.shields.io/nexus/r/io.github.mavenplugins/unleash-maven-plugin?server=https://s01.oss.sonatype.org&label=Maven%20Central&queryOpt=:v=3.0.2)](https://central.sonatype.com/artifact/io.github.mavenplugins/unleash-maven-plugin/3.0.2)
+[![3.0.2 Badge](https://img.shields.io/maven-central/v/io.github.mavenplugins/unleash-maven-plugin?label=Maven%20Central&filter=3.0.2)](https://central.sonatype.com/artifact/io.github.mavenplugins/unleash-maven-plugin/3.0.2)
 
 ### Summary
 - DEPRECATED - This release works but changes will be reverted within future releases
@@ -320,7 +320,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [3.0.1]
 <!-- !!! Align version in badge URLs as well !!! -->
-[![3.0.1 Badge](https://img.shields.io/nexus/r/io.github.mavenplugins/unleash-maven-plugin?server=https://s01.oss.sonatype.org&label=Maven%20Central&queryOpt=:v=3.0.1)](https://central.sonatype.com/artifact/io.github.mavenplugins/unleash-maven-plugin/3.0.1)
+[![3.0.1 Badge](https://img.shields.io/maven-central/v/io.github.mavenplugins/unleash-maven-plugin?label=Maven%20Central&filter=3.0.1)](https://central.sonatype.com/artifact/io.github.mavenplugins/unleash-maven-plugin/3.0.1)
 
 ### Summary
 - Fix wrong URLs for **Project URL** and **Source Control** rendered on [Maven Central](https://central.sonatype.com) for this project.
@@ -333,7 +333,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [3.0.0]
 <!-- !!! Align version in badge URLs as well !!! -->
-[![3.0.0 Badge](https://img.shields.io/nexus/r/io.github.mavenplugins/unleash-maven-plugin?server=https://s01.oss.sonatype.org&label=Maven%20Central&queryOpt=:v=3.0.0)](https://central.sonatype.com/artifact/io.github.mavenplugins/unleash-maven-plugin/3.0.0)
+[![3.0.0 Badge](https://img.shields.io/maven-central/v/io.github.mavenplugins/unleash-maven-plugin?label=Maven%20Central&filter=3.0.0)](https://central.sonatype.com/artifact/io.github.mavenplugins/unleash-maven-plugin/3.0.0)
 
 ### Summary
 - Add Workflow action `exitWithRollbackNoError` to abort the workflow  with a rollback of previous actions but with Maven success.<br>
@@ -364,7 +364,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [2.11.0]
 <!-- !!! Align version in badge URLs as well !!! -->
-[![2.11.0 Badge](https://img.shields.io/nexus/r/io.github.mavenplugins/unleash-maven-plugin?server=https://s01.oss.sonatype.org&label=Maven%20Central&queryOpt=:v=2.11.0)](https://central.sonatype.com/artifact/io.github.mavenplugins/unleash-maven-plugin/2.11.0)
+[![2.11.0 Badge](https://img.shields.io/maven-central/v/io.github.mavenplugins/unleash-maven-plugin?label=Maven%20Central&filter=2.11.0)](https://central.sonatype.com/artifact/io.github.mavenplugins/unleash-maven-plugin/2.11.0)
 
 ### Summary
 - Add enhancements provided by RockwellAutomation and hmdebenque
@@ -409,7 +409,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [2.10.0]
 <!-- !!! Align version in badge URLs as well !!! -->
-[![2.10.0 Badge](https://img.shields.io/nexus/r/io.github.mavenplugins/unleash-maven-plugin?server=https://s01.oss.sonatype.org&label=Maven%20Central&queryOpt=:v=2.10.0)](https://central.sonatype.com/artifact/io.github.mavenplugins/unleash-maven-plugin/2.10.0)
+[![2.10.0 Badge](https://img.shields.io/maven-central/v/io.github.mavenplugins/unleash-maven-plugin?label=Maven%20Central&filter=2.10.0)](https://central.sonatype.com/artifact/io.github.mavenplugins/unleash-maven-plugin/2.10.0)
 
 ### Summary
 - Initial release of this artifact with new groupId `io.github.mavenplugins`
