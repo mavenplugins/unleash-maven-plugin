@@ -23,6 +23,11 @@ on:
 #    tags:
 #      - '*'
 
+# Default permissions
+permissions:
+  contents: read
+  pull-requests: write
+
 jobs:
   # Deploy next snapshot
   job1_Call_Unleash:
