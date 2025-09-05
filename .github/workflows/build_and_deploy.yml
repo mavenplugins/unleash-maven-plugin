@@ -20,6 +20,11 @@ on:
       - 'CHANGELOG.md'
       - 'LICENSE'
 
+# Default permissions
+permissions:
+  contents: read
+  pull-requests: write
+
 jobs:
   job1_Call_Build_and_Deploy:
     name: Build ${{ github.repository }}
