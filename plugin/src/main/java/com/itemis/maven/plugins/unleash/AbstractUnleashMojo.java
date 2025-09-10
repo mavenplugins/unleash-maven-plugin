@@ -254,22 +254,7 @@ public class AbstractUnleashMojo extends AbstractCDIMojo {
   private String altDeploymentRepository;
 
   /**
-   * The alternative repository to use when the project has a snapshot version.
-   *
-   * <b>Note:</b> In version 2.x, the format was <code>id::<i>layout</i>::url</code> where <code><i>layout</i></code>
-   * could be <code>default</code> (ie. Maven 2) or <code>legacy</code> (ie. Maven 1), but since 3.0.0 the layout part
-   * has been removed because Maven 3 only supports Maven 2 repository layout.
-   *
-   * @since 3.3.0
-   * @see AbstractUnleashMojo#altDeploymentRepository
-   */
-  @MojoProduces
-  @Named("altSnapshotDeploymentRepository")
-  @Parameter(property = "altSnapshotDeploymentRepository", required = false)
-  private String altSnapshotDeploymentRepository;
-
-  /**
-   * The alternative repository to use when the project has a final version.
+   * The alternative repository to use when property <code>altReleaseDeploymentRepository</code> is not blank.
    *
    * <b>Note:</b> In version 2.x, the format was <code>id::<i>layout</i>::url</code> where <code><i>layout</i></code>
    * could be <code>default</code> (ie. Maven 2) or <code>legacy</code> (ie. Maven 1), but since 3.0.0 the layout part

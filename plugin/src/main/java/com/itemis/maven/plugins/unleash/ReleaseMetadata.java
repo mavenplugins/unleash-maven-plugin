@@ -10,7 +10,6 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.maven.RepositoryUtils;
-import org.apache.maven.artifact.ArtifactUtils;
 import org.apache.maven.artifact.repository.ArtifactRepository;
 import org.apache.maven.execution.MavenSession;
 import org.apache.maven.model.Scm;
@@ -89,9 +88,6 @@ public class ReleaseMetadata {
   @Named("altDeploymentRepository")
   private String altDeploymentRepository;
   @Inject
-  @Named("altSnapshotDeploymentRepository")
-  private String altSnapshotDeploymentRepository;
-  @Inject
   @Named("altReleaseDeploymentRepository")
   private String altReleaseDeploymentRepository;
 
@@ -121,7 +117,7 @@ public class ReleaseMetadata {
    * CDI managed initialization.
    *
    * @throws RuntimeException in case of a {@link MojoExecutionException} thrown inside to meet the CDI
-   *                            {@link PostConstruct} convention.
+   *           {@link PostConstruct} convention.
    */
   @PostConstruct
   public void init() throws RuntimeException {
@@ -317,20 +313,19 @@ public class ReleaseMetadata {
    *
    * @see https://github.com/apache/maven-deploy-plugin/blob/maven-deploy-plugin-3.1.4/src/main/java/org/apache/maven/plugins/deploy/DeployMojo.java
    * @see https://github.com/shillner/unleash-maven-plugin/pull/101
+   * @see https://github.com/mavenplugins/unleash-maven-plugin/issues/31
    */
   private RemoteRepository getEffectiveDeploymentRepository() throws MojoExecutionException {
     RemoteRepository repo = null;
 
     String altDeploymentRepo;
-    if (ArtifactUtils.isSnapshot(this.project.getVersion()) && this.altSnapshotDeploymentRepository != null) {
-      altDeploymentRepo = this.altSnapshotDeploymentRepository;
-    } else if (!ArtifactUtils.isSnapshot(this.project.getVersion()) && this.altReleaseDeploymentRepository != null) {
+    if (StringUtils.isNotBlank(this.altReleaseDeploymentRepository)) {
       altDeploymentRepo = this.altReleaseDeploymentRepository;
     } else {
       altDeploymentRepo = this.altDeploymentRepository;
     }
 
-    if (altDeploymentRepo != null) {
+    if (StringUtils.isNotBlank(altDeploymentRepo)) {
       this.log.info("Using alternate deployment repository " + altDeploymentRepo);
 
       Matcher matcher = ALT_LEGACY_REPO_SYNTAX_PATTERN.matcher(altDeploymentRepo);
