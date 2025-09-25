@@ -63,9 +63,9 @@
     <!-- UNLEASH -->
     <version.unleash-maven-plugin>${project.version}</version.unleash-maven-plugin>
     <version.artifact-spy-plugin>1.1.0</version.artifact-spy-plugin>
-    <version.cdi-plugin-utils>4.0.1</version.cdi-plugin-utils>
+    <version.cdi-plugin-utils>4.0.2</version.cdi-plugin-utils>
     <!-- Resolve chicken/egg unleash by defining specific unleash commandline goal: -->
-    <version.unleash-maven-plugin.perform>3.2.1</version.unleash-maven-plugin.perform>
+    <version.unleash-maven-plugin.perform>3.3.2</version.unleash-maven-plugin.perform>
     <unleash.goal>perform</unleash.goal>
     <!-- This is considered by the reusable GH unleash action: -->
     <unleash.cmdline.goal>
