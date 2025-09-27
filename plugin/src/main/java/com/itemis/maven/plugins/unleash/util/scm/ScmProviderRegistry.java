@@ -1,5 +1,6 @@
 package com.itemis.maven.plugins.unleash.util.scm;
 
+import java.io.File;
 import java.lang.reflect.Method;
 
 import org.apache.commons.lang3.StringUtils;
@@ -59,6 +60,9 @@ public class ScmProviderRegistry {
   @Inject
   @Named("scmSshPrivateKeyEnvVar")
   private String scmSshPrivateKeyEnvVar;
+  @Inject
+  @Named("allReactorsBasedir")
+  private File allReactorsBasedir;
   private String scmProviderName;
   private ScmProvider provider;
 
@@ -83,8 +87,7 @@ public class ScmProviderRegistry {
         this.provider = this.providers.select(new ScmProviderTypeLiteral(this.scmProviderName)).get();
         checkProviderAPI();
 
-        DefaultScmProviderInitialization initialization = new DefaultScmProviderInitialization(
-            this.project.getBasedir());
+        DefaultScmProviderInitialization initialization = new DefaultScmProviderInitialization(this.allReactorsBasedir);
         initialization.setLogger(new JavaLoggerAdapter(this.provider.getClass().getName(), this.log));
         initialization.setUsername(getScmUsername());
         initialization.setUsername(getScmUsername());
