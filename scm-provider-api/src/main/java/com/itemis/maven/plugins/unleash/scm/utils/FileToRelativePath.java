@@ -3,6 +3,7 @@ package com.itemis.maven.plugins.unleash.scm.utils;
 import java.io.File;
 import java.net.URI;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.SystemUtils;
 
 import com.google.common.base.Function;
@@ -43,4 +44,9 @@ public class FileToRelativePath implements Function<File, String> {
     }
     return file.toURI();
   }
+
+  public boolean isParentOfOrSame(File f) {
+    return !StringUtils.startsWith(apply(f), "file:");
+  }
+
 }

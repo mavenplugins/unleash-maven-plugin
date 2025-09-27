@@ -41,8 +41,6 @@ public class DetectReleaseArtifacts implements CDIMojoProcessingStep {
   @Inject
   private Logger log;
   @Inject
-  private MavenProject project;
-  @Inject
   @Named("reactorProjects")
   private List<MavenProject> reactorProjects;
   @Inject
@@ -50,6 +48,9 @@ public class DetectReleaseArtifacts implements CDIMojoProcessingStep {
   @Inject
   @Named("unleashOutputFolder")
   private File unleashOutputFolder;
+  @Inject
+  @Named("allReactorsBasedir")
+  private File allReactorsBasedir;
 
   @Override
   public void execute(ExecutionContext context) throws MojoExecutionException, MojoFailureException {
@@ -71,7 +72,7 @@ public class DetectReleaseArtifacts implements CDIMojoProcessingStep {
           // in case of pom artifacts the poms are copied to a different location to ensure we upload the correct
           // version of the pom since the pom evolves during the release build.
           if (Objects.equal(p.getFile().getName(), relativePath)) {
-            relativePath = new FileToRelativePath(this.project.getBasedir()).apply(p.getFile());
+            relativePath = new FileToRelativePath(this.allReactorsBasedir).apply(p.getFile());
             artifactFile = new File(this.unleashOutputFolder, relativePath);
             artifactFile.getParentFile().mkdirs();
 

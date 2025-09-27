@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 import org.apache.maven.artifact.repository.ArtifactRepository;
 import org.apache.maven.execution.MavenSession;
 import org.apache.maven.plugin.MojoExecution;
+import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugin.PluginParameterExpressionEvaluator;
 import org.apache.maven.plugin.descriptor.PluginDescriptor;
 import org.apache.maven.plugins.annotations.Component;
@@ -28,12 +29,14 @@ import org.eclipse.aether.repository.RemoteRepository;
 
 import com.google.common.base.Splitter;
 import com.google.common.base.Strings;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.itemis.maven.aether.ArtifactCoordinates;
 import com.itemis.maven.aether.ArtifactDeployer;
 import com.itemis.maven.plugins.cdi.AbstractCDIMojo;
 import com.itemis.maven.plugins.cdi.annotations.MojoInject;
 import com.itemis.maven.plugins.cdi.annotations.MojoProduces;
+import com.itemis.maven.plugins.unleash.scm.utils.FileToRelativePath;
 import com.itemis.maven.plugins.unleash.steps.actions.ExitWithRollbackNoError;
 import com.itemis.maven.plugins.unleash.util.PomPropertyResolver;
 import com.itemis.maven.plugins.unleash.util.ReleaseUtil;
@@ -398,6 +401,46 @@ public class AbstractUnleashMojo extends AbstractCDIMojo {
       return repo.buildRemoteRepository(this.session,
           new PomPropertyResolver(this.project, this.settings, this.profiles, getReleaseArgs()));
     }).collect(Collectors.toSet());
+  }
+
+  private File allReactorsBasedir;
+
+  @MojoProduces
+  @Named("allReactorsBasedir")
+  private File getAllReactorsBasedir() throws MojoFailureException {
+    if (this.allReactorsBasedir != null) {
+      return this.allReactorsBasedir;
+    }
+    this.allReactorsBasedir = this.project.getBasedir();
+    List<File> listOfAllReactorsBasedir = Lists.newArrayList();
+    for (MavenProject reactorProject : this.reactorProjects) {
+      listOfAllReactorsBasedir.add(reactorProject.getBasedir());
+      if (new FileToRelativePath(this.allReactorsBasedir).isParentOfOrSame(reactorProject.getBasedir())) {
+        continue;
+      }
+      if (new FileToRelativePath(reactorProject.getBasedir()).isParentOfOrSame(this.allReactorsBasedir)) {
+        this.allReactorsBasedir = reactorProject.getBasedir();
+        continue;
+      }
+      // Must never be reached
+      getLog().error("Invalid project structure: Reactor project " + reactorProject.getName()
+          + " is neither in a parent nor in a child path of " + this.allReactorsBasedir.getAbsolutePath());
+      throw new MojoFailureException("Invalid project structure - see previous error log for details.");
+    }
+    getLog().info("All projects basedir is: " + this.allReactorsBasedir.getAbsolutePath());
+    // Now validate that there is a single POM per relative path
+    List<String> listOfAllRelativPaths = Lists.newArrayList();
+    for (File projectBasedir : listOfAllReactorsBasedir) {
+      String relativePath = new FileToRelativePath(this.allReactorsBasedir).apply(projectBasedir);
+      if (!listOfAllRelativPaths.contains(relativePath)) {
+        listOfAllRelativPaths.add(relativePath);
+        continue;
+      }
+      getLog().error("Invalid project structure: Multiple project/reactor POMs found in directory "
+          + projectBasedir.getAbsolutePath());
+      throw new MojoFailureException("Invalid project structure - see previous error log for details.");
+    }
+    return this.allReactorsBasedir;
   }
 
 }

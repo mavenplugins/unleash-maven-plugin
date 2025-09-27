@@ -1,5 +1,6 @@
 package com.itemis.maven.plugins.unleash.util;
 
+import java.io.File;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -44,6 +45,9 @@ public class DevVersionUtil {
   @Inject
   private ScmProviderRegistry scmProviderRegistry;
   private ScmProvider scmProvider;
+  @Inject
+  @Named("allReactorsBasedir")
+  private File allReactorsBasedir;
 
   @PostConstruct
   private void init() {
@@ -98,7 +102,7 @@ public class DevVersionUtil {
 
     Builder requestBuilder = CommitRequest.builder().merge().mergeClient(new ScmPomVersionsMergeClient())
         .message(message.toString()).push();
-    FileToRelativePath pathConverter = new FileToRelativePath(this.project.getBasedir());
+    FileToRelativePath pathConverter = new FileToRelativePath(this.allReactorsBasedir);
     if (commitPomsOnly) {
       for (MavenProject p : this.reactorProjects) {
         requestBuilder.addPaths(pathConverter.apply(p.getFile()));
