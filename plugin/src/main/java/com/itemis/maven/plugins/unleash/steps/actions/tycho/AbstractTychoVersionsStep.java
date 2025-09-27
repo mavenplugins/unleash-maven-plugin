@@ -1,5 +1,6 @@
 package com.itemis.maven.plugins.unleash.steps.actions.tycho;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
@@ -49,6 +50,9 @@ public abstract class AbstractTychoVersionsStep implements CDIMojoProcessingStep
   @Inject
   @Named("reactorProjects")
   private List<MavenProject> reactorProjects;
+  @Inject
+  @Named("allReactorsBasedir")
+  private File allReactorsBasedir;
   private Map<ArtifactCoordinates, Document> cachedPOMs;
   private Map<ArtifactCoordinates, String> cachedModuleVersions;
   private ProjectMetadataReader metadataReader;
@@ -151,7 +155,7 @@ public abstract class AbstractTychoVersionsStep implements CDIMojoProcessingStep
     if (this.metadataReader == null) {
       this.metadataReader = lookup(ProjectMetadataReader.class);
       try {
-        this.metadataReader.addBasedir(this.project.getBasedir());
+        this.metadataReader.addBasedir(this.allReactorsBasedir);
       } catch (IOException e) {
         throw new MojoExecutionException("Tycho was unable to read the project structure!", e);
       }

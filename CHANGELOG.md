@@ -80,6 +80,21 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - TBD
 
 
+## [3.3.3]
+<!-- !!! Align version in badge URLs as well !!! -->
+[![3.3.3 Badge](https://img.shields.io/maven-central/v/io.github.mavenplugins/unleash-maven-plugin?label=Maven%20Central&filter=3.3.3)](https://central.sonatype.com/artifact/io.github.mavenplugins/unleash-maven-plugin/3.3.3)
+
+### Summary
+- Enhance to support Maven non standard multimodule project structure - #33
+
+### 🚀 New Features
+- Enhance to support Maven non standard multimodule project structure - #33
+
+### 📦 Updates
+- pom.xml:
+  - Update property `<version.cdi-plugin-utils>4.0.1</version.cdi-plugin-utils>` -> `<version.cdi-plugin-utils>4.0.2</version.cdi-plugin-utils>`
+
+
 ## [3.3.2]
 <!-- !!! Align version in badge URLs as well !!! -->
 [![3.3.2 Badge](https://img.shields.io/maven-central/v/io.github.mavenplugins/unleash-maven-plugin?label=Maven%20Central&filter=3.3.2)](https://central.sonatype.com/artifact/io.github.mavenplugins/unleash-maven-plugin/3.3.2)
@@ -448,7 +463,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 - This is just a dummy placeholder to make the parser of GHCICD/release-notes-from-changelog@v1 happy!
 -->
 
-[Unreleased]: https://github.com/mavenplugins/unleash-maven-plugin/compare/v3.3.2..HEAD
+[Unreleased]: https://github.com/mavenplugins/unleash-maven-plugin/compare/v3.3.3..HEAD
+[3.3.3]: https://github.com/mavenplugins/unleash-maven-plugin/compare/v3.3.2..v3.3.3
 [3.3.2]: https://github.com/mavenplugins/unleash-maven-plugin/compare/v3.3.1..v3.3.2
 [3.3.1]: https://github.com/mavenplugins/unleash-maven-plugin/compare/v3.3.0..v3.3.1
 [3.3.0]: https://github.com/mavenplugins/unleash-maven-plugin/compare/v3.2.1..v3.3.0
