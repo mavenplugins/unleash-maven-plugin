@@ -29,6 +29,12 @@ public class FileToRelativePath implements Function<File, String> {
     return workingDirURI.relativize(fileURI).toString();
   }
 
+  /**
+   * Convert a File to a URI, normalizing the Windows drive letter to lowercase when running on Windows.
+   *
+   * @param file the file whose URI to produce; its drive letter will be lowercased on Windows if present
+   * @return the URI for the file, with a lowercased drive letter on Windows when applicable
+   */
   private URI toURIWithNormalizedDriveLetterOnWindows(File file) {
     if (SystemUtils.IS_OS_WINDOWS) {
       // On Windows OS deviations in character case of the drive letter may occur
@@ -45,6 +51,12 @@ public class FileToRelativePath implements Function<File, String> {
     return file.toURI();
   }
 
+  /**
+   * Determines whether the given file is the same as or a descendant of the working directory.
+   *
+   * @param f the file to test
+   * @return {@code true} if the file is the same as or located inside the working directory, {@code false} otherwise
+   */
   public boolean isParentOfOrSame(File f) {
     return !StringUtils.startsWith(apply(f), "file:");
   }

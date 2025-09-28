@@ -151,6 +151,16 @@ public abstract class AbstractTychoVersionsStep implements CDIMojoProcessingStep
     }
   }
 
+  /**
+   * Prepare and configure a Tycho VersionsEngine for the current reactor projects.
+   *
+   * Ensures a ProjectMetadataReader is available (initialized with the reactor base directory)
+   * and uses it to populate and configure the VersionsEngine.
+   *
+   * @return the configured VersionsEngine ready to apply version changes for the reactor projects
+   * @throws MojoExecutionException if Tycho cannot read the project structure or other execution errors occur
+   * @throws MojoFailureException if a required Plexus component cannot be looked up
+   */
   private VersionsEngine initializeVersionsEngine() throws MojoExecutionException, MojoFailureException {
     if (this.metadataReader == null) {
       this.metadataReader = lookup(ProjectMetadataReader.class);

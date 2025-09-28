@@ -47,6 +47,11 @@ public class DevVersionUtil {
   @Named("allReactorsBasedir")
   private File allReactorsBasedir;
 
+  /**
+   * Initialize the SCM provider reference for this instance.
+   *
+   * Called after dependency injection to obtain and store the ScmProvider from the ScmProviderRegistry.
+   */
   @PostConstruct
   private void init() {
     this.scmProvider = this.scmProviderRegistry.getProvider();
@@ -88,6 +93,14 @@ public class DevVersionUtil {
     }
   }
 
+  /**
+   * Commit changed POMs and push the commits to the remote SCM, merging with remote changes if needed.
+   *
+   * Records the remote revision before the commit and the resulting revision after the commit in
+   * release metadata.
+   *
+   * @param commitPomsOnly if true, restrict the commit to the reactor projects' POM files; if false, include all detected changes
+   */
   public void commitChanges(boolean commitPomsOnly) {
     this.log.debug(
         "\tCommitting changed POMs of all modules and pushing to remote repository. Merging with remote changes if necessary.");

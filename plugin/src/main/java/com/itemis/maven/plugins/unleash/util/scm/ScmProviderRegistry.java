@@ -81,6 +81,12 @@ public class ScmProviderRegistry {
     this.scmProviderName = providerName.orNull();
   }
 
+  /**
+   * Provides the initialized ScmProvider instance for the current Maven project.
+   *
+   * @return the initialized ScmProvider instance
+   * @throws IllegalStateException if no matching provider is available, provider initialization fails, or the provider's API is incompatible
+   */
   public ScmProvider getProvider() throws IllegalStateException {
     if (this.provider == null) {
       try {

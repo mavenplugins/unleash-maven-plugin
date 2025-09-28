@@ -52,6 +52,14 @@ public class DetectReleaseArtifacts implements CDIMojoProcessingStep {
   @Named("allReactorsBasedir")
   private File allReactorsBasedir;
 
+  /**
+   * Detects release artifacts produced during the release build and registers them in
+   * ReleaseMetadata so they can be installed and deployed later.
+   *
+   * @param context the current execution context for this processing step
+   * @throws MojoExecutionException if an I/O error occurs while reading or preparing artifact files
+   * @throws MojoFailureException if expected artifact-spy output is missing for a module
+   */
   @Override
   public void execute(ExecutionContext context) throws MojoExecutionException, MojoFailureException {
     this.log.info(
