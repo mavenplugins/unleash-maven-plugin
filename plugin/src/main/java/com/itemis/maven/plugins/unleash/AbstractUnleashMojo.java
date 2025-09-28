@@ -383,6 +383,14 @@ public class AbstractUnleashMojo extends AbstractCDIMojo {
     return env;
   }
 
+  /**
+   * Collects additional deployment repositories configured for the build and returns them as RemoteRepository instances.
+   *
+   * The method includes repositories declared via the `additionalDeploymentRepositories` plugin configuration and
+   * repositories parsed from system properties whose keys start with "multiDeploy.repo".
+   *
+   * @return a set of RemoteRepository objects representing the additional deployment targets
+   */
   @MojoProduces
   @Named("additionalDeployemntRepositories")
   private Set<RemoteRepository> getAdditionalDeploymentRepositories() {
@@ -405,6 +413,16 @@ public class AbstractUnleashMojo extends AbstractCDIMojo {
 
   private File allReactorsBasedir;
 
+  /**
+   * Determine and return the lowest common base directory that contains all reactor projects, validating
+   * that each reactor corresponds to a unique relative path under that base.
+   *
+   * This method computes the common ancestor directory for the current project and all reactor projects,
+   * caches the result, and ensures there is at most one POM per relative path under the computed base.
+   *
+   * @return the common base directory that contains all reactor projects
+   * @throws MojoFailureException if no common ancestor exists or if multiple reactor POMs are found in the same relative directory
+   */
   @MojoProduces
   @Named("allReactorsBasedir")
   private File getAllReactorsBasedir() throws MojoFailureException {
