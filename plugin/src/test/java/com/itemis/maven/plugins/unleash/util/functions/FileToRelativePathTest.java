@@ -6,6 +6,7 @@ import java.io.IOException;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.SystemUtils;
 import org.junit.Assert;
+import org.junit.Assume;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
@@ -56,18 +57,16 @@ public class FileToRelativePathTest {
   @Test
   @UseDataProvider("windows_IsParentOf")
   public void testWindowsIsParentOf(String parentPath, String childPath) {
-    if (!SystemUtils.IS_OS_WINDOWS) {
-      return;
-    }
+    // Skip test in a non Windows runtime
+    Assume.assumeTrue("Windows-specific behavior", SystemUtils.IS_OS_WINDOWS);
     Assert.assertTrue(new FileToRelativePath(new File(parentPath)).isParentOfOrSame(new File(childPath)));
   }
 
   @Test
   @UseDataProvider("windows_IsParentOf")
   public void testWindowsIsNotParentOf(String parentPath, String childPath) {
-    if (!SystemUtils.IS_OS_WINDOWS) {
-      return;
-    }
+    // Skip test in a non Windows runtime
+    Assume.assumeTrue("Windows-specific behavior", SystemUtils.IS_OS_WINDOWS);
     File fileParentPath = new File(parentPath);
     File fileChildPath = new File(childPath);
     Assert.assertTrue(!new FileToRelativePath(fileChildPath).isParentOfOrSame(fileParentPath)
@@ -77,18 +76,16 @@ public class FileToRelativePathTest {
   @Test
   @UseDataProvider("unix_IsParentOf")
   public void testUnixIsParentOf(String parentPath, String childPath) {
-    if (SystemUtils.IS_OS_WINDOWS) {
-      return;
-    }
+    // Skip test in a Windows runtime
+    Assume.assumeFalse("Unix-specific behavior", SystemUtils.IS_OS_WINDOWS);
     Assert.assertTrue(new FileToRelativePath(new File(parentPath)).isParentOfOrSame(new File(childPath)));
   }
 
   @Test
   @UseDataProvider("unix_IsParentOf")
   public void testUnixIsNotParentOf(String parentPath, String childPath) {
-    if (SystemUtils.IS_OS_WINDOWS) {
-      return;
-    }
+    // Skip test in a Windows runtime
+    Assume.assumeFalse("Unix-specific behavior", SystemUtils.IS_OS_WINDOWS);
     File fileParentPath = new File(parentPath);
     File fileChildPath = new File(childPath);
     Assert.assertTrue(!new FileToRelativePath(fileChildPath).isParentOfOrSame(fileParentPath)

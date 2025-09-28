@@ -411,22 +411,24 @@ public class AbstractUnleashMojo extends AbstractCDIMojo {
     if (this.allReactorsBasedir != null) {
       return this.allReactorsBasedir;
     }
-    this.allReactorsBasedir = this.project.getBasedir();
+    // Derive the lowest common ancestor of all reactor projects
+    File commonBase = this.project.getBasedir();
     List<File> listOfAllReactorsBasedir = Lists.newArrayList();
     for (MavenProject reactorProject : this.reactorProjects) {
-      listOfAllReactorsBasedir.add(reactorProject.getBasedir());
-      if (new FileToRelativePath(this.allReactorsBasedir).isParentOfOrSame(reactorProject.getBasedir())) {
-        continue;
+      File currentCommonBase = commonBase;
+      File reactorBasedir = reactorProject.getBasedir();
+      listOfAllReactorsBasedir.add(reactorBasedir);
+      // Walk up from the initial base until it contains the reactor
+      while (commonBase != null && !new FileToRelativePath(commonBase).isParentOfOrSame(reactorBasedir)) {
+        commonBase = commonBase.getParentFile();
       }
-      if (new FileToRelativePath(reactorProject.getBasedir()).isParentOfOrSame(this.allReactorsBasedir)) {
-        this.allReactorsBasedir = reactorProject.getBasedir();
-        continue;
+      if (commonBase == null) {
+        getLog().error("Invalid project structure: Reactor project " + reactorProject.getName()
+            + " does not share a common ancestor directory with " + currentCommonBase.getAbsolutePath());
+        throw new MojoFailureException("Invalid project structure - see previous error log for details.");
       }
-      // Must never be reached
-      getLog().error("Invalid project structure: Reactor project " + reactorProject.getName()
-          + " is neither in a parent nor in a child path of " + this.allReactorsBasedir.getAbsolutePath());
-      throw new MojoFailureException("Invalid project structure - see previous error log for details.");
     }
+    this.allReactorsBasedir = commonBase;
     getLog().info("All projects basedir is: " + this.allReactorsBasedir.getAbsolutePath());
     // Now validate that there is a single POM per relative path
     List<String> listOfAllRelativPaths = Lists.newArrayList();

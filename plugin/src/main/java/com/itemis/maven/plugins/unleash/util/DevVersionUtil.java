@@ -33,8 +33,6 @@ public class DevVersionUtil {
   @Inject
   private Logger log;
   @Inject
-  private MavenProject project;
-  @Inject
   @Named("reactorProjects")
   private List<MavenProject> reactorProjects;
   @Inject
