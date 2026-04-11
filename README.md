@@ -1,9 +1,10 @@
 Unleash Maven Plugin - More Efficient And Reliable Maven Releases
 =================================================================
 [![Eclipse Public License](https://img.shields.io/github/license/mavenplugins/unleash-maven-plugin?label=License)](./LICENSE)
-[![Maven Central](https://img.shields.io/maven-central/v/io.github.mavenplugins/unleash-maven-plugin.svg?label=Maven%20Central)](https://search.maven.org/artifact/io.github.mavenplugins/unleash-maven-plugin)
 [![CI](https://github.com/mavenplugins/unleash-maven-plugin/actions/workflows/build_and_deploy.yml/badge.svg)](https://github.com/mavenplugins/unleash-maven-plugin/actions/workflows/build_and_deploy.yml)
 [![E2E](https://github.com/mavenplugins/unleash-test-sandbox/actions/workflows/test_unleash_e2e.yml/badge.svg)](https://github.com/mavenplugins/unleash-test-sandbox/actions/workflows/test_unleash_e2e.yml)
+[![Maven Central Snapshot](https://img.shields.io/maven-metadata/v?label=Maven%20Central%20Snapshot&metadataUrl=https%3A%2F%2Fcentral.sonatype.com%2Frepository%2Fmaven-snapshots%2Fio%2Fgithub%2Fmavenplugins%2Funleash-maven-plugin%2Fmaven-metadata.xml)](https://central.sonatype.com/repository/maven-snapshots/io/github/mavenplugins/unleash-maven-plugin/maven-metadata.xml)
+[![Maven Central](https://img.shields.io/maven-central/v/io.github.mavenplugins/unleash-maven-plugin.svg?label=Maven%20Central&color=blue)](https://search.maven.org/artifact/io.github.mavenplugins/unleash-maven-plugin)
 
 The Unleash Maven Plugin provides functionality to release Maven projects as it is possible with the Maven Release Plugin. While the idea and the core feature (building release artifacts) is the similar, there are many serious differences that make the unleash plugin much more reliable and efficient than the official release plugin. It is furthermore highly extensible and adaptable to your specific requirements when building releases.
 
