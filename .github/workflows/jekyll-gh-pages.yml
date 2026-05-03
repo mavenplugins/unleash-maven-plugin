@@ -29,7 +29,7 @@ jobs:
     steps:
       - name: Delete Previous Deployments
         #uses: strumwolf/delete-deployment-environment@v3
-        uses: GHCICD/delete-deployment-environment@v3
+        uses: GHCICD/delete-deployment-environment@vHEAD
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           environment: github-pages
@@ -41,16 +41,16 @@ jobs:
     needs: cleanup_deployment_history
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: GHCICD/checkout@vHEAD
       - name: Setup Pages
-        uses: actions/configure-pages@v5
+        uses: GHCICD/configure-pages@vHEAD
       - name: Build with Jekyll
         uses: actions/jekyll-build-pages@v1
         with:
           source: ./
           destination: ./_site
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: GHCICD/upload-pages-artifact@vHEAD
 
   # Deployment job
   deploy:
@@ -62,4 +62,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: GHCICD/deploy-pages@vHEAD
