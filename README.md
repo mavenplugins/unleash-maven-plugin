@@ -9,7 +9,7 @@ Unleash Maven Plugin - More Efficient And Reliable Maven Releases
 The Unleash Maven Plugin provides functionality to release Maven projects as it is possible with the Maven Release Plugin. While the idea and the core feature (building release artifacts) is the similar, there are many serious differences that make the unleash plugin much more reliable and efficient than the official release plugin. It is furthermore highly extensible and adaptable to your specific requirements when building releases.
 
 
-🚀 JAVA 8 - JAVA 21 Ready Since Version 3.0.0 🚀
+🚀 JAVA 8 - JAVA 25 Ready Since Version 3.0.0 🚀
 ===============================================
 
 
@@ -23,7 +23,7 @@ As we are still using this plugin intensively for a couple of years now, we woul
 - According to each Maven Central deployed release an appropriate GitHub release will be created with ChangeLog details for that release - see [Latest release](https://github.com/mavenplugins/unleash-maven-plugin/releases/latest).
 - The first release with this groupId will be code and feature wise identical to the most recent release provided by [Stanley Hillner](https://github.com/shillner).
 - Pending fixes and/or pull requests on forks of the original repo did have been reviewed and merged into this repo.
-- The most recent release version works for JAVA 8 to JAVA 21 and for any Maven version >= 3.3.9
+- The most recent release version works for JAVA 8 to JAVA 25 and for any Maven version >= 3.3.9
 - An End to End CICD testing project is running daily to test for a matrix of Java and Maven versions -  see [Test Maven Unleash E2E](https://github.com/mavenplugins/unleash-test-sandbox/actions/workflows/test_unleash_e2e.yml)
 
 :green_heart: **Any contribution via pull requests is more than welcome!** :green_heart:
